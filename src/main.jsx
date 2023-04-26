@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import LoginRoute from './routes/LoginRoute';
 import HomeRoute from './routes/HomeRoute';
+import RegisterRoute from './routes/RegisterRoute.jsx';
 import AuthContextProvider from "./context/auth-context";
 
 const router = createBrowserRouter([
@@ -19,8 +20,12 @@ const router = createBrowserRouter([
                 element: <LoginRoute />,
             },
             {
-                path: "home",
+                path: "",
                 element: <HomeRoute />,
+            },
+            {
+                path: "register",
+                element: <RegisterRoute />,
             },
         ],
     },

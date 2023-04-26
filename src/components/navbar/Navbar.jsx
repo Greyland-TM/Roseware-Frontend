@@ -3,7 +3,7 @@ import { AuthContext } from '../../context/auth-context';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link, useNavigate } from 'react-router-dom';
-import Button from '../button/Button';
+import Button from '../UI/Button';
 
 const user = {
   name: 'Tom Cook',
@@ -14,9 +14,9 @@ const user = {
 
 const navigation = [
   {
-    name: 'Dashboard',
+    name: 'Placeholder',
     to: '#',
-    current: true,
+    current: false,
   },
 ];
 

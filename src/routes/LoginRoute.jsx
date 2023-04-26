@@ -1,8 +1,8 @@
-import React from "react";
-import LoginForm from "../auth/login_form/loginForm";
+import React from 'react';
+import LoginForm from '../auth/LoginForm';
 
 const LoginRoute = () => {
-    return <LoginForm />
+  return <LoginForm />;
 };
 
 export default LoginRoute;

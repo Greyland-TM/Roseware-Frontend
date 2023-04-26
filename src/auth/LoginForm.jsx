@@ -5,9 +5,9 @@
 import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useRef, useContext } from 'react';
-import { AuthContext } from '../../context/auth-context';
-import { handleLogin } from '../../utils/auth';
-import Modal from '../../components/Modal';
+import { AuthContext } from '../context/auth-context';
+import { handleLogin } from '../utils/auth';
+import Modal from '../components/Modal';
 
 export default function LoginForm(props) {
   const navigate = useNavigate();
@@ -122,7 +122,8 @@ export default function LoginForm(props) {
             <p className='mt-2 text-center text-sm text-gray-500'>
               Not a member?{' '}
               <Link
-                to='/signup'
+                to='/register'
+                onClick={handleOverlayClicked}
                 className='font-semibold leading-6 text-indigo-600 hover:text-indigo-500'
               >
                 Sign Up Here

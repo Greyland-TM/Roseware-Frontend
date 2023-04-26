@@ -1,12 +1,16 @@
 import './index.css';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import Navbar from './components/navbar/Navbar';
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
-import LoginForm from './auth/login_form/loginForm';
+import LoginForm from './auth/LoginForm';
+import Breadcrumb from './components/navbar/Breadcrumb';
+import Footer from './components/Footer';
 
-export default function App() {
+export default function App(props) {
   const [showAuthPortal, setShowAuthPortal] = useState(false);
+  const location = useLocation();
+  const currentPage = location.pathname;
 
   const toggleAuthPortal = () => {
     setShowAuthPortal(!showAuthPortal);
@@ -21,11 +25,7 @@ export default function App() {
       <div className='min-h-full'>
         <Navbar showAuthPortal={toggleAuthPortal} />
         <header className='bg-white shadow-sm'>
-          <div className='mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8'>
-            <h1 className='text-lg font-semibold leading-6 text-gray-900'>
-              Dashboard
-            </h1>
-          </div>
+          <Breadcrumb currentPage={currentPage} />
         </header>
         <main>
           <div className='mx-auto max-w-7xl py-6 sm:px-6 lg:px-8'>
@@ -38,6 +38,7 @@ export default function App() {
           </div>
         </main>
       </div>
+      <Footer />
     </>
   );
 }

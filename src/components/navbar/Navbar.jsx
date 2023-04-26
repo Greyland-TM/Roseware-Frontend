@@ -1,4 +1,4 @@
-import React, { useContext, Fragment } from 'react';
+import React, { useContext, Fragment, useState } from 'react';
 import { AuthContext } from '../../context/auth-context';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
@@ -12,7 +12,13 @@ const user = {
     'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
 };
 
-const navigation = [{ name: 'Dashboard', to: '#', current: true }];
+const navigation = [
+  {
+    name: 'Dashboard',
+    to: '#',
+    current: true,
+  },
+];
 
 const userNavigation = [
   { name: 'Your Profile', to: '#' },
@@ -23,8 +29,12 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-const Navbar = () => {
+const Navbar = (props) => {
   const ctx = useContext(AuthContext);
+
+  const handleSignInPortal = () => {
+      props.showAuthPortal(true);
+  };
 
   return (
     <Disclosure as='nav' className='bg-gray-800'>
@@ -34,12 +44,14 @@ const Navbar = () => {
             <div className='flex h-16 items-center justify-between'>
               <div className='flex items-center'>
                 <div className='flex-shrink-0'>
-              <Link className='font-bold text-blue-500 text-xl' to='/'>CMS</Link>
+                  <Link className='font-bold text-blue-500 text-xl' to='/'>
+                    CMS
+                  </Link>
                 </div>
                 <div className='hidden md:block'>
                   <div className='ml-10 flex items-baseline space-x-4'>
                     {navigation.map((item) => (
-                      <a
+                      <Link
                         key={item.name}
                         to={item.to}
                         className={classNames(
@@ -51,7 +63,7 @@ const Navbar = () => {
                         aria-current={item.current ? 'page' : undefined}
                       >
                         {item.name}
-                      </a>
+                      </Link>
                     ))}
                   </div>
                 </div>
@@ -63,14 +75,20 @@ const Navbar = () => {
                     className='rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'
                   >
                     <span className='sr-only'>View notifications</span>
-                    <BellIcon className='h-6 w-6' aria-hidden='true' />
+                    {ctx.isAuth && (
+                      <BellIcon className='h-6 w-6' aria-hidden='true' />
+                    )}
                   </button>
 
                   {/* Profile dropdown */}
                   {ctx.isAuth ? (
                     <Menu as='div' className='relative ml-3'>
                       <div>
-                        <Menu.Button className='flex max-w-xs items-center rounded-full bg-gray-800 text-sm text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'>
+                        <Menu.Button
+                          className='flex max-w-xs items-center rounded-full bg-gray-800 text-sm
+                           text-white focus:outline-none focus:ring-2 
+                           focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'
+                        >
                           <span className='sr-only'>Open user menu</span>
                           <img
                             className='h-8 w-8 rounded-full'
@@ -108,7 +126,11 @@ const Navbar = () => {
                       </Transition>
                     </Menu>
                   ) : (
-                    <Button nav={'/login'} size='large'>
+                    <Button
+                      className='mx-5'
+                      onClick={handleSignInPortal}
+                      size='large'
+                    >
                       Sign In
                     </Button>
                   )}

@@ -9,6 +9,7 @@ import LoginRoute from './routes/LoginRoute';
 import HomeRoute from './routes/HomeRoute';
 import RegisterRoute from './routes/RegisterRoute.jsx';
 import AuthContextProvider from "./context/auth-context";
+import DashboardRoute from './routes/DashboardRoute.jsx';
 
 const router = createBrowserRouter([
     {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
             {
                 path: "register",
                 element: <RegisterRoute />,
+            },
+            {
+                path: "dashboard",
+                element: <DashboardRoute />,
             },
         ],
     },

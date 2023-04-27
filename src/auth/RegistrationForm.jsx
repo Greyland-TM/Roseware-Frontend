@@ -1,7 +1,52 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import Input from '../components/UI/Input';
+import { createNewUser } from '../utils/auth';
 
 export default function RegisterForm() {
   const [userInfo, setUserInfo] = useState({});
+
+  const firstNameRef = useRef(null);
+  const lastNameRef = useRef(null);
+  const usernameRef = useRef(null);
+  const phoneRef = useRef(null);
+  const passwordRef = useRef(null);
+  const passwordAgainRef = useRef(null);
+  const emailRef = useRef(null);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const firstName = firstNameRef.current.value;
+    const lastName = lastNameRef.current.value;
+    const username = usernameRef.current.value;
+    const email = emailRef.current.value;
+    const phone = phoneRef.current.value;
+    const password = passwordRef.current.value;
+    const passwordAgain = passwordAgainRef.current.value;
+
+    if (password === passwordAgain) {
+      const info = {
+        first_name: firstName,
+        last_name: lastName,
+        email: email,
+        password: password,
+        phone: phone,
+        package_plan: {},
+      };
+      try {
+        console.log(info);
+        createNewUser(info);
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      console.log('Passwords do not match');
+    }
+  };
+
+  useEffect(() => {
+    firstNameRef.current.focus();
+  }, []);
 
   return (
     <div className='space-y-10 divide-y divide-gray-900/10'>
@@ -15,41 +60,44 @@ export default function RegisterForm() {
           </p>
         </div>
 
-        <form className='bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2'>
+        <form
+          onSubmit={handleSubmit}
+          className='bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2'
+        >
           <div className='px-4 py-6 sm:p-8'>
             <div className='grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6'>
               <div className='sm:col-span-3'>
                 <label
-                  htmlFor='first-name'
+                  htmlFor='first_name'
                   className='block text-sm font-medium leading-6 text-gray-900'
                 >
-                  First name
+                  First Name:
                 </label>
                 <div className='mt-2'>
-                  <input
+                  <Input
+                    ref={firstNameRef}
                     type='text'
-                    name='first-name'
-                    id='first-name'
-                    autoComplete='given-name'
-                    className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
+                    name='first_name'
+                    id='first_name'
+                    autoComplete='first_name'
                   />
                 </div>
               </div>
 
               <div className='sm:col-span-3'>
                 <label
-                  htmlFor='last-name'
+                  htmlFor='last_name'
                   className='block text-sm font-medium leading-6 text-gray-900'
                 >
-                  Last name
+                  Last Name:
                 </label>
                 <div className='mt-2'>
-                  <input
+                  <Input
+                    ref={lastNameRef}
                     type='text'
-                    name='last-name'
-                    id='last-name'
-                    autoComplete='family-name'
-                    className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
+                    name='last_name'
+                    id='last_name'
+                    autoComplete='last_name'
                   />
                 </div>
               </div>
@@ -59,13 +107,14 @@ export default function RegisterForm() {
                   htmlFor='email'
                   className='block text-sm font-medium leading-6 text-gray-900'
                 >
-                  Email address
+                  Email address:
                 </label>
                 <div className='mt-2'>
-                  <input
+                  <Input
+                    ref={emailRef}
                     id='email'
                     name='email'
-                    type='email'
+                    type='text'
                     autoComplete='email'
                     className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
                   />
@@ -74,98 +123,78 @@ export default function RegisterForm() {
 
               <div className='sm:col-span-4'>
                 <label
-                  htmlFor='country'
+                  htmlFor='phone-number'
                   className='block text-sm font-medium leading-6 text-gray-900'
                 >
-                  Country
+                  Phone Number
                 </label>
-                <div className='mt-2'>
-                  <select
-                    id='country'
-                    name='country'
-                    autoComplete='country-name'
-                    className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6'
-                  >
-                    <option>United States</option>
-                    <option>Canada</option>
-                    <option>Mexico</option>
-                  </select>
+                <div className='relative mt-2 rounded-md shadow-sm'>
+                  <div className='absolute inset-y-0 left-0 flex items-center'>
+                    <label htmlFor='country' className='sr-only'>
+                      Country
+                    </label>
+                    <select
+                      id='country'
+                      name='country'
+                      autoComplete='country'
+                      className='h-full rounded-md border-0 bg-transparent py-0 pl-3 pr-7 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm'
+                    >
+                      <option>US</option>
+                      <option>CA</option>
+                      <option>EU</option>
+                    </select>
+                  </div>
+                  <input
+                    ref={phoneRef}
+                    type='tel'
+                    name='phone-number'
+                    id='phone-number'
+                    className='block w-full rounded-md border-0 py-1.5 pl-16 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
+                    placeholder='+1 (555) 987-6543'
+                  />
                 </div>
               </div>
 
-              <div className='col-span-full'>
+              <div className='sm:col-span-4'>
                 <label
-                  htmlFor='street-address'
+                  htmlFor='password'
                   className='block text-sm font-medium leading-6 text-gray-900'
                 >
-                  Street address
+                  Password:
                 </label>
                 <div className='mt-2'>
-                  <input
-                    type='text'
-                    name='street-address'
-                    id='street-address'
-                    autoComplete='street-address'
+                  <Input
+                    ref={passwordRef}
+                    id='password'
+                    name='password'
+                    type='password'
+                    autoComplete='password'
                     className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
                   />
                 </div>
               </div>
 
-              <div className='sm:col-span-2 sm:col-start-1'>
+              <div className='sm:col-span-4'>
                 <label
-                  htmlFor='city'
+                  htmlFor='password-again'
                   className='block text-sm font-medium leading-6 text-gray-900'
                 >
-                  City
+                  Password Again:
                 </label>
                 <div className='mt-2'>
-                  <input
-                    type='text'
-                    name='city'
-                    id='city'
-                    autoComplete='address-level2'
-                    className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
-                  />
-                </div>
-              </div>
-
-              <div className='sm:col-span-2'>
-                <label
-                  htmlFor='region'
-                  className='block text-sm font-medium leading-6 text-gray-900'
-                >
-                  State / Province
-                </label>
-                <div className='mt-2'>
-                  <input
-                    type='text'
-                    name='region'
-                    id='region'
-                    autoComplete='address-level1'
-                    className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
-                  />
-                </div>
-              </div>
-
-              <div className='sm:col-span-2'>
-                <label
-                  htmlFor='postal-code'
-                  className='block text-sm font-medium leading-6 text-gray-900'
-                >
-                  ZIP / Postal code
-                </label>
-                <div className='mt-2'>
-                  <input
-                    type='text'
-                    name='postal-code'
-                    id='postal-code'
-                    autoComplete='postal-code'
+                  <Input
+                    ref={passwordAgainRef}
+                    id='password-again'
+                    name='password-again'
+                    type='password'
+                    autoComplete='password'
                     className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
                   />
                 </div>
               </div>
             </div>
           </div>
+
           <div className='flex items-center justify-end gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:px-8'>
             <button
               type='button'

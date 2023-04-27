@@ -6,11 +6,11 @@ export default function Modal(props) {
   return (
     <>
       <div className='flex justify-center'>
-        <div className='absolute z-20 '>{props.children}</div>
+        <div className='fixed z-20 '>{props.children}</div>
       </div>
       <div
         onClick={handleOverlayClick}
-        className='absolute z-10  w-full h-full bg-black opacity-50'
+        className='fixed z-10  w-full h-full bg-black opacity-75'
       />
     </>
   );

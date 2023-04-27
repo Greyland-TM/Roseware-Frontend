@@ -11,7 +11,7 @@ export async function createNewUser(body, navigate) {
   console.log(data);
 
   if (data.ok) {
-    navigate("/");
+    // navigate("/");
     // If all input is valid then a user is created and you may now log in.
     // Otherwise an error message is shown.
   } else {
@@ -32,12 +32,12 @@ export async function handleLogin(ctx, body, navigate) {
     const data = await response.json();
 
     if (data.token) {
-      console.log('success');
+      console.log(data);
       ctx.login(); // Logged in state is stores in the app wide context
       ctx.setUser(data.user, data.user.username);
       ctx.setToken(data.token);
       localStorage.setItem("Auth_Token", data.token);
-      navigate("/home");
+      navigate("/Dashboard");
     }
     else {
       console.log('error');
@@ -49,7 +49,8 @@ export async function handleLogin(ctx, body, navigate) {
 };
 
 // Handles validating token and resetting login context
-export async function validateToken(ctx, navigate, token) {
+export async function validateToken(ctx, token) {
+  console.log('validating token...')
   try {
     const response = await fetch("http://127.0.0.1:8000/accounts/user", {
       method: "GET",
@@ -64,7 +65,6 @@ export async function validateToken(ctx, navigate, token) {
       ctx.login(); // Logged in state is stores in the app wide context
       ctx.setUser(data.username, data.username);
       ctx.setToken(token);
-      navigate("/home");
     }
   } catch (err) {
     console.log(err);

@@ -8,57 +8,59 @@ import { useRef, useContext } from 'react';
 import { AuthContext } from '../context/auth-context';
 import { handleLogin } from '../utils/auth';
 import Modal from '../components/Modal';
+import Input from '../components/UI/Input';
 
 export default function LoginForm(props) {
   const navigate = useNavigate();
   const ctx = useContext(AuthContext);
   const passwordRef = useRef();
-  const nameRef = useRef();
+  const emailRef = useRef();
 
   const handleOverlayClicked = () => {
-    props.overlayClicked(true);
+    props.overlayClicked();
   };
 
   const formSubmit = (e) => {
     e.preventDefault();
 
     const body = {
-      username: nameRef.current.value,
+      username: emailRef.current.value,
       password: passwordRef.current.value,
     };
     handleLogin(ctx, body, navigate);
+    props.overlayClicked();
   };
 
   return (
     <>
       <Modal overlayClicked={props.overlayClicked}>
-        <div className='mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]'>
+        <div className='mt-52 sm:mx-auto sm:w-full sm:max-w-[480px]'>
           <div className='bg-white px-6 py-6 shadow sm:rounded-lg sm:px-12'>
             <div className='flex justify-center'>
               <h1 className='font-extrabold text-4xl text-blue-700'>CMS</h1>
             </div>
             <div className='flex min-h-full flex-1 flex-col justify-center py-6 sm:px-6 lg:px-8'>
               <div className='sm:mx-auto sm:w-full sm:max-w-md'>
-                <h2 className=' text-center text-2xl font-bold leading-9 tracking-tight text-gray-900'>
+                <h2 className=' mb-5 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900'>
                   Sign in to your account
                 </h2>
               </div>
-              <form className='space-y-6' action='#' method='POST'>
+              <form className='space-y-6' onSubmit={formSubmit}>
                 <div>
                   <label
-                    htmlFor='email'
+                    htmlFor='username'
                     className='block text-sm font-medium leading-6 text-gray-900'
                   >
-                    Email address
+                    Email:
                   </label>
                   <div className='mt-2'>
-                    <input
-                      id='email'
-                      name='email'
-                      type='email'
-                      autoComplete='email'
+                    <Input
+                      ref={emailRef}
+                      id='username'
+                      name='username'
+                      type='text'
+                      autoComplete='username'
                       required
-                      className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
                     />
                   </div>
                 </div>
@@ -71,13 +73,13 @@ export default function LoginForm(props) {
                     Password
                   </label>
                   <div className='mt-2'>
-                    <input
+                    <Input
+                      ref={passwordRef}
                       id='password'
                       name='password'
                       type='password'
                       autoComplete='current-password'
                       required
-                      className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'
                     />
                   </div>
                 </div>

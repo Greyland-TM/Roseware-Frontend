@@ -8,7 +8,10 @@ export const AuthContext = React.createContext({
   name: "",
   userName: "",
   token: "",
-  // login: () => {},
+  login: () => {},
+  logout: () => {},
+  setToken: () => {},
+  setUser: () => {}
 });
 
 const AuthContextProvider = (props) => {
@@ -37,6 +40,7 @@ const AuthContextProvider = (props) => {
   };
 
   const setTokenHandler = (token) => {
+    console.log("setting token");
     setToken(token);
   };
 

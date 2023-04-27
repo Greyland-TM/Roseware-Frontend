@@ -4,6 +4,7 @@ import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../UI/Button';
+import Dashboard from './../Dashboard';
 
 const user = {
   name: 'Tom Cook',
@@ -16,13 +17,22 @@ const navigation = [
   {
     name: 'Placeholder',
     to: '#',
+    current: true,
+  },
+  {
+    name: 'Services',
+    to: '#',
+    current: false,
+  },
+  {
+    name: 'Contact',
+    to: '#',
     current: false,
   },
 ];
 
 const userNavigation = [
-  { name: 'Your Profile', to: '#' },
-  { name: 'Sign out', to: '#' },
+  { name: 'Your Profile', to: '/Dashboard' },
 ];
 
 function classNames(...classes) {
@@ -31,9 +41,16 @@ function classNames(...classes) {
 
 const Navbar = (props) => {
   const ctx = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleSignInPortal = () => {
-      props.showAuthPortal(true);
+    props.showAuthPortal(true);
+  };
+
+  const handleLogout = () => {
+    console.log('logging out');
+    ctx.logout();
+    navigate('');
   };
 
   return (
@@ -44,7 +61,7 @@ const Navbar = (props) => {
             <div className='flex h-16 items-center justify-between'>
               <div className='flex items-center'>
                 <div className='flex-shrink-0'>
-                  <Link className='font-bold text-blue-500 text-xl' to='/'>
+                  <Link className='font-bold text-blue-500 text-4xl' to='/'>
                     CMS
                   </Link>
                 </div>
@@ -57,8 +74,8 @@ const Navbar = (props) => {
                         className={classNames(
                           item.current
                             ? 'bg-gray-900 text-white'
-                            : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                          'rounded-md px-3 py-2 text-sm font-medium'
+                            : 'text-gray-300 font-bold hover:bg-gray-700 hover:text-white',
+                          'rounded-md px-3 py-2 text-sm font-bold'
                         )}
                         aria-current={item.current ? 'page' : undefined}
                       >
@@ -70,15 +87,15 @@ const Navbar = (props) => {
               </div>
               <div className='hidden md:block'>
                 <div className='ml-4 flex items-center md:ml-6'>
-                  <button
-                    type='button'
-                    className='rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'
-                  >
-                    <span className='sr-only'>View notifications</span>
-                    {ctx.isAuth && (
+                  {ctx.isAuth && (
+                    <button
+                      type='button'
+                      className='rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'
+                    >
+                      <span className='sr-only'>View notifications</span>
                       <BellIcon className='h-6 w-6' aria-hidden='true' />
-                    )}
-                  </button>
+                    </button>
+                  )}
 
                   {/* Profile dropdown */}
                   {ctx.isAuth ? (
@@ -122,6 +139,11 @@ const Navbar = (props) => {
                               )}
                             </Menu.Item>
                           ))}
+                          <Menu.Item key='signoutbutton'>
+                            <div className='flex justify-center p-2'>
+                              <Button  onClick={handleLogout}>Sign Out</Button>
+                            </div>
+                          </Menu.Item>
                         </Menu.Items>
                       </Transition>
                     </Menu>
@@ -169,44 +191,54 @@ const Navbar = (props) => {
                 </Disclosure.Button>
               ))}
             </div>
-            <div className='border-t border-gray-700 pb-3 pt-4'>
-              <div className='flex items-center px-5'>
-                <div className='flex-shrink-0'>
-                  <img
-                    className='h-10 w-10 rounded-full'
-                    src={user.imageUrl}
-                    alt=''
-                  />
-                </div>
-                <div className='ml-3'>
-                  <div className='text-base font-medium text-white'>
-                    {user.name}
+            {ctx.isAuth ? (
+              <div className='border-t border-gray-700 pb-3 pt-4'>
+                <div className='flex items-center px-5'>
+                  <div className='flex-shrink-0'>
+                    <img
+                      className='h-10 w-10 rounded-full'
+                      src={user.imageUrl}
+                      alt=''
+                    />
                   </div>
-                  <div className='text-sm font-medium text-gray-400'>
-                    {user.email}
+                  <div className='ml-3'>
+                    <div className='text-base font-medium text-white'>
+                      {ctx.userName}
+                    </div>
                   </div>
-                </div>
-                <button
-                  type='button'
-                  className='ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'
-                >
-                  <span className='sr-only'>View notifications</span>
-                  <BellIcon className='h-6 w-6' aria-hidden='true' />
-                </button>
-              </div>
-              <div className='mt-3 space-y-1 px-2'>
-                {userNavigation.map((item) => (
-                  <Disclosure.Button
-                    key={item.name}
-                    as='a'
-                    to={item.to}
-                    className='block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white'
+                  <button
+                    type='button'
+                    className='ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'
                   >
-                    {item.name}
-                  </Disclosure.Button>
-                ))}
+                    <span className='sr-only'>View notifications</span>
+                    <BellIcon className='h-6 w-6' aria-hidden='true' />
+                  </button>
+                </div>
+                <div className='mt-3 space-y-1 px-2'>
+                  {userNavigation.map((item) => (
+                    <Disclosure.Button
+                      key={item.name}
+                      as='a'
+                      to={item.to}
+                      className='block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white'
+                    >
+                      {item.name}
+                    </Disclosure.Button>
+                  ))}
+                </div>
               </div>
-            </div>
+            ) : (
+              <div className='flex justify-center pb-3'>
+                {' '}
+                <Button
+                  className='mx-5'
+                  onClick={handleSignInPortal}
+                  size='large'
+                >
+                  Sign In
+                </Button>
+              </div>
+            )}
           </Disclosure.Panel>
         </>
       )}

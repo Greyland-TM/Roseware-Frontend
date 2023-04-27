@@ -1,8 +1,7 @@
 import { HomeIcon } from '@heroicons/react/20/solid';
 import { Link } from 'react-router-dom';
 
-export default function Breadcrumb(props) {
-  const currentPage = props.currentPage;
+export default function Breadcrumb({currentPage}) {
   const titleWithoutSlash = currentPage.slice(1);
   let capitalizedTitle =
     titleWithoutSlash.charAt(0).toUpperCase() + titleWithoutSlash.slice(1);

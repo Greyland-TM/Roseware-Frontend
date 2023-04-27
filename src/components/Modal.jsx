@@ -1,12 +1,12 @@
-export default function Modal(props) {
+export default function Modal({overlayClicked, children}) {
   const handleOverlayClick = () => {
-    props.overlayClicked();
+    overlayClicked();
   };
 
   return (
     <>
       <div className='flex justify-center'>
-        <div className='fixed z-20 '>{props.children}</div>
+        <div className='fixed z-20 '>{children}</div>
       </div>
       <div
         onClick={handleOverlayClick}

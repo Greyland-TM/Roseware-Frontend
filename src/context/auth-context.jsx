@@ -1,20 +1,20 @@
 // The context is used to maintain the authentication state throughout the app.
 // The JWT found in local storage is also stored here, and sent with every API request.
 
-import React, {useState} from "react";
+import React, { useState } from 'react';
 
 export const AuthContext = React.createContext({
   isAuth: false,
-  name: "",
-  userName: "",
-  token: "",
+  name: '',
+  userName: '',
+  token: '',
   login: () => {},
   logout: () => {},
   setToken: () => {},
-  setUser: () => {}
+  setUser: () => {},
 });
 
-const AuthContextProvider = (props) => {
+const AuthContextProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [name, setName] = useState();
   const [userName, setUserName] = useState();
@@ -27,23 +27,22 @@ const AuthContextProvider = (props) => {
   };
 
   const logoutHandler = () => {
-    localStorage.removeItem("Auth_Token");
+    localStorage.removeItem('Auth_Token');
     setIsAuthenticated(false);
-    setToken("");
+    setToken('');
     // Sent the logout request to the backend...
   };
 
   const setUserHandler = (name, userName) => {
-    console.log("setting user");
+    console.log('setting user');
     setName(name);
     setUserName(userName);
   };
 
   const setTokenHandler = (token) => {
-    console.log("setting token");
+    console.log('setting token');
     setToken(token);
   };
-
 
   return (
     <AuthContext.Provider
@@ -58,7 +57,7 @@ const AuthContextProvider = (props) => {
         userName: userName,
       }}
     >
-      {props.children}
+      {children}
     </AuthContext.Provider>
   );
 };

@@ -9,7 +9,7 @@ import Footer from './components/Footer';
 import { AuthContext } from './context/auth-context';
 import { validateToken } from './utils/auth';
 
-export default function App(props) {
+export default function App() {
   const ctx = useContext(AuthContext);
   const [showAuthPortal, setShowAuthPortal] = useState(false);
   const location = useLocation();
@@ -19,16 +19,12 @@ export default function App(props) {
     setShowAuthPortal(!showAuthPortal);
   };
 
-  const handleOverlayClick = () => {
-    toggleAuthPortal();
-  };
-
   useEffect(() => {
-    console.log(ctx.isAuth)
-    validateToken(ctx, ctx.token);
+    const storedToken = localStorage.getItem('Auth_Token')
+    validateToken(ctx, storedToken);
   }, [])
 
-  return (
+  return ( 
     <>
       <div className='min-h-full'>
         <Navbar showAuthPortal={toggleAuthPortal} />
@@ -39,7 +35,7 @@ export default function App(props) {
           <div className='mx-auto max-w-7xl py-6 sm:px-6 lg:px-8'>
             {showAuthPortal &&
               createPortal(
-                <LoginForm overlayClicked={handleOverlayClick} />,
+                <LoginForm overlayClicked={toggleAuthPortal} />,
                 document.getElementById('portal')
               )}
             <Outlet />

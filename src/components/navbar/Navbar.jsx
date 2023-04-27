@@ -1,10 +1,9 @@
-import React, { useContext, Fragment, useState } from 'react';
+import React, { useContext, Fragment } from 'react';
 import { AuthContext } from '../../context/auth-context';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../UI/Button';
-import Dashboard from './../Dashboard';
 
 const user = {
   name: 'Tom Cook',
@@ -31,20 +30,18 @@ const navigation = [
   },
 ];
 
-const userNavigation = [
-  { name: 'Your Profile', to: '/Dashboard' },
-];
+const userNavigation = [{ name: 'Your Profile', to: '/Dashboard' }];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-const Navbar = (props) => {
+const Navbar = ({ showAuthPortal }) => {
   const ctx = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleSignInPortal = () => {
-    props.showAuthPortal(true);
+    showAuthPortal(true);
   };
 
   const handleLogout = () => {
@@ -141,7 +138,7 @@ const Navbar = (props) => {
                           ))}
                           <Menu.Item key='signoutbutton'>
                             <div className='flex justify-center p-2'>
-                              <Button  onClick={handleLogout}>Sign Out</Button>
+                              <Button onClick={handleLogout}>Sign Out</Button>
                             </div>
                           </Menu.Item>
                         </Menu.Items>
@@ -158,7 +155,7 @@ const Navbar = (props) => {
                   )}
                 </div>
               </div>
-              <div className='-mr-2 flex md:hidden'>
+              <div className='-mr-2 flex  md:hidden'>
                 {/* Mobile menu button */}
                 <Disclosure.Button className='inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'>
                   <span className='sr-only'>Open main menu</span>

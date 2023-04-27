@@ -10,14 +10,14 @@ import { handleLogin } from '../utils/auth';
 import Modal from '../components/Modal';
 import Input from '../components/UI/Input';
 
-export default function LoginForm(props) {
+export default function LoginForm({ overlayClicked }) {
   const navigate = useNavigate();
   const ctx = useContext(AuthContext);
   const passwordRef = useRef();
   const emailRef = useRef();
 
   const handleOverlayClicked = () => {
-    props.overlayClicked();
+    overlayClicked();
   };
 
   const formSubmit = (e) => {
@@ -28,12 +28,12 @@ export default function LoginForm(props) {
       password: passwordRef.current.value,
     };
     handleLogin(ctx, body, navigate);
-    props.overlayClicked();
+    overlayClicked();
   };
 
   return (
     <>
-      <Modal overlayClicked={props.overlayClicked}>
+      <Modal overlayClicked={overlayClicked}>
         <div className='mt-52 sm:mx-auto sm:w-full sm:max-w-[480px]'>
           <div className='bg-white px-6 py-6 shadow sm:rounded-lg sm:px-12'>
             <div className='flex justify-center'>

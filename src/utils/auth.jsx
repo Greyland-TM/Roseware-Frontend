@@ -50,7 +50,7 @@ export async function handleLogin(ctx, body, navigate) {
 
 // Handles validating token and resetting login context
 export async function validateToken(ctx, token) {
-  console.log('validating token...')
+  console.log('validating token...', token)
   try {
     const response = await fetch("http://127.0.0.1:8000/accounts/user", {
       method: "GET",

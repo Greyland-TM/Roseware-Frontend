@@ -34,13 +34,11 @@ const AuthContextProvider = ({ children }) => {
   };
 
   const setUserHandler = (name, userName) => {
-    console.log('setting user');
     setName(name);
     setUserName(userName);
   };
 
   const setTokenHandler = (token) => {
-    console.log('setting token');
     setToken(token);
   };
 

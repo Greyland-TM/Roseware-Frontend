@@ -39,9 +39,9 @@ const router = createBrowserRouter([
 const domNode = document.getElementById('root');
 const root = createRoot(domNode);
 root.render(
-    <React.StrictMode>
+    // <React.StrictMode>
         <AuthContextProvider>
             <RouterProvider router={router} />
         </AuthContextProvider>
-    </React.StrictMode>
+    /* </React.StrictMode> */
 );

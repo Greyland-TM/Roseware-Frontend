@@ -2,6 +2,8 @@ import { useReducer, useRef } from 'react';
 import Input from '../components/UI/Input';
 import { createNewUser, handleLogin } from '../utils/auth';
 import { useNavigate } from 'react-router-dom';
+import { PhoneNumberUtil, PhoneNumberFormat } from 'google-libphonenumber';
+import { validateField } from '../utils/validateField';
 
 const initialState = {
   firstName: '',
@@ -23,12 +25,18 @@ const initialState = {
   passwordTouched: false,
   passwordAgainTouched: false,
   formValid: false,
-  error: null,
-  message: '',
+  error: {general: '', email_error: '', password_error: '', confirm_password_error: '', phone_error: '', first_name_error: '', last_name_error: '',},
 };
+
+const phoneUtil = PhoneNumberUtil.getInstance();
+const PNF = PhoneNumberFormat;
 
 function reducer(state, action) {
   switch (action.type) {
+    case 'PHONE_CHANGED':
+      const phoneInput = action.value;
+      console.log('Phone: ' + phoneInput);
+      return { ...state, phone: phoneInput };
     case 'FIRSTNAME_VALID':
       const firstNameIsValid =
         action.value.trim().length > 0 && action.value.trim().length < 20;
@@ -40,7 +48,9 @@ function reducer(state, action) {
       console.log(lastNameIsValid);
       return { ...state, lastNameValid: lastNameIsValid };
     case 'EMAIL_VALID':
-      const emailIsValid = action.value.trim().length > 0;
+      console.log(validateField('email', action.value));
+      const emailIsValid = validateField('email', action.value);
+      console.log(emailIsValid);
       return { ...state, emailValid: emailIsValid };
     case 'PHONE_VALID':
       const phoneIsValid =
@@ -56,9 +66,6 @@ function reducer(state, action) {
       return { ...state, passwordAgainValid: passwordAgainIsValid };
     case 'SET_FIELD_TOUCHED_TRUE':
       return { ...state, [action.field]: true };
-    case `SET_ERROR`:
-      return { ...state, error: action.error };
-
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
   }
@@ -75,41 +82,52 @@ export default function RegisterForm() {
   const passwordAgainRef = useRef(null);
   const emailRef = useRef(null);
 
-  const handleFirstNameBlur = (e) => {
+  const handlePhoneChange = () => {
+    const phone = phoneRef.current.value;
+    dispatch({ type: 'PHONE_CHANGED', value: phone });
+  };
+
+  const handleFirstNameBlur = () => {
     const firstName = firstNameRef.current.value;
     dispatch({ type: 'SET_FIELD_TOUCHED_TRUE', field: 'firstNameTouched' });
     dispatch({ type: 'FIRSTNAME_VALID', value: firstName });
   };
 
-  const handleLastNameBlur = (e) => {
+  const handleLastNameBlur = () => {
     const lastName = lastNameRef.current.value;
     dispatch({ type: 'SET_FIELD_TOUCHED_TRUE', field: 'lastNameTouched' });
     dispatch({ type: 'LASTNAME_VALID', value: lastName });
   };
 
-  const handleEmailBlur = (e) => {
+  const handleEmailBlur = () => {
     const email = emailRef.current.value;
     dispatch({ type: 'SET_FIELD_TOUCHED_TRUE', field: 'emailTouched' });
     dispatch({ type: 'EMAIL_VALID', value: email });
   };
 
-  const handlePhoneBlur = (e) => {
+  const handlePhoneBlur = () => {
     const phone = phoneRef.current.value;
+    const number = phoneUtil.parseAndKeepRawInput(phone, 'US');
+    const formattedPhoneNumber = phoneUtil.format(number, PNF.NATIONAL);
+    console.log('Formatted: ' + formattedPhoneNumber);
+    dispatch({ type: 'PHONE_CHANGED', value: formattedPhoneNumber });
     dispatch({ type: 'SET_FIELD_TOUCHED_TRUE', field: 'phoneTouched' });
     dispatch({ type: 'PHONE_VALID', value: phone });
   };
 
-  const handlePasswordBlur = (e) => {
+  const handlePasswordBlur = () => {
     const password = passwordRef.current.value;
     dispatch({ type: 'SET_FIELD_TOUCHED_TRUE', field: 'passwordTouched' });
     dispatch({ type: 'PASSWORD_VALID', value: password });
   };
 
-  const handlePasswordAgainBlur = (e) => {
+  const handlePasswordAgainBlur = () => {
     const passwordAgain = passwordAgainRef.current.value;
     console.log(passwordAgain);
     dispatch({ type: 'SET_FIELD_TOUCHED_TRUE', field: 'passwordAgainTouched' });
+    console.log(state.passwordAgainTouched);
     dispatch({ type: 'PASSWORDAGAIN_VALID', value: passwordAgain });
+    console.log(state.passwordAgainValid);
   };
 
   const handleSubmit = (e) => {
@@ -129,8 +147,6 @@ export default function RegisterForm() {
       state.lastNameValid &&
       state.phoneValid &&
       state.password === state.passwordAgain;
-
-    console.log(formIsValid);
 
     if (formIsValid) {
       const info = {
@@ -161,10 +177,10 @@ export default function RegisterForm() {
             Personal Information
           </h2>
           <p className='mt-1 text-sm leading-6 text-gray-600'>
-            We promise we'll never sell or give out your data.
+            We'll never sell or give out your data.
           </p>
           <br />
-          <p className='text-red-600'>{state.error}</p>
+          <p className='text-red-600'>{state.error.general}</p>
         </div>
 
         <form
@@ -193,6 +209,7 @@ export default function RegisterForm() {
                     name='first_name'
                     id='first_name'
                     autoComplete='first_name'
+                    placeholder='John'
                   />
                 </div>
               </div>
@@ -212,6 +229,7 @@ export default function RegisterForm() {
                     name='last_name'
                     id='last_name'
                     autoComplete='last_name'
+                    placeholder='Doe'
                     className={
                       !state.lastNameValid &&
                       state.lastNameTouched &&
@@ -236,6 +254,7 @@ export default function RegisterForm() {
                     name='email'
                     type='text'
                     autoComplete='email'
+                    placeholder='your@email.com'
                     className={
                       !state.emailValid && state.emailTouched && 'bg-red-100'
                     }
@@ -251,33 +270,17 @@ export default function RegisterForm() {
                   Phone Number
                 </label>
                 <div className='relative mt-2 rounded-md shadow-sm'>
-                  <div className='absolute inset-y-0 left-0 flex items-center'>
-                    <label htmlFor='country' className='sr-only'>
-                      Country
-                    </label>
-                    <select
-                      id='country'
-                      name='country'
-                      autoComplete='country'
-                      className={`bg-transparent h-full rounded-md border-0  py-0 pl-3 pr-7 text-gray-500 
-                        focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-600`}
-                    >
-                      <option>US</option>
-                      <option>CA</option>
-                      <option>EU</option>
-                    </select>
-                  </div>
-                  <input
+                  <Input
+                    onChange={handlePhoneChange}
+                    value={state.phone}
                     onBlur={handlePhoneBlur}
                     ref={phoneRef}
                     type='tel'
                     name='phone-number'
                     id='phone-number'
-                    className={`${
+                    className={
                       !state.phoneValid && state.phoneTouched && 'bg-red-100'
-                    } block w-full rounded-md border-0 py-1.5 pl-16 text-gray-900 ring-1 ring-inset 
-                    ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset 
-                    focus:ring-indigo-600 sm:text-sm sm:leading-6`}
+                    }
                     placeholder='+1 (555) 987-6543'
                   />
                 </div>
@@ -298,6 +301,7 @@ export default function RegisterForm() {
                     name='password'
                     type='password'
                     autoComplete='password'
+                    placeholder='********'
                     className={`${
                       !state.passwordValid &&
                       state.passwordTouched &&
@@ -323,11 +327,12 @@ export default function RegisterForm() {
                     name='password-again'
                     type='password'
                     autoComplete='password'
+                    placeholder='********'
                     className={`${
                       !state.passwordAgainValid &&
                       state.passwordAgainTouched &&
                       'bg-red-100'
-                    }block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset 
+                    } block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset 
                     ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
                   />
                 </div>

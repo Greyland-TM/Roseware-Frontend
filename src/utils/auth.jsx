@@ -1,6 +1,6 @@
 // All input is validated on the server.
 export async function createNewUser(body, navigate) {
-  const response = await fetch("http://127.0.0.1:8000/accounts/register", {
+  const response = await fetch("https://www.api.rosewareintegrations.com/accounts/register", {
     method: "POST",
     body: JSON.stringify(body),
     headers: { "Content-Type": "application/json" },
@@ -22,12 +22,13 @@ export async function createNewUser(body, navigate) {
 // Handles logging in an existing user
 export async function handleLogin(ctx, body, navigate) {
   try {
-    const response = await fetch("http://127.0.0.1:8000/accounts/login", {
+    const response = await fetch("https://www.api.rosewareintegrations.com/accounts/login", {
       method: "POST",
       body: JSON.stringify(body),
       headers: { "Content-Type": "application/json" },
     }
     );
+    console.log('Response: ', response);
 
     const data = await response.json();
 
@@ -51,7 +52,7 @@ export async function handleLogin(ctx, body, navigate) {
 // Handles validating token and resetting login context
 export async function validateToken(ctx, token) {
   try {
-    const response = await fetch("http://127.0.0.1:8000/accounts/user", {
+    const response = await fetch("https://www.api.rosewareintegrations.com/accounts/user", {
       method: "GET",
       headers: {
         Authorization: `Token ${token}`,

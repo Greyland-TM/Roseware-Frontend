@@ -5,11 +5,21 @@ import {
     createBrowserRouter,
     RouterProvider,
 } from "react-router-dom";
+import AuthContextProvider from "./context/auth-context";
+
+// Redux
+import { Provider } from 'react-redux'
+import store from './redux/store'
+
+// Routes
 import LoginRoute from './routes/LoginRoute';
 import HomeRoute from './routes/HomeRoute';
 import RegisterRoute from './routes/RegisterRoute.jsx';
-import AuthContextProvider from "./context/auth-context";
 import DashboardRoute from './routes/DashboardRoute.jsx';
+import ServicesRoute from './routes/ServicesRoute.jsx';
+import AboutRoute from './routes/AboutRoute.jsx';
+import ContactRoute from './routes/ContactRoute.jsx';
+import JournalRoute from './routes/JournalRoute.jsx';
 
 const router = createBrowserRouter([
     {
@@ -32,6 +42,22 @@ const router = createBrowserRouter([
                 path: "dashboard",
                 element: <DashboardRoute />,
             },
+            {
+                path: "services",
+                element: <ServicesRoute />,
+            },
+            {
+                path: "about",
+                element: <AboutRoute />,
+            },
+            {
+                path: "contact",
+                element: <ContactRoute />,
+            },
+            {
+                path: "journal",
+                element: <JournalRoute />,
+            },
         ],
     },
 ]);
@@ -41,7 +67,9 @@ const root = createRoot(domNode);
 root.render(
     // <React.StrictMode>
         <AuthContextProvider>
-            <RouterProvider router={router} />
+            <Provider store={store}>
+                <RouterProvider router={router} />
+            </Provider>
         </AuthContextProvider>
     /* </React.StrictMode> */
 );

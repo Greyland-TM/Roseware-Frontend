@@ -2,9 +2,10 @@ import React, { useContext } from "react";
 import Overview from "../components/Overview";
 import Landing from "../components/Landing";
 import { AuthContext } from "../context/auth-context";
+import Hero from '../components/page-components/home/Hero'
 
 const Home = () => {
-    return <Landing />;
+    return <Hero />;
 };
 
 export default Home;

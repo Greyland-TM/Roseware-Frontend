@@ -1,4 +1,5 @@
-import React, { useContext, Fragment, useState } from 'react';
+import React, { useContext, Fragment, useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { AuthContext } from '../../context/auth-context';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
@@ -23,30 +24,37 @@ function classNames(...classes) {
 const Navbar = ({ showAuthPortal }) => {
   const [currentPage, setCurrentPage] = useState('');
   const ctx = useContext(AuthContext);
+  const location = useLocation();
   const navigate = useNavigate();
 
   const navigation = [
     {
       name: 'Services',
       to: '/services',
-      current: currentPage === 'Services'
+      current: currentPage.toLowerCase() === 'services'
     },
     {
       name: 'About',
       to: '/about',
-      current: currentPage === 'About',
+      current: currentPage.toLowerCase() === 'about',
     },
     {
       name: 'Contact',
       to: '/contact',
-      current: currentPage === 'Contact',
+      current: currentPage.toLowerCase() === 'contact',
     },
     {
       name: 'Journal',
       to: '/journal',
-      current: currentPage === 'Journal',
+      current: currentPage.toLowerCase() === 'journal',
     },
   ];
+
+  useEffect(() => {
+    const currentPath = location.pathname.slice(1);
+    setCurrentPage(currentPath);
+  }, [location.pathname]);
+
 
   const handleSignInPortal = () => {
     showAuthPortal(true);

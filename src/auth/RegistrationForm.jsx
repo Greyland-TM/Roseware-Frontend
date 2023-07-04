@@ -155,7 +155,6 @@ export default function RegisterForm() {
         email: email,
         password: password,
         phone: phone,
-        package_plan: {},
       };
       try {
         createNewUser(info);

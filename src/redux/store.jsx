@@ -1,5 +1,8 @@
-import { configureStore } from '@reduxjs/toolkit'
+import {configureStore} from "@reduxjs/toolkit";
+import sessionReducer from "./slices/sessionSlice";
 
 export default configureStore({
-  reducer: {},
-})
+  reducer: {
+    session: sessionReducer,
+  },
+});

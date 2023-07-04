@@ -6,6 +6,12 @@ import {
     RouterProvider,
 } from "react-router-dom";
 import AuthContextProvider from "./context/auth-context";
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route,
+} from "react-router-dom";
+
 
 // Redux
 import { Provider } from 'react-redux'
@@ -65,11 +71,9 @@ const router = createBrowserRouter([
 const domNode = document.getElementById('root');
 const root = createRoot(domNode);
 root.render(
-    // <React.StrictMode>
-        <AuthContextProvider>
-            <Provider store={store}>
-                <RouterProvider router={router} />
-            </Provider>
-        </AuthContextProvider>
-    /* </React.StrictMode> */
+    <AuthContextProvider>
+        <Provider store={store}>
+            <RouterProvider router={router} />
+        </Provider>
+    </AuthContextProvider>
 );

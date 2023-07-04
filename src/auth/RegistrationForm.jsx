@@ -1,6 +1,7 @@
-import { useReducer, useRef } from 'react';
-import { useSelector } from 'react-redux';
+import { useReducer, useRef, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Input from '../components/UI/Input';
+import store from '../redux/store';
 // import { createNewUser, handleLogin } from '../utils/auth';
 import { useNavigate } from 'react-router-dom';
 import { PhoneNumberUtil, PhoneNumberFormat } from 'google-libphonenumber';
@@ -30,7 +31,7 @@ const initialState = {
   passwordAgainTouched: false,
   formValid: false,
   hasError: false,
-  errorMessage: '',
+  errorMessage: ''
 };
 
 const phoneUtil = PhoneNumberUtil.getInstance();
@@ -80,11 +81,9 @@ function reducer(state, action) {
 
 export default function RegisterForm() {
   const { createUserSuccess, createUserError } = useSelector((state) => state.session);
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, localDispatch] = useReducer(reducer, initialState);
   const navigate = useNavigate();
-
-  console.log('here: ', createUserSuccess, createUserError);
-
+  const dispatch = useDispatch();
   const firstNameRef = useRef(null);
   const lastNameRef = useRef(null);
   const phoneRef = useRef(null);
@@ -94,50 +93,46 @@ export default function RegisterForm() {
 
   const handlePhoneChange = () => {
     const phone = phoneRef.current.value;
-    dispatch({ type: 'PHONE_CHANGED', value: phone });
+    localDispatch({ type: 'PHONE_CHANGED', value: phone });
   };
 
   const handleFirstNameBlur = () => {
     const firstName = firstNameRef.current.value;
-    dispatch({ type: 'SET_FIELD_TOUCHED_TRUE', field: 'firstNameTouched' });
-    dispatch({ type: 'FIRSTNAME_VALID', value: firstName });
+    localDispatch({ type: 'SET_FIELD_TOUCHED_TRUE', field: 'firstNameTouched' });
+    localDispatch({ type: 'FIRSTNAME_VALID', value: firstName });
   };
 
   const handleLastNameBlur = () => {
     const lastName = lastNameRef.current.value;
-    dispatch({ type: 'SET_FIELD_TOUCHED_TRUE', field: 'lastNameTouched' });
-    dispatch({ type: 'LASTNAME_VALID', value: lastName });
+    localDispatch({ type: 'SET_FIELD_TOUCHED_TRUE', field: 'lastNameTouched' });
+    localDispatch({ type: 'LASTNAME_VALID', value: lastName });
   };
 
   const handleEmailBlur = () => {
     const email = emailRef.current.value;
-    dispatch({ type: 'SET_FIELD_TOUCHED_TRUE', field: 'emailTouched' });
-    dispatch({ type: 'EMAIL_VALID', value: email });
+    localDispatch({ type: 'SET_FIELD_TOUCHED_TRUE', field: 'emailTouched' });
+    localDispatch({ type: 'EMAIL_VALID', value: email });
   };
 
   const handlePhoneBlur = () => {
     const phone = phoneRef.current.value;
     const number = phoneUtil.parseAndKeepRawInput(phone, 'US');
     const formattedPhoneNumber = phoneUtil.format(number, PNF.NATIONAL);
-    console.log('Formatted: ' + formattedPhoneNumber);
-    dispatch({ type: 'PHONE_CHANGED', value: formattedPhoneNumber });
-    dispatch({ type: 'SET_FIELD_TOUCHED_TRUE', field: 'phoneTouched' });
-    dispatch({ type: 'PHONE_VALID', value: phone });
+    localDispatch({ type: 'PHONE_CHANGED', value: formattedPhoneNumber });
+    localDispatch({ type: 'SET_FIELD_TOUCHED_TRUE', field: 'phoneTouched' });
+    localDispatch({ type: 'PHONE_VALID', value: phone });
   };
 
   const handlePasswordBlur = () => {
     const password = passwordRef.current.value;
-    dispatch({ type: 'SET_FIELD_TOUCHED_TRUE', field: 'passwordTouched' });
-    dispatch({ type: 'PASSWORD_VALID', value: password });
+    localDispatch({ type: 'SET_FIELD_TOUCHED_TRUE', field: 'passwordTouched' });
+    localDispatch({ type: 'PASSWORD_VALID', value: password });
   };
 
   const handlePasswordAgainBlur = () => {
     const passwordAgain = passwordAgainRef.current.value;
-    console.log(passwordAgain);
-    dispatch({ type: 'SET_FIELD_TOUCHED_TRUE', field: 'passwordAgainTouched' });
-    console.log(state.passwordAgainTouched);
-    dispatch({ type: 'PASSWORDAGAIN_VALID', value: passwordAgain });
-    console.log(state.passwordAgainValid);
+    localDispatch({ type: 'SET_FIELD_TOUCHED_TRUE', field: 'passwordAgainTouched' });
+    localDispatch({ type: 'PASSWORDAGAIN_VALID', value: passwordAgain });
   };
 
   const handleSubmit = async (e) => {
@@ -167,21 +162,35 @@ export default function RegisterForm() {
           password: password,
           phone: phone,
         };
-        await dispatch(createNewUser(info));
-        if(createUserSuccess) {
-          navigate('/dashboard');
-        } else {
-          console.log('error... ');
-          dispatch({ type: 'SET_ERROR', hasError: true, errorMessage: createUserError || 'Please fill out all fields dummy.' });
-        }
+        console.log('dispatching...');
+        // dispatch(createNewUser(info));
+        dispatch(createNewUser(info)).then((result) => {
+          console.log('Got a result: ', result);
+        }).catch((error) => {
+          console.log('Got an error: ', error);
+        });
       } else {
-        console.log('Error...');
-        dispatch({ type: 'SET_ERROR', hasError: true, errorMessage: 'Please fill out all fields.' });
+        localDispatch({ type: 'SET_ERROR', hasError: true, errorMessage: 'Please fill out all fields.' });
       }
     } catch (error){ 
       console.log('Got an error: ', error);
     }
   };
+
+  useEffect(() => {
+    const unsubscribe = store.subscribe(() => {
+      const state = store.getState();
+      if (state.session.createUserSuccess) {
+        navigate('/dashboard');
+      }
+      if (state.session.createUserError) {
+        alert(state.session.createUserError);
+      }
+    });
+
+    // Cleanup function:
+    return unsubscribe;
+  }, []); // Only run once after initial render
 
   return (
     <div className='space-y-10 divide-y divide-gray-900/10'>

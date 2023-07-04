@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 
 export const sessionSlice = createSlice({
   name: 'session',
@@ -41,6 +41,24 @@ export const sessionSlice = createSlice({
       state.userToken = action.payload.token;
     }
   },
+  extraReducers: (builder) => {
+    builder
+      .addCase(createNewUser.pending, (state) => {
+        state.createUserSuccess = false;
+        state.createUserError = null;
+      })
+      .addCase(createNewUser.fulfilled, (state, action) => {
+        state.createUserSuccess = true;
+        state.createUserError = null;
+        state.userEmail = action.payload.email;
+        state.userId = action.payload.id;
+        state.userToken = action.payload.token;
+      })
+      .addCase(createNewUser.rejected, (state, action) => {
+        state.createUserSuccess = false;
+        state.createUserError = action.payload;
+      })
+  },
 })
 
 // Action creators are generated for each case reducer function
@@ -50,39 +68,34 @@ export default sessionSlice.reducer
 
 // ----------------------------------------------------------------------
 
-export async function createNewUser(body) {
-  try {
-    console.log('Test 1');
-    sessionSlice.actions.createUserStart();
-    console.log('Test 2');
-
-    const response = await fetch(`http://127.0.0.1:8000/accounts/create-customer/`, {
-      method: "POST",
-      body: JSON.stringify(body),
-      headers: { "Content-Type": "application/json" },
-    });
-    console.log('Test 3');
-
-    const data = await response.json();
-
-    console.log('createNewUser: ', data.new_customer);
-
-    if (data.ok) {
-      sessionSlice.actions.createUserSuccess(data.new_customer);
-    } else {
-      sessionSlice.actions.createUserFailure(data.message);
+export const createNewUser = createAsyncThunk(
+  'session/createNewUser',
+  async (body, { rejectWithValue }) => {
+    try {
+      const response = await fetch(`http://127.0.0.1:8000/accounts/create-customer/`, {
+        method: "POST",
+        body: JSON.stringify(body),
+        headers: { "Content-Type": "application/json" },
+      });
+  
+      const data = await response.json();
+  
+      if (data.ok) {
+        return data.new_customer;
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (error) {
+      return rejectWithValue(error.toString());
     }
-  } catch (error) {
-    console.log('Error: ', error);
-    sessionSlice.actions.createUserFailure(error.toString());
   }
-}
+)
 
 // ----------------------------------------------------------------------
 
 // Handles logging in an existing user
 export async function handleLogin(body) {
-  const response = await fetch(`${process.env.BACKEND_URL}/accounts/login`, {
+  const response = await fetch(`http://127.0.0.1:8000/accounts/login`, {
     method: "POST",
     body: JSON.stringify(body),
     headers: { "Content-Type": "application/json" },
@@ -104,7 +117,7 @@ export async function handleLogin(body) {
 
 // Handles validating token and resetting login context
 export async function validateToken(token) {
-  const response = await fetch(`${process.env.BACKEND_URL}/accounts/user`, {
+  const response = await fetch(`http://127.0.0.1:8000/accounts/user`, {
     method: "GET",
     headers: {
       Authorization: `Token ${token}`,

@@ -1,9 +1,13 @@
 import { useReducer, useRef } from 'react';
+import { useSelector } from 'react-redux';
 import Input from '../components/UI/Input';
-import { createNewUser, handleLogin } from '../utils/auth';
+// import { createNewUser, handleLogin } from '../utils/auth';
 import { useNavigate } from 'react-router-dom';
 import { PhoneNumberUtil, PhoneNumberFormat } from 'google-libphonenumber';
 import { validateField } from '../utils/validateField';
+import { createNewUser } from '../redux/slices/sessionSlice'
+
+// import {} from '../redux/slices'
 
 const initialState = {
   firstName: '',
@@ -25,7 +29,8 @@ const initialState = {
   passwordTouched: false,
   passwordAgainTouched: false,
   formValid: false,
-  error: {general: '', email_error: '', password_error: '', confirm_password_error: '', phone_error: '', first_name_error: '', last_name_error: '',},
+  hasError: false,
+  errorMessage: '',
 };
 
 const phoneUtil = PhoneNumberUtil.getInstance();
@@ -66,14 +71,19 @@ function reducer(state, action) {
       return { ...state, passwordAgainValid: passwordAgainIsValid };
     case 'SET_FIELD_TOUCHED_TRUE':
       return { ...state, [action.field]: true };
+    case 'SET_ERROR':
+      return { ...state, hasError: action.hasError, errorMessage: action.message };
     default:
       throw new Error(`Unhandled action type: ${action.type}`);
   }
 }
 
 export default function RegisterForm() {
+  const { createUserSuccess, createUserError } = useSelector((state) => state.session);
   const [state, dispatch] = useReducer(reducer, initialState);
   const navigate = useNavigate();
+
+  console.log('here: ', createUserSuccess, createUserError);
 
   const firstNameRef = useRef(null);
   const lastNameRef = useRef(null);
@@ -130,7 +140,7 @@ export default function RegisterForm() {
     console.log(state.passwordAgainValid);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const firstName = firstNameRef.current.value;
@@ -148,23 +158,28 @@ export default function RegisterForm() {
       state.phoneValid &&
       state.password === state.passwordAgain;
 
-    if (formIsValid) {
-      const info = {
-        first_name: firstName,
-        last_name: lastName,
-        email: email,
-        password: password,
-        phone: phone,
-      };
-      try {
-        createNewUser(info);
-        handleLogin(email, password);
-        navigate('/dashboard');
-      } catch (error) {
-        console.log(error);
+    try {
+      if (formIsValid) {
+        const info = {
+          first_name: firstName,
+          last_name: lastName,
+          email: email,
+          password: password,
+          phone: phone,
+        };
+        await dispatch(createNewUser(info));
+        if(createUserSuccess) {
+          navigate('/dashboard');
+        } else {
+          console.log('error... ');
+          dispatch({ type: 'SET_ERROR', hasError: true, errorMessage: createUserError || 'Please fill out all fields dummy.' });
+        }
+      } else {
+        console.log('Error...');
+        dispatch({ type: 'SET_ERROR', hasError: true, errorMessage: 'Please fill out all fields.' });
       }
-    } else {
-      dispatch({ type: 'SET_ERROR', error: 'Please fill out all fields.' });
+    } catch (error){ 
+      console.log('Got an error: ', error);
     }
   };
 
@@ -179,7 +194,7 @@ export default function RegisterForm() {
             We'll never sell or give out your data.
           </p>
           <br />
-          <p className='text-red-600'>{state.error.general}</p>
+          <p className='text-red-600'>{state.errorMessage}</p>
         </div>
 
         <form

@@ -5,14 +5,14 @@
 import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useRef, useContext } from 'react';
-import { AuthContext } from '../context/auth-context';
-import { handleLogin } from '../utils/auth';
+import { useDispatch } from 'react-redux';
 import Modal from '../components/Modal';
 import Input from '../components/UI/Input';
+import { handleLogin } from '../redux/slices/sessionSlice';
 
 export default function LoginForm({ overlayClicked }) {
   const navigate = useNavigate();
-  const ctx = useContext(AuthContext);
+  const dispatch = useDispatch();
   const passwordRef = useRef();
   const emailRef = useRef();
 
@@ -27,7 +27,13 @@ export default function LoginForm({ overlayClicked }) {
       username: emailRef.current.value,
       password: passwordRef.current.value,
     };
-    handleLogin(ctx, body, navigate);
+    dispatch(handleLogin(body)).then((result) => {
+      if (result.meta.requestStatus === 'fulfilled') {
+        navigate('/dashboard');
+      }
+    }).catch((error) => {
+      console.log('Got an error: ', error);
+    });
     overlayClicked();
   };
 

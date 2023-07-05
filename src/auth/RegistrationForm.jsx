@@ -1,14 +1,11 @@
 import { useReducer, useRef, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Input from '../components/UI/Input';
 import store from '../redux/store';
-// import { createNewUser, handleLogin } from '../utils/auth';
 import { useNavigate } from 'react-router-dom';
 import { PhoneNumberUtil, PhoneNumberFormat } from 'google-libphonenumber';
 import { validateField } from '../utils/validateField';
 import { createNewUser } from '../redux/slices/sessionSlice'
-
-// import {} from '../redux/slices'
 
 const initialState = {
   firstName: '',
@@ -80,7 +77,6 @@ function reducer(state, action) {
 }
 
 export default function RegisterForm() {
-  const { createUserSuccess, createUserError } = useSelector((state) => state.session);
   const [state, localDispatch] = useReducer(reducer, initialState);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -162,8 +158,6 @@ export default function RegisterForm() {
           password: password,
           phone: phone,
         };
-        console.log('dispatching...');
-        // dispatch(createNewUser(info));
         dispatch(createNewUser(info)).then((result) => {
           console.log('Got a result: ', result);
         }).catch((error) => {

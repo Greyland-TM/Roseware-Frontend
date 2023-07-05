@@ -5,7 +5,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useRef, useContext, useState } from 'react';
-import { AuthContext } from '../../context/auth-context';
 import { handleLogin } from '../../utils/auth';
 
 export default function LoginForm() {

@@ -1,9 +1,6 @@
-import React, { useContext, useEffect } from "react";
-import { AuthContext } from "../context/auth-context";
+import React from "react";
 
 const Overview = () => {
-    const ctx = useContext(AuthContext);
-    console.log(ctx.isAuth);
     return (
         <div>'overview'</div>
     );

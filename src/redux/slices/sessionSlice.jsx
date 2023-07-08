@@ -69,7 +69,8 @@ export const createNewUser = createAsyncThunk(  // This async thunk was required
   'session/createNewUser',
   async (body, { rejectWithValue }) => {
     try {
-      const response = await fetch(`http://127.0.0.1:8000/accounts/create-customer/`, {
+      const backend_url = import.meta.env.VITE_BACKEND_URL || 'http://127.0.0.1:8000'
+      const response = await fetch(`${backend_url}/accounts/create-customer/`, {
         method: "POST",
         body: JSON.stringify(body),
         headers: { "Content-Type": "application/json" },
@@ -96,7 +97,8 @@ export const handleLogin = createAsyncThunk(
   'session/handleLogin',
   async (body, { rejectWithValue }) => {
     try {
-      const response = await fetch(`http://127.0.0.1:8000/accounts/login`, {
+      const backend_url = import.meta.env.VITE_BACKEND_URL || 'http://127.0.0.1:8000'
+      const response = await fetch(`${backend_url}/accounts/login`, {
         method: "POST",
         body: JSON.stringify(body),
         headers: { "Content-Type": "application/json" },
@@ -122,7 +124,8 @@ export const validateToken = createAsyncThunk(
   'session/validateToken',
   async (token, { rejectWithValue }) => {
     try {
-      const response = await fetch(`http://127.0.0.1:8000/accounts/user`, {
+      const backend_url = import.meta.env.VITE_BACKEND_URL || 'http://127.0.0.1:8000'
+      const response = await fetch(`${backend_url}/accounts/user`, {
         method: "GET",
         headers: {
           Authorization: `Token ${token}`,
@@ -149,9 +152,9 @@ export const handleLogout = createAsyncThunk(
   'session/handleLogout',
   async (_, { rejectWithValue, getState }) => {
     const userToken = getState().session.userToken;
-    
+    const backend_url = import.meta.env.VITE_BACKEND_URL || 'http://127.0.0.1:8000'
     try {
-      const response = await fetch('http://127.0.0.1:8000/accounts/logout', {
+      const response = await fetch(`${backend_url}/accounts/logout`, {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',

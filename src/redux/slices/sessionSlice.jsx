@@ -21,14 +21,14 @@ export const sessionSlice = createSlice({
       .addCase(handleLogin.rejected, (state, action) => {
         state.createUserError = action.payload;
       })
-      .addCase(handleLogout.fulfilled, (state, action) => {
+      .addCase(handleLogout.fulfilled, (state) => {
         state.userEmail = '';
         state.userId = 0;
         state.userToken = '';
         state.isLoggedIn = false;
       })
-      .addCase(handleLogout.rejected, (state, action) => {
-        alert(action.payload);  // Show the error message
+      .addCase(handleLogout.rejected, (action) => {
+        alert(action.payload);
       })
       .addCase(validateToken.fulfilled, (state, action) => {
         state.userEmail = action.payload.email;
@@ -46,8 +46,8 @@ export const sessionSlice = createSlice({
       .addCase(createNewUser.fulfilled, (state, action) => {
         state.createUserSuccess = true;
         state.createUserError = null;
-        state.userEmail = action.payload.email;
-        state.userId = action.payload.id;
+        state.userEmail = action.payload.user.email;
+        state.userId = action.payload.user.id;
         state.userToken = action.payload.token;
         state.isLoggedIn = true;
       })
@@ -76,11 +76,12 @@ export const createNewUser = createAsyncThunk(  // This async thunk was required
       });
   
       const data = await response.json();
+      console.log('New customer: ', data);
   
-      if (data.ok) {
-        return data.new_customer;
+      if (data.token) {
+        return data;
       } else {
-        throw new Error(data.message);
+        return rejectWithValue(data);
       }
     } catch (error) {
       return rejectWithValue(error.toString());

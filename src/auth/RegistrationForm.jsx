@@ -133,13 +133,13 @@ export default function RegisterForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const firstName = firstNameRef.current.value;
     const lastName = lastNameRef.current.value;
     const email = emailRef.current.value;
     const phone = phoneRef.current.value;
     const password = passwordRef.current.value;
-
+  
     const formIsValid =
       state.emailValid &&
       state.passwordValid &&
@@ -148,43 +148,30 @@ export default function RegisterForm() {
       state.lastNameValid &&
       state.phoneValid &&
       state.password === state.passwordAgain;
-
-    try {
-      if (formIsValid) {
-        const info = {
-          first_name: firstName,
-          last_name: lastName,
-          email: email,
-          password: password,
-          phone: phone,
-        };
-        dispatch(createNewUser(info)).then((result) => {
-          console.log('Got a result: ', result);
-        }).catch((error) => {
-          console.log('Got an error: ', error);
+  
+    if (formIsValid) {
+      const info = {
+        first_name: firstName,
+        last_name: lastName,
+        email: email,
+        password: password,
+        phone: phone,
+      };
+      dispatch(createNewUser(info))
+        .then((result) => {
+          if (result.meta.requestStatus === 'fulfilled') {
+            navigate('/dashboard');
+          } else {
+            localDispatch({ type: 'SET_ERROR', hasError: true, errorMessage: result.error });
+          }
+        })
+        .catch((error) => {
+          localDispatch({ type: 'SET_ERROR', hasError: true, errorMessage: error });
         });
-      } else {
-        localDispatch({ type: 'SET_ERROR', hasError: true, errorMessage: 'Please fill out all fields.' });
-      }
-    } catch (error){ 
-      console.log('Got an error: ', error);
+    } else {
+      localDispatch({ type: 'SET_ERROR', hasError: true, errorMessage: 'Please fill out all fields.' });
     }
   };
-
-  useEffect(() => {
-    const unsubscribe = store.subscribe(() => {
-      const state = store.getState();
-      if (state.session.createUserSuccess) {
-        navigate('/dashboard');
-      }
-      if (state.session.createUserError) {
-        alert(state.session.createUserError);
-      }
-    });
-
-    // Cleanup function:
-    return unsubscribe;
-  }, []); // Only run once after initial render
 
   return (
     <div className='space-y-10 divide-y divide-gray-900/10'>

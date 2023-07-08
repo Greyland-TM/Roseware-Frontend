@@ -32,7 +32,7 @@ export default function LoginForm({ overlayClicked }) {
         navigate('/dashboard');
       }
     }).catch((error) => {
-      console.log('Got an error: ', error);
+      console.log('Got an error 3: ', error);
     });
     overlayClicked();
   };

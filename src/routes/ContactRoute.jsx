@@ -1,5 +1,7 @@
+import Contact from "../components/page-components/contact/Contact";
+
 const ContactRoute = () => {
-  return <div><p>Contact Page</p></div>;
+  return <Contact />;
 };
 
 export default ContactRoute;

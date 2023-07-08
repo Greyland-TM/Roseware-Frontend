@@ -1,5 +1,7 @@
+import About from "../components/page-components/about/About";
+
 const AboutRoute = () => {
-  return <div><p>About Page</p></div>;
+  return <About />;
 };
 
 export default AboutRoute;

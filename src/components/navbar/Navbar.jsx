@@ -82,7 +82,7 @@ const Navbar = ({ showAuthPortal }) => {
               <div className='flex items-center'>
                 <div className='flex-shrink-0'>
                   <Link className='font-bold text-blue-500 text-4xl' to='/'>
-                    CMS
+                    Roseware
                   </Link>
                 </div>
                 <div className='hidden md:block'>

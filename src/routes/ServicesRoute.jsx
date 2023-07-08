@@ -1,5 +1,13 @@
+import Services from '../components/page-components/services/Services';
+import ServicesHeader from '../components/page-components/services/ServicesHeader';
+
 const ServicesRoute = () => {
-  return <div><p>Services Page</p></div>;
+  return (
+    <>
+      <ServicesHeader />
+      <Services />
+    </>
+  );
 };
 
 export default ServicesRoute;

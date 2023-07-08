@@ -1,5 +1,7 @@
+import Blog from '../components/page-components/blog/Blog';
+
 const JournalRoute = () => {
-  return <div><p>Journal Page</p></div>;
+  return <Blog />;
 };
 
 export default JournalRoute;

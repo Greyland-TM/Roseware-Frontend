@@ -43,7 +43,7 @@ export default function LoginForm({ overlayClicked }) {
         <div className='mt-52 sm:mx-auto sm:w-full sm:max-w-[480px]'>
           <div className='bg-white px-6 py-6 shadow sm:rounded-lg sm:px-12'>
             <div className='flex justify-center'>
-              <h1 className='font-extrabold text-4xl text-blue-700'>CMS</h1>
+              <h1 className='font-extrabold text-4xl text-blue-700'>Roseware</h1>
             </div>
             <div className='flex min-h-full flex-1 flex-col justify-center py-6 sm:px-6 lg:px-8'>
               <div className='sm:mx-auto sm:w-full sm:max-w-md'>
@@ -90,7 +90,7 @@ export default function LoginForm({ overlayClicked }) {
                   </div>
                 </div>
 
-                <div className='flex items-center justify-between'>
+                {/* <div className='flex items-center justify-between'>
                   <div className='flex items-center'>
                     <input
                       id='remember-me'
@@ -114,7 +114,7 @@ export default function LoginForm({ overlayClicked }) {
                       Forgot password?
                     </a>
                   </div>
-                </div>
+                </div> */}
 
                 <div>
                   <button

@@ -39,7 +39,7 @@ export default function Footer() {
         <div className='flex align-middle xl:grid xl:grid-cols-3 xl:gap-8'>
           <div className='flex justify-center flex-shrink-0'>
             <Link className='m-auto font-bold text-blue-500 text-6xl' to='/'>
-              CMS
+              Roseware
             </Link>
           </div>
           <div className='mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0'>

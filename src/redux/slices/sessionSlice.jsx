@@ -98,6 +98,7 @@ export const handleLogin = createAsyncThunk(
   async (body, { rejectWithValue }) => {
     try {
       const backend_url = import.meta.env.VITE_BACKEND_URL || 'http://127.0.0.1:8000'
+      print('backend_url: ', backend_url)
       const response = await fetch(`${backend_url}/accounts/login`, {
         method: "POST",
         body: JSON.stringify(body),

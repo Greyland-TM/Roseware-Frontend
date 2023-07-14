@@ -80,6 +80,7 @@ export const createNewUser = createAsyncThunk(  // This async thunk was required
       console.log('New customer: ', data);
   
       if (data.token) {
+        localStorage.setItem("rosewareAuthToken", data.token);
         return data;
       } else {
         return rejectWithValue(data);
@@ -98,7 +99,6 @@ export const handleLogin = createAsyncThunk(
   async (body, { rejectWithValue }) => {
     try {
       const backend_url = import.meta.env.VITE_BACKEND_URL || 'http://127.0.0.1:8000'
-      print('backend_url: ', backend_url)
       const response = await fetch(`${backend_url}/accounts/login`, {
         method: "POST",
         body: JSON.stringify(body),
@@ -108,6 +108,7 @@ export const handleLogin = createAsyncThunk(
       const data = await response.json();
   
       if (data.token) {
+        localStorage.setItem("rosewareAuthToken", data.token);
         return data;  // Return data here, not dispatching action
       } else {
         return rejectWithValue(data.error);
@@ -126,21 +127,26 @@ export const validateToken = createAsyncThunk(
   async (token, { rejectWithValue }) => {
     try {
       const backend_url = import.meta.env.VITE_BACKEND_URL || 'http://127.0.0.1:8000'
-      const response = await fetch(`${backend_url}/accounts/user`, {
+      const response = await fetch(`${backend_url}/accounts/customer/`, {
         method: "GET",
         headers: {
+          'Content-Type': 'application/json',
           Authorization: `Token ${token}`,
         },
       });
+      console.log(response);
   
       const data = await response.json();
   
-      if (data.okay) {
+      if (data.ok) {
+        console.log('Returning good data');
         return data;  // Return data here, not dispatching action
       } else {
+        console.log('Returning bad data');
         return rejectWithValue("No valid token found.");
       }
     } catch (error) {
+      console.log('Returning error: ', error);
       return rejectWithValue(error.toString());
     }
   }
@@ -163,7 +169,11 @@ export const handleLogout = createAsyncThunk(
         },
       });
 
-      if (response.ok) {
+      const data = await response.json();
+      console.log(data);
+
+      if (data.ok) {
+        localStorage.removeItem("rosewareAuthToken");
         return {};  // You can return anything here, since you don't need a result.
       } else {
         return rejectWithValue("Failed to log out.");

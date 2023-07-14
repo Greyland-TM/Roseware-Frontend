@@ -65,12 +65,8 @@ const Navbar = ({ showAuthPortal }) => {
   };
 
   const logoutUser = () => {
-    try {
-      dispatch(handleLogout());
-      navigate('');
-    } catch (error) {
-      console.log('Failed: ', error);
-    }
+    dispatch(handleLogout());
+    navigate('');
   };
 
   return (

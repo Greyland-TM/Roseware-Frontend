@@ -2,10 +2,10 @@
 // Once a user is logged in a JWT is returned from the server and stored
 // in the local app context and in the browser local storage.
 
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useRef, useContext, useState } from 'react';
-import { handleLogin } from '../../utils/auth';
+import React from "react";
+import {useNavigate} from "react-router-dom";
+import {useRef, useContext, useState} from "react";
+import {handleLogin} from "../../../utils/auth";
 
 export default function LoginForm() {
   const navigate = useNavigate();
@@ -40,7 +40,9 @@ export default function LoginForm() {
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form className="space-y-6" onSubmit={formSubmit}>
             <div>
-              <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">
+              <label
+                htmlFor="username"
+                className="block text-sm font-medium leading-6 text-gray-900">
                 Username
               </label>
               <div className="mt-2">
@@ -58,11 +60,15 @@ export default function LoginForm() {
 
             <div>
               <div className="flex items-center justify-between">
-                <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium leading-6 text-gray-900">
                   Password
                 </label>
                 <div className="text-sm">
-                  <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
+                  <a
+                    href="#"
+                    className="font-semibold text-indigo-600 hover:text-indigo-500">
                     Forgot password?
                   </a>
                 </div>
@@ -83,23 +89,22 @@ export default function LoginForm() {
             <div>
               <button
                 type="submit"
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
+                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                 Sign in
               </button>
             </div>
           </form>
 
           <p className="mt-10 text-center text-sm text-gray-500">
-            Not a member?{' '}
-            <a href="#" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+            Not a member?{" "}
+            <a
+              href="#"
+              className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
               Start a 14 day free trial
             </a>
           </p>
         </div>
       </div>
     </>
-  )
+  );
 }
-
-

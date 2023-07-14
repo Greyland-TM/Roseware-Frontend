@@ -1,4 +1,4 @@
-import About from "../components/page-components/about/About";
+import About from "../../components/page-components/about/About";
 
 const AboutRoute = () => {
   return <About />;

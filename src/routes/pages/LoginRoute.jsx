@@ -1,5 +1,5 @@
-import React from 'react';
-import LoginForm from '../auth/LoginForm';
+import React from "react";
+import LoginForm from "../../components/auth/LoginForm";
 
 const LoginRoute = () => {
   return <LoginForm />;

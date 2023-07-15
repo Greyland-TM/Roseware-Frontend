@@ -31,8 +31,8 @@ export const sessionSlice = createSlice({
         alert(action.payload);
       })
       .addCase(validateToken.fulfilled, (state, action) => {
-        state.userEmail = action.payload.email;
-        state.userId = action.payload.id;
+        state.userEmail = action.payload.user.email;
+        state.userId = action.payload.user.id;
         state.userToken = action.payload.token;
         state.isLoggedIn = true;
       })
@@ -134,15 +134,13 @@ export const validateToken = createAsyncThunk(
           Authorization: `Token ${token}`,
         },
       });
-      console.log(response);
   
       const data = await response.json();
   
       if (data.ok) {
-        console.log('Returning good data');
-        return data;  // Return data here, not dispatching action
+        const token = localStorage.getItem("rosewareAuthToken");
+        return {token: token, user: data.customer};  // Return data here, not dispatching action
       } else {
-        console.log('Returning bad data');
         return rejectWithValue("No valid token found.");
       }
     } catch (error) {

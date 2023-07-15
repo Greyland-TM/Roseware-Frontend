@@ -10,7 +10,7 @@ import Modal from "../Modal";
 import Input from "../UI/Input";
 import {handleLogin} from "../../redux/slices/sessionSlice";
 
-export default function LoginForm({overlayClicked}) {
+export default function LoginForm({overlayClicked, pipedriveOuthCode}) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const passwordRef = useRef();
@@ -30,7 +30,7 @@ export default function LoginForm({overlayClicked}) {
     dispatch(handleLogin(body))
       .then((result) => {
         if (result.meta.requestStatus === "fulfilled") {
-          navigate("/dashboard");
+          navigate(`/dashboard${pipedriveOuthCode ? `?code=${pipedriveOuthCode}` : ''}`);
         }
       })
       .catch((error) => {
@@ -131,7 +131,7 @@ export default function LoginForm({overlayClicked}) {
             <p className="mt-2 text-center text-sm text-gray-500">
               Not a member?{" "}
               <Link
-                to="/register"
+                to={`/register${pipedriveOuthCode ? `?code=${pipedriveOuthCode}` : ''}`}
                 onClick={handleOverlayClicked}
                 className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
                 Sign Up Here

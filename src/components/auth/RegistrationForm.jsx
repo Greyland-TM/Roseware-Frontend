@@ -80,7 +80,7 @@ function reducer(state, action) {
   }
 }
 
-export default function RegisterForm() {
+export default function RegisterForm({pipedriveOuthCode}) {
   const [state, localDispatch] = useReducer(reducer, initialState);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -167,8 +167,10 @@ export default function RegisterForm() {
       dispatch(createNewUser(info))
         .then((result) => {
           if (result.meta.requestStatus === "fulfilled") {
-            navigate("/dashboard");
+            console.log('navigating: ', pipedriveOuthCode);
+            navigate(`/dashboard${pipedriveOuthCode ? `?code=${pipedriveOuthCode}` : ''}`);
           } else {
+            console.log('Not fulfilled: ', result);
             localDispatch({
               type: "SET_ERROR",
               hasError: true,
@@ -177,6 +179,7 @@ export default function RegisterForm() {
           }
         })
         .catch((error) => {
+          console.log('Eerroorr: ', error);
           localDispatch({
             type: "SET_ERROR",
             hasError: true,

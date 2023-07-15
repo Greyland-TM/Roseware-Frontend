@@ -7,8 +7,14 @@ export const sessionSlice = createSlice({
     userId: 0,
     userToken: '',
     isLoggedIn: false,
+    validationCheckComplete: false,
     createUserSuccess: false,
     createUserError: null,
+  },
+  reducers: {
+    validationComplete: state => {
+      state.validationCheckComplete = true;
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -17,27 +23,33 @@ export const sessionSlice = createSlice({
         state.userId = action.payload.user.id;
         state.userToken = action.payload.token;
         state.isLoggedIn = true;
+        state.validationCheckComplete = true;
       })
       .addCase(handleLogin.rejected, (state, action) => {
         state.createUserError = action.payload;
+        state.validationCheckComplete = true;
       })
       .addCase(handleLogout.fulfilled, (state) => {
         state.userEmail = '';
         state.userId = 0;
         state.userToken = '';
         state.isLoggedIn = false;
+        state.validationCheckComplete = true;
       })
       .addCase(handleLogout.rejected, (action) => {
         alert(action.payload);
+        state.validationCheckComplete = true;
       })
       .addCase(validateToken.fulfilled, (state, action) => {
         state.userEmail = action.payload.user.email;
         state.userId = action.payload.user.id;
         state.userToken = action.payload.token;
         state.isLoggedIn = true;
+        state.validationCheckComplete = true;
       })
       .addCase(validateToken.rejected, (state, action) => {
         state.createUserError = action.payload;
+        state.validationCheckComplete = true;
       })
       .addCase(createNewUser.pending, (state) => {
         state.createUserSuccess = false;
@@ -50,16 +62,18 @@ export const sessionSlice = createSlice({
         state.userId = action.payload.user.id;
         state.userToken = action.payload.token;
         state.isLoggedIn = true;
+        state.validationCheckComplete = true;
       })
       .addCase(createNewUser.rejected, (state, action) => {
         state.createUserSuccess = false;
         state.createUserError = action.payload;
+        state.validationCheckComplete = true;
       })
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { logout } = sessionSlice.actions
+export const { logout, validationComplete } = sessionSlice.actions
 
 export default sessionSlice.reducer
 

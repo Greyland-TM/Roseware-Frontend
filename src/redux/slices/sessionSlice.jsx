@@ -3,9 +3,10 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 export const sessionSlice = createSlice({
   name: 'session',
   initialState: {
-    userEmail: '',
-    userId: 0,
     userToken: '',
+    userId: 0,
+    userEmail: '',
+    packagePlans: [],
     isLoggedIn: false,
     validationCheckComplete: false,
     createUserSuccess: false,
@@ -24,6 +25,7 @@ export const sessionSlice = createSlice({
         state.userToken = action.payload.token;
         state.isLoggedIn = true;
         state.validationCheckComplete = true;
+        state.packagePlans = action.payload.user.package_plans;
       })
       .addCase(handleLogin.rejected, (state, action) => {
         state.createUserError = action.payload;
@@ -46,6 +48,7 @@ export const sessionSlice = createSlice({
         state.userToken = action.payload.token;
         state.isLoggedIn = true;
         state.validationCheckComplete = true;
+        state.packagePlans = action.payload.user.package_plans;
       })
       .addCase(validateToken.rejected, (state, action) => {
         state.createUserError = action.payload;
@@ -120,7 +123,7 @@ export const handleLogin = createAsyncThunk(
       });
 
       const data = await response.json();
-  
+
       if (data.token) {
         localStorage.setItem("rosewareAuthToken", data.token);
         return data;  // Return data here, not dispatching action
@@ -150,6 +153,7 @@ export const validateToken = createAsyncThunk(
       });
   
       const data = await response.json();
+      console.log('Validated token: ', data);
   
       if (data.ok) {
         const token = localStorage.getItem("rosewareAuthToken");

@@ -24,7 +24,6 @@ export default function DashboardRoute() {
     useEffect(() => {
         const pipedriveOauthSetup = async () => {
             if (isLoggedIn && pipedriveOuthCode && userToken) {
-                console.log('pipedriveOuthCode: ', pipedriveOuthCode);
                 const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/pipedrive/oauth/`, {
                     method: 'POST',
                     headers: {

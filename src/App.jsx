@@ -1,16 +1,15 @@
 // App.jsx
 import "./index.css";
-import Navbar from "./components/navbar/Navbar";
+import Navbar from "./components/UI/navbar/Navbar";
 import {MainLayout} from "./layouts/MainLayout";
 import {PageLayout} from "./layouts/PageLayout";
-import Footer from "./components/Footer";
+import Footer from "./components/UI/Footer";
 import {Outlet} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {createPortal} from "react-dom";
 import LoginForm from "./components/auth/LoginForm";
 import {validateToken, validationComplete} from './redux/slices/sessionSlice';
 import {useDispatch} from 'react-redux';
-// import { useSelector } from 'react-redux';
 
 export default function App() {
   // const { validationCheckComplete } = useSelector((state) => state.session);

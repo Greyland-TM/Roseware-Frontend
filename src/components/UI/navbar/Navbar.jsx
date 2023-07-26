@@ -1,11 +1,11 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { handleLogout } from '../../redux/slices/sessionSlice';
+import { handleLogout } from '../../../redux/slices/sessionSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link, useNavigate } from 'react-router-dom';
-import Button from '../UI/Button';
+import Button from '../Button';
 
 const user = {
   name: 'Tom Cook',
@@ -14,7 +14,7 @@ const user = {
     'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
 };
 
-const userNavigation = [{ name: 'Your Profile', to: '/Dashboard' }];
+const userNavigation = [{ name: 'Your Profile', to: '/dashboard' }];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');

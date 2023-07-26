@@ -80,7 +80,7 @@ function reducer(state, action) {
   }
 }
 
-export default function RegisterForm() {
+export default function RegisterForm({pipedriveOuthCode}) {
   const [state, localDispatch] = useReducer(reducer, initialState);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -167,8 +167,10 @@ export default function RegisterForm() {
       dispatch(createNewUser(info))
         .then((result) => {
           if (result.meta.requestStatus === "fulfilled") {
-            navigate("/dashboard");
+            console.log('navigating: ', pipedriveOuthCode);
+            navigate(`/dashboard${pipedriveOuthCode ? `?code=${pipedriveOuthCode}` : ''}`);
           } else {
+            console.log('Not fulfilled: ', result);
             localDispatch({
               type: "SET_ERROR",
               hasError: true,
@@ -177,6 +179,7 @@ export default function RegisterForm() {
           }
         })
         .catch((error) => {
+          console.log('Eerroorr: ', error);
           localDispatch({
             type: "SET_ERROR",
             hasError: true,
@@ -193,7 +196,7 @@ export default function RegisterForm() {
   };
 
   return (
-    <div className="space-y-10 divide-y divide-gray-900/10">
+    <div className="space-y-10 divide-y divide-gray-900/10 w-9/12 flex justify-center">
       <div className="grid grid-cols-1 gap-x-8 gap-y-8 pt-10 md:grid-cols-3">
         <div className="px-4 sm:px-0">
           <h2 className="text-base font-semibold leading-7 text-gray-900">

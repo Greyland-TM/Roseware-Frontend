@@ -49,7 +49,7 @@ export function DashboardLayout({ children }) {
   }
 
   return (
-    <div className='flex h-full'>
+    <div className='flex h-custom'>
       <DashboardNav />
       <div className='flex flex-col flex-grow justify-around items-center'>
         {children}

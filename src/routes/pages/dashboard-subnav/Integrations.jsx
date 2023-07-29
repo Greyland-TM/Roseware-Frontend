@@ -10,7 +10,7 @@ const Integrations = () => {
       title: "Pipedrive-Stripe sync",
       description:
         "This is a 100% integration between your Pipedrive and Stripe accounts, and includes tools for creating stripe payments and subscriptions from in your Pipedrive account.",
-      icons: [{src: pipedriveLogo, isLinked: true}, {src: stripeLogo, isLinked: false}],
+      icons: [{src: pipedriveLogo, isLinked: true}, {src: stripeLogo, isLinked: true}],
       
     },
     {

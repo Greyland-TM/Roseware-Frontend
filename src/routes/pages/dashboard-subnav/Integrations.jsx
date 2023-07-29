@@ -1,11 +1,10 @@
 import {DashboardLayout} from "../../../layouts/DashboardLayout";
 import IntegrationCard from "../../../components/page-components/dashboard/IntegrationCard";
-import stripeLogo from "../../../images/logos/stripe-logo.png";
-import pipedriveLogo from "../../../images/logos/pipedrive-logo.png";
-import mondayLogo from "../../../images/logos/monday-logo.png";
+import stripeLogo from "../../../images/logos/stripe-logo.jpeg";
+import pipedriveLogo from "../../../images/logos/pipedrive-logo.jpeg";
+import mondayLogo from "../../../images/logos/monday-logo.jpeg";
 
 const Integrations = () => {
-
   const integrations = [
     {
       title: "Pipedrive-Stripe sync",
@@ -20,7 +19,7 @@ const Integrations = () => {
       icons: [{src: mondayLogo}],
     },
   ];
-  
+
   return (
     <DashboardLayout>
       {integrations.map((integration) => (

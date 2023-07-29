@@ -28,7 +28,6 @@ const Navbar = ({ showAuthPortal }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log('isLoggedIn', isLoggedIn);
   }, [isLoggedIn]);
 
   const navigation = [

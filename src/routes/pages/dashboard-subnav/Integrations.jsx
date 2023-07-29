@@ -10,21 +10,33 @@ const Integrations = () => {
       title: "Pipedrive-Stripe sync",
       description:
         "This is a 100% integration between your Pipedrive and Stripe accounts, and includes tools for creating stripe payments and subscriptions from in your Pipedrive account.",
-      icons: [{src: pipedriveLogo}, {src: stripeLogo}],
+      icons: [{src: pipedriveLogo, isLinked: true}, {src: stripeLogo, isLinked: false}],
+      
     },
     {
       title: "Monday Lead Capture",
       description:
         "This generic lead capturing tool is free with websites developed by Roseware Integrations.",
-      icons: [{src: mondayLogo}],
+      icons: [{src: mondayLogo, isLinked: false}],
     },
   ];
 
   return (
     <DashboardLayout>
-      {integrations.map((integration) => (
-        <IntegrationCard integrationDetails={integration} />
-      ))}
+      <div className="bg-white px-1 py-8 sm:py-8 lg:px-1">
+        <div className="mx-auto max-w-2xl text-center">
+          <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">Integrations center</h2>
+          <p className="mt-6 text-lg leading-8 text-gray-600">
+            Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet
+            fugiat veniam occaecat fugiat aliqua.
+          </p>
+        </div>
+      </div>
+      <div className="flex justify-around w-full">
+        {integrations.map((integration) => (
+          <IntegrationCard integrationDetails={integration} />
+        ))}
+      </div>
     </DashboardLayout>
   );
 };

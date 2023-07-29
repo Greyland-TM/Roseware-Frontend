@@ -11,7 +11,7 @@ export default function IntegrationCard(props) {
       </div>
       <div className="flex justify-around mb-8">
         {integrationDetails.icons.map((icon) => (
-          <div className="flex items-center justify-center rounded-full bg-slate-600 h-24 w-24">
+          <div className={`flex items-center justify-center rounded-full bg-slate-600 h-24 w-24 cursor-pointer ${icon.isLinked ? 'bg-green-700 p-1.5' : ''}`}>
             <img
               className="inline-block rounded-full h-full w-full"
               src={icon.src}

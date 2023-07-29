@@ -153,7 +153,6 @@ export const validateToken = createAsyncThunk(
       });
   
       const data = await response.json();
-      console.log('Validated token: ', data);
   
       if (data.ok) {
         const token = localStorage.getItem("rosewareAuthToken");

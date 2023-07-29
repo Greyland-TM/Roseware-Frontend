@@ -51,7 +51,7 @@ export function DashboardLayout({ children }) {
   return (
     <div className='flex h-custom'>
       <DashboardNav />
-      <div className='flex flex-col flex-grow justify-around items-center'>
+      <div className='flex flex-col flex-grow justify-around items-center overflow-scroll'>
         {children}
       </div>
     </div>

@@ -1,11 +1,9 @@
 import { DashboardLayout } from "../../../layouts/DashboardLayout";
-
+import AccountForm from '../../../components/page-components/dashboard/AccountForm';
 const Account = () => {
   return (
     <DashboardLayout>
-      <div className="justify-self-center bg-cyan-800 w-min h-full">
-        <h1>Account</h1>
-      </div>
+      <AccountForm />
     </DashboardLayout> 
     
   );

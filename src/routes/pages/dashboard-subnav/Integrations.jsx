@@ -1,13 +1,32 @@
-import { DashboardLayout } from "../../../layouts/DashboardLayout";
+import {DashboardLayout} from "../../../layouts/DashboardLayout";
+import IntegrationCard from "../../../components/page-components/dashboard/IntegrationCard";
+import stripeLogo from "../../../images/logos/stripe-logo.png";
+import pipedriveLogo from "../../../images/logos/pipedrive-logo.png";
+import mondayLogo from "../../../images/logos/monday-logo.png";
 
 const Integrations = () => {
+
+  const integrations = [
+    {
+      title: "Pipedrive-Stripe sync",
+      description:
+        "This is a 100% integration between your Pipedrive and Stripe accounts, and includes tools for creating stripe payments and subscriptions from in your Pipedrive account.",
+      icons: [{src: pipedriveLogo}, {src: stripeLogo}],
+    },
+    {
+      title: "Monday Lead Capture",
+      description:
+        "This generic lead capturing tool is free with websites developed by Roseware Integrations.",
+      icons: [{src: mondayLogo}],
+    },
+  ];
+  
   return (
     <DashboardLayout>
-      <div className="justify-self-center bg-cyan-800 w-min h-full">
-        <h1>Integrations</h1>
-      </div>
-    </DashboardLayout> 
-    
+      {integrations.map((integration) => (
+        <IntegrationCard integrationDetails={integration} />
+      ))}
+    </DashboardLayout>
   );
 };
 

@@ -1,13 +1,15 @@
 // PageLayout.jsx
 import React, { useEffect } from 'react';
 import DashboardNav from '../components/page-components/dashboard/DashboardNav';
-import {useSelector} from "react-redux";
-import {useLocation, useNavigate} from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { useLocation, useNavigate } from "react-router-dom";
+import { updateSyncedPipedrive, updateSyncedStripe } from '../redux/slices/sessionSlice'
 
 export function DashboardLayout({ children }) {
   const {userToken} = useSelector((state) => state.session);
   const navigate = useNavigate();
-  const {isLoggedIn, validationCheckComplete} = useSelector(
+  const dispatch = useDispatch();
+  const {isLoggedIn, validationCheckComplete, hasSyncedPipedrive, hasSyncedStripe} = useSelector(
     (state) => state.session
   );
   const location = useLocation();
@@ -38,7 +40,8 @@ export function DashboardLayout({ children }) {
           }
         );
         const data = await response.json();
-        console.log("data: ", data);
+        dispatch(updateSyncedPipedrive(data.has_synced_pipedrive));
+        dispatch(updateSyncedStripe(data.has_synced_stripe));
       }
     };
     pipedriveOauthSetup();

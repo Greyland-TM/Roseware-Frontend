@@ -3,27 +3,24 @@ import { CheckCircleIcon } from '@heroicons/react/20/solid'
 export default function IntegrationCard(props) {
   const { integrationDetails } = props;
   const isConnected = integrationDetails.icons.every((icon) => icon.isLinked);
-  console.log(isConnected);
   
   return (
-    <div class={`max-w-sm rounded-xl overflow-hidden shadow-lg h-fit ${isConnected ? 'ring-2 ring-green-500 p-2' : 'p-0'}`}>
-      <div class="px-6 py-4 h-48">
-        <div class="font-bold text-xl mb-2">{integrationDetails.title}</div>
-        <p class="text-gray-700 text-base">
+    <div className={`max-w-sm rounded-xl overflow-hidden shadow-lg h-fit ${isConnected ? 'ring-2 ring-green-500 p-2' : 'p-0'}`}>
+      <div className="px-6 py-4 h-48">
+        <div className="font-bold text-xl mb-2">{integrationDetails.title}</div>
+        <p className="text-gray-700 text-base">
           {integrationDetails.description}
         </p>
       </div>
       <div className="flex justify-around mb-8">
-        {integrationDetails.icons.map((icon) => (
-          <div className="flex flex-col align-middle justify-center relative">
+        {integrationDetails.icons.map((icon, idx) => (
+          <div key={idx} className="flex flex-col align-middle justify-center relative">
             <div className={`flex items-center justify-center p-1 rounded-full mb-4 bg-slate-300 h-24 w-24`}>
               <img
                 className="inline-block rounded-full h-full w-full"
                 src={icon.src}
                 alt="smthn"
               />
-              {/* {icon.isLinked && 
-              <CheckCircleIcon className="absolute -top-2 -right-2 h-6 w-6 text-green-500" aria-hidden="true" />} */}
             </div>
             <button
               type="button"

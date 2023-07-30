@@ -3,14 +3,19 @@ import IntegrationCard from "../../../components/page-components/dashboard/Integ
 import stripeLogo from "../../../images/logos/stripe-logo.jpeg";
 import pipedriveLogo from "../../../images/logos/pipedrive-logo.jpeg";
 import mondayLogo from "../../../images/logos/monday-logo.jpeg";
+import { useSelector } from "react-redux";
 
 const Integrations = () => {
+  const {hasSyncedPipedrive, hasSyncedStripe} = useSelector(
+    (state) => state.session
+  );
+
   const integrations = [
     {
       title: "Pipedrive-Stripe sync",
       description:
         "This is a 100% integration between your Pipedrive and Stripe accounts, and includes tools for creating stripe payments and subscriptions from in your Pipedrive account.",
-      icons: [{src: pipedriveLogo, isLinked: true}, {src: stripeLogo, isLinked: true}],
+      icons: [{src: pipedriveLogo, isLinked: hasSyncedPipedrive}, {src: stripeLogo, isLinked: hasSyncedStripe}],
       
     },
     {
@@ -33,8 +38,8 @@ const Integrations = () => {
         </div>
       </div>
       <div className="flex justify-around w-full">
-        {integrations.map((integration) => (
-          <IntegrationCard integrationDetails={integration} />
+        {integrations.map((integration, idx) => (
+          <IntegrationCard key={idx} integrationDetails={integration} />
         ))}
       </div>
     </DashboardLayout>

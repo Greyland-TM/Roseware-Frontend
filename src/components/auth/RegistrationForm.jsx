@@ -167,10 +167,8 @@ export default function RegisterForm({pipedriveOuthCode}) {
       dispatch(createNewUser(info))
         .then((result) => {
           if (result.meta.requestStatus === "fulfilled") {
-            console.log('navigating: ', pipedriveOuthCode);
-            navigate(`/dashboard${pipedriveOuthCode ? `?code=${pipedriveOuthCode}` : ''}`);
+            navigate(`/dashboard${pipedriveOuthCode ? `/integrations?code=${pipedriveOuthCode}` : ''}`);
           } else {
-            console.log('Not fulfilled: ', result);
             localDispatch({
               type: "SET_ERROR",
               hasError: true,
@@ -179,7 +177,6 @@ export default function RegisterForm({pipedriveOuthCode}) {
           }
         })
         .catch((error) => {
-          console.log('Eerroorr: ', error);
           localDispatch({
             type: "SET_ERROR",
             hasError: true,

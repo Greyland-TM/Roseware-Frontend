@@ -13,6 +13,8 @@ export const sessionSlice = createSlice({
     createUserError: null,
     hasSyncedPipedrive: false,
     hasSyncedStripe: false,
+    isPipedriveSyncing: false,
+    isStripeSyncing: false,
   },
   reducers: {
     validationComplete: state => {
@@ -23,7 +25,13 @@ export const sessionSlice = createSlice({
     },
     updateSyncedStripe: (state, action) => {
       state.hasSyncedStripe = action.payload;
-    } 
+    },
+    updateIsPipedriveSyncing: (state, action) => {
+      state.isPipedriveSyncing = action.payload;
+    },
+    updateIsStripeSyncing: (state, action) => {
+      state.isStripeSyncing = action.payload;
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -88,7 +96,14 @@ export const sessionSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { logout, validationComplete, updateSyncedPipedrive, updateSyncedStripe } = sessionSlice.actions
+export const { 
+  logout, 
+  validationComplete, 
+  updateSyncedPipedrive, 
+  updateSyncedStripe,
+  updateIsPipedriveSyncing, 
+  updateIsStripeSyncing 
+} = sessionSlice.actions
 
 export default sessionSlice.reducer
 

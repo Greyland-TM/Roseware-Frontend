@@ -6,7 +6,7 @@ import mondayLogo from "../../../images/logos/monday-logo.jpeg";
 import { useSelector } from "react-redux";
 
 const Integrations = () => {
-  const {hasSyncedPipedrive, hasSyncedStripe} = useSelector(
+  const {hasSyncedPipedrive, hasSyncedStripe, isPipedriveSyncing, isStripeSyncing} = useSelector(
     (state) => state.session
   );
 
@@ -15,14 +15,17 @@ const Integrations = () => {
       title: "Pipedrive-Stripe sync",
       description:
         "This is a 100% integration between your Pipedrive and Stripe accounts, and includes tools for creating stripe payments and subscriptions from in your Pipedrive account.",
-      icons: [{src: pipedriveLogo, isLinked: hasSyncedPipedrive}, {src: stripeLogo, isLinked: hasSyncedStripe}],
+      icons: [
+        {src: pipedriveLogo, isLinked: hasSyncedPipedrive, isSyncing: isPipedriveSyncing}, 
+        {src: stripeLogo, isLinked: hasSyncedStripe, isSyncing: isStripeSyncing}
+      ],
       
     },
     {
       title: "Monday Lead Capture",
       description:
         "This generic lead capturing tool is free with websites developed by Roseware Integrations.",
-      icons: [{src: mondayLogo, isLinked: false}],
+      icons: [{src: mondayLogo, isLinked: false, isSyncing: false}],
     },
   ];
 

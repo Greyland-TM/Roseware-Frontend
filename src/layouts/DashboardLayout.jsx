@@ -3,18 +3,18 @@ import React, { useEffect } from 'react';
 import DashboardNav from '../components/page-components/dashboard/DashboardNav';
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { updateSyncedPipedrive, updateSyncedStripe } from '../redux/slices/sessionSlice'
+import { updateSyncedPipedrive, updateSyncedStripe, updateIsPipedriveSyncing } from '../redux/slices/sessionSlice'
 
 export function DashboardLayout({ children }) {
   const {userToken} = useSelector((state) => state.session);
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const {isLoggedIn, validationCheckComplete, hasSyncedPipedrive, hasSyncedStripe} = useSelector(
+  const {isLoggedIn, validationCheckComplete } = useSelector(
     (state) => state.session
   );
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const pipedriveOuthCode = queryParams.get("code");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // If the user is not logged in the redirect to the register page. Keep the oauth code in the url if it exists
   useEffect(() => {
@@ -28,6 +28,7 @@ export function DashboardLayout({ children }) {
   useEffect(() => {
     const pipedriveOauthSetup = async () => {
       if (isLoggedIn && pipedriveOuthCode && userToken) {
+        dispatch(updateIsPipedriveSyncing(true));
         const response = await fetch(
           `${import.meta.env.VITE_BACKEND_URL}/pipedrive/oauth/`,
           {
@@ -40,8 +41,10 @@ export function DashboardLayout({ children }) {
           }
         );
         const data = await response.json();
-        dispatch(updateSyncedPipedrive(data.has_synced_pipedrive));
-        dispatch(updateSyncedStripe(data.has_synced_stripe));
+        if (data.ok) {
+          dispatch(updateSyncedPipedrive(data.customer.has_synced_pipedrive));
+        }
+        dispatch(updateIsPipedriveSyncing(false));
       }
     };
     pipedriveOauthSetup();

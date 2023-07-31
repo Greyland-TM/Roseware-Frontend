@@ -30,7 +30,7 @@ export default function LoginForm({overlayClicked, pipedriveOuthCode}) {
     dispatch(handleLogin(body))
       .then((result) => {
         if (result.meta.requestStatus === "fulfilled") {
-          navigate(`/dashboard${pipedriveOuthCode ? `?code=${pipedriveOuthCode}` : ''}`);
+          navigate(`/dashboard${pipedriveOuthCode ? `/integrations?code=${pipedriveOuthCode}` : ''}`);
         }
       })
       .catch((error) => {

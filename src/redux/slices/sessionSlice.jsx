@@ -11,10 +11,26 @@ export const sessionSlice = createSlice({
     validationCheckComplete: false,
     createUserSuccess: false,
     createUserError: null,
+    hasSyncedPipedrive: false,
+    hasSyncedStripe: false,
+    isPipedriveSyncing: false,
+    isStripeSyncing: false,
   },
   reducers: {
     validationComplete: state => {
       state.validationCheckComplete = true;
+    },
+    updateSyncedPipedrive: (state, action) => {
+      state.hasSyncedPipedrive = action.payload;
+    },
+    updateSyncedStripe: (state, action) => {
+      state.hasSyncedStripe = action.payload;
+    },
+    updateIsPipedriveSyncing: (state, action) => {
+      state.isPipedriveSyncing = action.payload;
+    },
+    updateIsStripeSyncing: (state, action) => {
+      state.isStripeSyncing = action.payload;
     }
   },
   extraReducers: (builder) => {
@@ -26,6 +42,8 @@ export const sessionSlice = createSlice({
         state.isLoggedIn = true;
         state.validationCheckComplete = true;
         state.packagePlans = action.payload.user.package_plans;
+        state.hasSyncedPipedrive = action.payload.user.has_synced_pipedrive;
+        state.hasSyncedStripe = action.payload.user.has_synced_stripe;
       })
       .addCase(handleLogin.rejected, (state, action) => {
         state.createUserError = action.payload;
@@ -49,6 +67,8 @@ export const sessionSlice = createSlice({
         state.isLoggedIn = true;
         state.validationCheckComplete = true;
         state.packagePlans = action.payload.user.package_plans;
+        state.hasSyncedPipedrive = action.payload.user.has_synced_pipedrive;
+        state.hasSyncedStripe = action.payload.user.has_synced_stripe;
       })
       .addCase(validateToken.rejected, (state, action) => {
         state.createUserError = action.payload;
@@ -76,7 +96,14 @@ export const sessionSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { logout, validationComplete } = sessionSlice.actions
+export const { 
+  logout, 
+  validationComplete, 
+  updateSyncedPipedrive, 
+  updateSyncedStripe,
+  updateIsPipedriveSyncing, 
+  updateIsStripeSyncing 
+} = sessionSlice.actions
 
 export default sessionSlice.reducer
 
@@ -153,7 +180,6 @@ export const validateToken = createAsyncThunk(
       });
   
       const data = await response.json();
-      console.log('Validated token: ', data);
   
       if (data.ok) {
         const token = localStorage.getItem("rosewareAuthToken");

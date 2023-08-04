@@ -46,11 +46,11 @@ const Navbar = ({ showAuthPortal }) => {
       to: '/contact',
       current: currentPage.toLowerCase() === 'contact',
     },
-    {
-      name: 'Journal',
-      to: '/journal',
-      current: currentPage.toLowerCase() === 'journal',
-    },
+    // {
+    //   name: 'Journal',
+    //   to: '/journal',
+    //   current: currentPage.toLowerCase() === 'journal',
+    // },
   ];
 
   useEffect(() => {

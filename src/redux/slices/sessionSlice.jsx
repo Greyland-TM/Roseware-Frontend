@@ -81,10 +81,12 @@ export const sessionSlice = createSlice({
       .addCase(createNewUser.fulfilled, (state, action) => {
         state.createUserSuccess = true;
         state.createUserError = null;
-        state.userEmail = action.payload.user.email;
-        state.userId = action.payload.user.id;
-        state.userToken = action.payload.token;
-        state.isLoggedIn = true;
+        if (action.payload.user.status !== "lead") {
+          state.userEmail = action.payload.user.email;
+          state.userId = action.payload.user.id;
+          state.userToken = action.payload.token;
+          state.isLoggedIn = true;
+        }
         state.validationCheckComplete = true;
       })
       .addCase(createNewUser.rejected, (state, action) => {
@@ -121,12 +123,12 @@ export const createNewUser = createAsyncThunk(  // This async thunk was required
       });
   
       const data = await response.json();
-      console.log('New customer: ', data);
+      console.log('New user: ', data);
   
-      if (data.token) {
+      if(data.token) {
         localStorage.setItem("rosewareAuthToken", data.token);
         return data;
-      } else {
+      }else {
         return rejectWithValue(data);
       }
     } catch (error) {

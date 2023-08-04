@@ -163,6 +163,7 @@ export default function RegisterForm({pipedriveOuthCode}) {
         email: email,
         password: password,
         phone: phone,
+        status: 'customer'
       };
       dispatch(createNewUser(info))
         .then((result) => {

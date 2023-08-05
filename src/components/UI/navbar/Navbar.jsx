@@ -6,13 +6,7 @@ import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../Button';
-
-const user = {
-  name: 'Tom Cook',
-  email: 'tom@example.com',
-  imageUrl:
-    'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-};
+import defaultProfilePicture from "../../../images/general/default_profile_picture.jpg";
 
 const userNavigation = [{ name: 'Your Profile', to: '/dashboard' }];
 
@@ -21,14 +15,19 @@ function classNames(...classes) {
 }
 
 const Navbar = ({ showAuthPortal }) => {
-  const { isLoggedIn, userEmail } = useSelector((state) => state.session);
+  const { isLoggedIn, user } = useSelector((state) => state.session);
   const [currentPage, setCurrentPage] = useState('');
+  const [navImage, setNavImage] = useState(defaultProfilePicture);
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
   }, [isLoggedIn]);
+
+  useEffect(() => {
+    setNavImage(user.profile_picture);
+  }, [user])
 
   const navigation = [
     {
@@ -125,7 +124,7 @@ const Navbar = ({ showAuthPortal }) => {
                           <span className='sr-only'>Open user menu</span>
                           <img
                             className='h-8 w-8 rounded-full'
-                            src={user.imageUrl}
+                            src={ navImage }
                             alt=''
                           />
                         </Menu.Button>
@@ -214,13 +213,13 @@ const Navbar = ({ showAuthPortal }) => {
                   <div className='flex-shrink-0'>
                     <img
                       className='h-10 w-10 rounded-full'
-                      src={user.imageUrl}
+                      src={navImage}
                       alt=''
                     />
                   </div>
                   <div className='ml-3'>
                     <div className='text-base font-medium text-white'>
-                      {userEmail}
+                      {user.email}
                     </div>
                   </div>
                   <button

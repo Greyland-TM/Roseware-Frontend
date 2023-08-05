@@ -4,15 +4,23 @@ export const sessionSlice = createSlice({
   name: 'session',
   initialState: {
     userToken: '',
-    userId: 0,
-    userEmail: '',
-    packagePlans: [],
     isLoggedIn: false,
+    user: {
+      id: 0,
+      firstName: '',
+      lastName: '',
+      email: '',
+      profilePicture: '',
+      phoneNumber: '',
+      packagePlans: [],
+      organization: {},
+      hasSyncedPipedrive: false,
+      hasSyncedStripe: false,
+    },
+    // Form Fields
     validationCheckComplete: false,
     createUserSuccess: false,
     createUserError: null,
-    hasSyncedPipedrive: false,
-    hasSyncedStripe: false,
     isPipedriveSyncing: false,
     isStripeSyncing: false,
   },
@@ -36,21 +44,18 @@ export const sessionSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(handleLogin.fulfilled, (state, action) => {
-        state.userEmail = action.payload.user.email;
+        state.user = action.payload.user;
         state.userId = action.payload.user.id;
         state.userToken = action.payload.token;
         state.isLoggedIn = true;
         state.validationCheckComplete = true;
-        state.packagePlans = action.payload.user.package_plans;
-        state.hasSyncedPipedrive = action.payload.user.has_synced_pipedrive;
-        state.hasSyncedStripe = action.payload.user.has_synced_stripe;
       })
       .addCase(handleLogin.rejected, (state, action) => {
         state.createUserError = action.payload;
         state.validationCheckComplete = true;
       })
       .addCase(handleLogout.fulfilled, (state) => {
-        state.userEmail = '';
+        state.user = {}
         state.userId = 0;
         state.userToken = '';
         state.isLoggedIn = false;
@@ -61,14 +66,11 @@ export const sessionSlice = createSlice({
         state.validationCheckComplete = true;
       })
       .addCase(validateToken.fulfilled, (state, action) => {
-        state.userEmail = action.payload.user.email;
+        state.user = action.payload.user
         state.userId = action.payload.user.id;
         state.userToken = action.payload.token;
         state.isLoggedIn = true;
         state.validationCheckComplete = true;
-        state.packagePlans = action.payload.user.package_plans;
-        state.hasSyncedPipedrive = action.payload.user.has_synced_pipedrive;
-        state.hasSyncedStripe = action.payload.user.has_synced_stripe;
       })
       .addCase(validateToken.rejected, (state, action) => {
         state.createUserError = action.payload;
@@ -82,7 +84,7 @@ export const sessionSlice = createSlice({
         state.createUserSuccess = true;
         state.createUserError = null;
         if (action.payload.user.status !== "lead") {
-          state.userEmail = action.payload.user.email;
+          state.user = action.payload.user;
           state.userId = action.payload.user.id;
           state.userToken = action.payload.token;
           state.isLoggedIn = true;

@@ -1,31 +1,31 @@
 const people = [
   {
-    name: 'Emma Dorsey',
-    role: 'Senior Developer',
+    name: 'Greyland Miller',
+    role: 'Software Engineer / Founder',
     imageUrl:
       'https://images.unsplash.com/photo-1505840717430-882ce147ef2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
-    bio: 'Praesentium iure error aliquam voluptas ut libero. Commodi placeat sit iure nulla officiis. Ut ex sit repellat tempora. Qui est accusamus exercitationem natus ut voluptas. Officiis velit eos ducimus.',
-    twitterUrl: '#',
+    bio: 'I am an Oregon raised nerd who likes hiking in the mountians, experiencing art crafted by a loved one, and creating things that improve quality of life. I designed, developed and maintain this platform as a way to make managing my clients easy, and it turns oout I was able to open the software up enough to share it.',
     linkedinUrl: '#',
+    githubUrl: '#',
   },
-  {
-    name: 'Emma Dorsey',
-    role: 'Senior Developer',
-    imageUrl:
-      'https://images.unsplash.com/photo-1505840717430-882ce147ef2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
-    bio: 'Praesentium iure error aliquam voluptas ut libero. Commodi placeat sit iure nulla officiis. Ut ex sit repellat tempora. Qui est accusamus exercitationem natus ut voluptas. Officiis velit eos ducimus.',
-    twitterUrl: '#',
-    linkedinUrl: '#',
-  },
-  {
-    name: 'Emma Dorsey',
-    role: 'Senior Developer',
-    imageUrl:
-      'https://images.unsplash.com/photo-1505840717430-882ce147ef2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
-    bio: 'Praesentium iure error aliquam voluptas ut libero. Commodi placeat sit iure nulla officiis. Ut ex sit repellat tempora. Qui est accusamus exercitationem natus ut voluptas. Officiis velit eos ducimus.',
-    twitterUrl: '#',
-    linkedinUrl: '#',
-  },
+  // {
+  //   name: 'Emma Dorsey',
+  //   role: 'Senior Developer',
+  //   imageUrl:
+  //     'https://images.unsplash.com/photo-1505840717430-882ce147ef2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
+  //   bio: 'Praesentium iure error aliquam voluptas ut libero. Commodi placeat sit iure nulla officiis. Ut ex sit repellat tempora. Qui est accusamus exercitationem natus ut voluptas. Officiis velit eos ducimus.',
+  //   twitterUrl: '#',
+  //   linkedinUrl: '#',
+  // },
+  // {
+  //   name: 'Emma Dorsey',
+  //   role: 'Senior Developer',
+  //   imageUrl:
+  //     'https://images.unsplash.com/photo-1505840717430-882ce147ef2d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80',
+  //   bio: 'Praesentium iure error aliquam voluptas ut libero. Commodi placeat sit iure nulla officiis. Ut ex sit repellat tempora. Qui est accusamus exercitationem natus ut voluptas. Officiis velit eos ducimus.',
+  //   twitterUrl: '#',
+  //   linkedinUrl: '#',
+  // },
   // More people...
 ]
 

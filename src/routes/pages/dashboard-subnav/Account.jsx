@@ -9,7 +9,7 @@ const Account = () => {
       <div className='inline-grid grid-cols-3 gap-6 m-6'>
         <AccountForm />
         {/* <OrganizationForm /> */}
-        <PaymentInfoForm />
+        {/* <PaymentInfoForm /> */}
       </div>
     </DashboardLayout> 
     

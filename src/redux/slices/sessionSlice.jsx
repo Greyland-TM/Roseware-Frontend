@@ -7,15 +7,15 @@ export const sessionSlice = createSlice({
     isLoggedIn: false,
     user: {
       id: 0,
-      firstName: '',
-      lastName: '',
+      first_name: '',
+      last_name: '',
       email: '',
-      profilePicture: '',
+      profile_picture: '',
       phoneNumber: '',
-      packagePlans: [],
+      package_plans: [],
       organization: {},
-      hasSyncedPipedrive: false,
-      hasSyncedStripe: false,
+      has_synced_pipedrive: false,
+      has_synced_stripe: false,
     },
     // Form Fields
     validationCheckComplete: false,
@@ -125,7 +125,6 @@ export const createNewUser = createAsyncThunk(  // This async thunk was required
       });
   
       const data = await response.json();
-      console.log('New user: ', data);
   
       if(data.token) {
         localStorage.setItem("rosewareAuthToken", data.token);
@@ -216,7 +215,6 @@ export const handleLogout = createAsyncThunk(
       });
 
       const data = await response.json();
-      console.log(data);
 
       if (data.ok) {
         localStorage.removeItem("rosewareAuthToken");

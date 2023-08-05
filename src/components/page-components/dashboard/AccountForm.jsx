@@ -1,11 +1,13 @@
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import defaultProfilePicture from "../../../images/general/default_profile_picture.jpg";
 
 export default function AccountForm() {
   const { user, userToken } = useSelector((state) => state.session);
-
-  // console.log(user);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFileUrl, setSelectedFileUrl] = useState(null);
 
   const formik = useFormik({
     initialValues: {
@@ -29,26 +31,29 @@ export default function AccountForm() {
     }),
     onSubmit: async function (values, { setSubmitting }) {
       event.preventDefault(); // Prevent default form submit behavior
-      const requestData = {
-        first_name: values.firstName,
-        last_name: values.lastName,
-        email: values.email,
-        phone: values.phone,
-        pk: user.id
+      
+      const formData = new FormData();
+      formData.append("first_name", values.firstName);
+      formData.append("last_name", values.lastName);
+      formData.append("email", values.email);
+      formData.append("phone", values.phone);
+      formData.append("pk", parseInt(user.id));
+
+      if (selectedFile) {
+        formData.append("profile_picture", selectedFile);
       }
-      console.log('Form submitted: ', requestData);
+      
       const backend_url = import.meta.env.VITE_BACKEND_URL || 'http://127.0.0.1:8000'
       const response = await fetch(`${backend_url}/accounts/customer/`, {
         method: "PUT",
-        body: JSON.stringify(requestData),
+        body: formData,
         headers: {
-          Authorization: `Token ${userToken}`,
-          'Content-Type': 'application/json',
+          Authorization: `Token ${userToken}`
         },
         
       });
       const responseData = await response.json();
-      console.log(responseData);
+      
       if (!responseData.ok) {
         console.log('Error: ', responseData);
       }
@@ -56,20 +61,36 @@ export default function AccountForm() {
     }
   });
 
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setSelectedFile(file);
+      const imageURL = URL.createObjectURL(file);
+      setSelectedFileUrl(imageURL);
+    }
+  };
+
   return (
     <div className='max-w-md rounded-xl overflow-hidden shadow-lg h-fit p-6'>
       <form onSubmit={formik.handleSubmit} className="md:col-span-2">
         <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:max-w-xl sm:grid-cols-6">
-        <div className="col-span-full flex items-center gap-x-8">
+          <div className="col-span-full flex items-center gap-x-8">
             <img
-              src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+              className="inline-block h-28 w-28 rounded-full object-cover"
+              src={selectedFileUrl ? selectedFileUrl : user.profile_picture ? user.profile_picture : defaultProfilePicture}
               alt=""
-              className="h-24 w-24 flexNone rounded-lg bg-gray-800 object-cover"
             />
             <div>
+              <input
+                type="file"
+                id="profileImageInput"
+                hidden
+                onChange={handleImageChange}
+              />
               <button
                 type="button"
                 className="rounded-md bg-gray-300 px-3 py-2 text-sm font-semibold text-gray-800 shadow-sm hover:bg-white/20"
+                onClick={() => document.getElementById('profileImageInput').click()}
               >
                 Change avatar
               </button>

@@ -12,7 +12,9 @@ const navigation = [
   { name: 'Integrations', href: '../dashboard/integrations', icon: FolderIcon, current: false }
 ]
 const teams = [
-  { id: 1, name: 'Account', href: '../dashboard/account', initial: 'H', current: false }
+  // { id: 1, name: 'Details', href: '../dashboard/account', initial: 'H', current: false },
+  { id: 1, name: 'Settings', href: '../dashboard/settings', initial: 'H', current: false },
+  // { id: 1, name: 'Package Plans', href: '../dashboard/packageplans', initial: 'H', current: false }
 ]
 
 function classNames(...classes) {
@@ -49,7 +51,7 @@ export default function DashboardNav({children}) {
               </ul>
             </li>
             <li>
-              <div className="text-xs font-semibold leading-6 text-gray-400">Your teams</div>
+              <div className="text-xs font-semibold leading-6 text-gray-400">Your Account</div>
               <ul role="list" className="-mx-2 mt-2 space-y-1">
                 {teams.map((team) => (
                   <li key={team.name}>

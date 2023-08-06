@@ -8,8 +8,8 @@ const Account = () => {
     <DashboardLayout>
       <div className='inline-grid grid-cols-3 gap-6 m-6'>
         <AccountForm />
-        {/* <OrganizationForm /> */}
-        {/* <PaymentInfoForm /> */}
+        <PaymentInfoForm />
+        <OrganizationForm />
       </div>
     </DashboardLayout> 
     

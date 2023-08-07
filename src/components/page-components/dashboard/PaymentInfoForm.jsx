@@ -44,7 +44,10 @@ export default function PaymentInfoForm() {
   return (
     <div className='max-w-md rounded-xl overflow-hidden shadow-lg h-fit p-6'>
       <form onSubmit={formik.handleSubmit} className="md:col-span-2">
-        <div className="font-bold text-xl mb-6">Payment Details</div>
+        <div className="mb-6 flex align-middle">
+          <div className="font-bold text-xl mb-6">Payment Details</div>
+          <p className="text-md leading-relaxed">&nbsp;- ( Secured by Stripe )</p>
+        </div>
         <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:max-w-xl sm:grid-cols-6">
           <div className="col-span-full">
             <label htmlFor="email" className="block text-sm font-semibold leading-6 text-gray-900">

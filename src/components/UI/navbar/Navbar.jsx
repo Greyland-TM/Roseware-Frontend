@@ -6,29 +6,28 @@ import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../Button';
+import defaultProfilePicture from "../../../images/general/default_profile_picture.jpg";
 
-const user = {
-  name: 'Tom Cook',
-  email: 'tom@example.com',
-  imageUrl:
-    'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-};
-
-const userNavigation = [{ name: 'Your Profile', to: '/dashboard' }];
+const userNavigation = [{ name: 'Your Profile', to: '/dashboard/' }];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
 const Navbar = ({ showAuthPortal }) => {
-  const { isLoggedIn, userEmail } = useSelector((state) => state.session);
+  const { isLoggedIn, user } = useSelector((state) => state.session);
   const [currentPage, setCurrentPage] = useState('');
+  const [navImage, setNavImage] = useState(defaultProfilePicture);
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
   }, [isLoggedIn]);
+
+  useEffect(() => {
+    setNavImage(user.profile_picture);
+  }, [user])
 
   const navigation = [
     {
@@ -46,11 +45,11 @@ const Navbar = ({ showAuthPortal }) => {
       to: '/contact',
       current: currentPage.toLowerCase() === 'contact',
     },
-    {
-      name: 'Journal',
-      to: '/journal',
-      current: currentPage.toLowerCase() === 'journal',
-    },
+    // {
+    //   name: 'Journal',
+    //   to: '/journal',
+    //   current: currentPage.toLowerCase() === 'journal',
+    // },
   ];
 
   useEffect(() => {
@@ -125,7 +124,7 @@ const Navbar = ({ showAuthPortal }) => {
                           <span className='sr-only'>Open user menu</span>
                           <img
                             className='h-8 w-8 rounded-full'
-                            src={user.imageUrl}
+                            src={ navImage }
                             alt=''
                           />
                         </Menu.Button>
@@ -191,11 +190,13 @@ const Navbar = ({ showAuthPortal }) => {
 
           <Disclosure.Panel className='md:hidden'>
             <div className='space-y-1 px-2 pb-3 pt-2 sm:px-3'>
-              {navigation.map((item) => (
+            {navigation.map((item) => (
+              <Link 
+                key={item.name}
+                to={item.to}
+                onClick={() => setCurrentPage(item.name)} 
+              >
                 <Disclosure.Button
-                  key={item.name}
-                  as='a'
-                  to={item.to}
                   className={classNames(
                     item.current
                       ? 'bg-gray-900 text-white'
@@ -206,7 +207,8 @@ const Navbar = ({ showAuthPortal }) => {
                 >
                   {item.name}
                 </Disclosure.Button>
-              ))}
+              </Link>
+            ))}
             </div>
             {isLoggedIn ? (
               <div className='border-t border-gray-700 pb-3 pt-4'>
@@ -214,13 +216,13 @@ const Navbar = ({ showAuthPortal }) => {
                   <div className='flex-shrink-0'>
                     <img
                       className='h-10 w-10 rounded-full'
-                      src={user.imageUrl}
+                      src={navImage}
                       alt=''
                     />
                   </div>
                   <div className='ml-3'>
                     <div className='text-base font-medium text-white'>
-                      {userEmail}
+                      {user.email}
                     </div>
                   </div>
                   <button
@@ -233,14 +235,20 @@ const Navbar = ({ showAuthPortal }) => {
                 </div>
                 <div className='mt-3 space-y-1 px-2'>
                   {userNavigation.map((item) => (
-                    <Disclosure.Button
+                    <Link 
                       key={item.name}
-                      as='a'
                       to={item.to}
-                      className='block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white'
+                      onClick={() => setCurrentPage(item.name)} 
                     >
-                      {item.name}
-                    </Disclosure.Button>
+                      <Disclosure.Button
+                        key={item.name}
+                        as='a'
+                        to={item.to}
+                        className='block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white'
+                      >
+                        {item.name}
+                      </Disclosure.Button>
+                    </Link>
                   ))}
                 </div>
               </div>

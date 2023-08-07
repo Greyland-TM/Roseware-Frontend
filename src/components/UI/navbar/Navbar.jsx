@@ -8,7 +8,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Button from '../Button';
 import defaultProfilePicture from "../../../images/general/default_profile_picture.jpg";
 
-const userNavigation = [{ name: 'Your Profile', to: '/dashboard' }];
+const userNavigation = [{ name: 'Your Profile', to: '/dashboard/' }];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
@@ -190,11 +190,13 @@ const Navbar = ({ showAuthPortal }) => {
 
           <Disclosure.Panel className='md:hidden'>
             <div className='space-y-1 px-2 pb-3 pt-2 sm:px-3'>
-              {navigation.map((item) => (
+            {navigation.map((item) => (
+              <Link 
+                key={item.name}
+                to={item.to}
+                onClick={() => setCurrentPage(item.name)} 
+              >
                 <Disclosure.Button
-                  key={item.name}
-                  as='a'
-                  to={item.to}
                   className={classNames(
                     item.current
                       ? 'bg-gray-900 text-white'
@@ -205,7 +207,8 @@ const Navbar = ({ showAuthPortal }) => {
                 >
                   {item.name}
                 </Disclosure.Button>
-              ))}
+              </Link>
+            ))}
             </div>
             {isLoggedIn ? (
               <div className='border-t border-gray-700 pb-3 pt-4'>
@@ -232,14 +235,20 @@ const Navbar = ({ showAuthPortal }) => {
                 </div>
                 <div className='mt-3 space-y-1 px-2'>
                   {userNavigation.map((item) => (
-                    <Disclosure.Button
+                    <Link 
                       key={item.name}
-                      as='a'
                       to={item.to}
-                      className='block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white'
+                      onClick={() => setCurrentPage(item.name)} 
                     >
-                      {item.name}
-                    </Disclosure.Button>
+                      <Disclosure.Button
+                        key={item.name}
+                        as='a'
+                        to={item.to}
+                        className='block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white'
+                      >
+                        {item.name}
+                      </Disclosure.Button>
+                    </Link>
                   ))}
                 </div>
               </div>

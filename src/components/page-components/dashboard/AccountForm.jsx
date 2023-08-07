@@ -57,6 +57,8 @@ export default function AccountForm() {
       if (!responseData.ok) {
         console.log('Error: ', responseData);
       }
+
+      // TODO - set the new user data in redux. 
       setSubmitting(false);
     }
   });
@@ -73,7 +75,12 @@ export default function AccountForm() {
   return (
     <div className='max-w-md rounded-xl overflow-hidden shadow-lg h-fit p-6'>
       <form onSubmit={formik.handleSubmit} className="md:col-span-2">
+        <div className="mb-6 flex align-middle">
+          <p className="font-bold text-xl leading-tight">Contact Details</p>
+          {/* <p className="text-md leading-relaxed">&nbsp;- ( just for you so we know  )</p> */}
+        </div>
         <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:max-w-xl sm:grid-cols-6">
+          
           <div className="col-span-full flex items-center gap-x-8">
             <img
               className="inline-block h-28 w-28 rounded-full object-cover"

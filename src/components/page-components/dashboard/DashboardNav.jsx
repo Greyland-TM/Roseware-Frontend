@@ -32,7 +32,7 @@ export default function DashboardNav({children}) {
   ]
 
   return (
-      <div className="flex flex-col h-screen gap-y-6 overflow-y-auto bg-gray-800 px-6">
+      <div className="flex flex-col h-screen gap-y-6 overflow-y-auto bg-gray-800 px-6 min-w-[170px] w-[170px]">
 
         <div className="flex h-1 shrink-0 items-center">
         </div>

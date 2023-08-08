@@ -1,11 +1,21 @@
 import { CheckCircleIcon } from '@heroicons/react/20/solid'
+import { useSelector } from 'react-redux';
 
 export default function IntegrationCard(props) {
   const { integrationDetails } = props;
+  const { user } = useSelector((state) => state.session);
   const isConnected = integrationDetails.icons.every((icon) => icon.isLinked)
   
   return (
-    <div className={`max-w-sm rounded-xl overflow-hidden shadow-lg h-fit ${isConnected ? 'ring-2 ring-green-500 p-2' : 'p-0'}`}>
+    <div 
+      className={`relative max-w-sm rounded-xl overflow-hidden shadow-lg h-fit ${isConnected ? 'ring-2 ring-green-500 p-2' : 'p-0'}`}
+    >
+      {/* The overlay to show the card is not available */}
+      {!user.beta_feature_flag && (
+        <div className="absolute top-0 left-0 h-full w-full bg-black bg-opacity-50 flex items-center justify-center z-10">
+          <span className="text-white text-lg">Coming Soon</span>
+        </div>
+      )}
       <div className="px-6 py-4 h-48">
         <div className="font-bold text-xl mb-2">{integrationDetails.title}</div>
         <p className="text-gray-700 text-base">

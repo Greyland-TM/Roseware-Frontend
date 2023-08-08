@@ -8,11 +8,12 @@ import RegisterRoute from './pages/RegisterRoute.jsx';
 import ServicesRoute from './pages/ServicesRoute.jsx';
 import AboutRoute from './pages/AboutRoute.jsx';
 import ContactRoute from './pages/ContactRoute.jsx';
-import JournalRoute from './pages/JournalRoute.jsx';
+import ArticlesRoute from './pages/ArticlesRoute.jsx';
 import Dashboard from './pages/dashboard-subnav/Dashboard.jsx';
 import Integrations from './pages/dashboard-subnav/Integrations';
 import Account from './pages/dashboard-subnav/Account';
 import Websites from './pages/dashboard-subnav/Websites';
+import Plans from './pages/dashboard-subnav/Plans';
 import TermsRoute from './pages/TermsRoute.jsx';
 
 export const router = createBrowserRouter([
@@ -45,6 +46,10 @@ export const router = createBrowserRouter([
                 element: <Account />,
             },
             {
+                path: "dashboard/plans",
+                element: <Plans />,
+            },
+            {
                 path: "dashboard/integrations",
                 element: <Integrations />,
             },
@@ -60,10 +65,10 @@ export const router = createBrowserRouter([
                 path: "contact",
                 element: <ContactRoute />,
             },
-            // {
-            //     path: "journal",
-            //     element: <JournalRoute />,
-            // },
+            {
+                path: "articles",
+                element: <ArticlesRoute />,
+            },
             {
                 path: "terms",
                 element: <TermsRoute />,

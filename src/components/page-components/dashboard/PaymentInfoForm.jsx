@@ -3,9 +3,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 export default function PaymentInfoForm() {
-  const { userEmail } = useSelector((state) => state.session);
-
-  console.log(userEmail);
+  const { user } = useSelector((state) => state.session);
 
   const formik = useFormik({
     initialValues: {
@@ -42,7 +40,13 @@ export default function PaymentInfoForm() {
   });
 
   return (
-    <div className='max-w-md rounded-xl overflow-hidden shadow-lg h-fit p-6'>
+    <div className='mx-auto w-full p-5 rounded-lg shadow-md relative h-fit overflow-hidden'>
+      {/* The overlay to show the card is not available */}
+      {!user.beta_feature_flag && (
+        <div className="absolute top-0 left-0 h-full w-full bg-black bg-opacity-50 flex items-center justify-center z-10">
+          <span className="text-white text-lg">Coming Soon</span>
+        </div>
+      )}
       <form onSubmit={formik.handleSubmit} className="md:col-span-2">
         <div className="mb-6 flex align-middle">
           <div className="font-bold text-xl mb-6">Payment Details</div>

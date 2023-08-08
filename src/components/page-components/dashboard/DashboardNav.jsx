@@ -22,17 +22,17 @@ export default function DashboardNav({children}) {
 
   const navigation = [
     { name: 'Dashboard', href: '../dashboard/', icon: HomeIcon, current: currentPage.toLowerCase() === '' },
-    { name: 'Websites', href: '../dashboard/websites', icon: UsersIcon, current: currentPage.toLowerCase() === 'websites' },
+    { name: 'Apps', href: '../dashboard/websites', icon: UsersIcon, current: currentPage.toLowerCase() === 'websites' },
     { name: 'Integrations', href: '../dashboard/integrations', icon: FolderIcon, current: currentPage.toLowerCase() === 'integrations' }
   ];
   const teams = [
     // { id: 1, name: 'Details', href: '../dashboard/account', initial: 'H', current: false },
-    { id: 1, name: 'Settings', href: '../dashboard/settings', initial: 'H', current: currentPage.toLowerCase() === 'settings' },
-    // { id: 1, name: 'Package Plans', href: '../dashboard/packageplans', initial: 'H', current: false }
+    { id: 1, name: 'Settings', href: '../dashboard/settings', initial: 'S', current: currentPage.toLowerCase() === 'settings' },
+    { id: 1, name: 'Plans', href: '../dashboard/plans', initial: 'P', current: currentPage.toLowerCase() === 'plans' }
   ]
 
   return (
-      <div className="flex flex-col h-screen gap-y-6 overflow-y-auto bg-gray-800 px-6">
+      <div className="flex flex-col h-screen gap-y-6 overflow-y-auto bg-gray-800 px-6 min-w-[170px] w-[170px]">
 
         <div className="flex h-1 shrink-0 items-center">
         </div>

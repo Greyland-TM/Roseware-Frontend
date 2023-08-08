@@ -3,15 +3,11 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 export default function OrganizationForm() {
-  const { userEmail } = useSelector((state) => state.session);
+  const { user } = useSelector((state) => state.session);
 
   const formik = useFormik({
     initialValues: {
-      firstName: '',
-      lastName: '',
-      email: userEmail,
-      phone: '',
-      password: '',
+      organizationName: '',
     },
     validationSchema: Yup.object({
       firstName: Yup.string()
@@ -41,7 +37,12 @@ export default function OrganizationForm() {
   });
 
   return (
-    <div className='max-w-md rounded-xl overflow-hidden shadow-lg h-fit p-6'>
+    <div className='mx-auto w-full p-5 rounded-lg shadow-md relative h-fit overflow-hidden'>
+    {!user.beta_feature_flag && (
+      <div className="absolute top-0 left-0 h-full w-full bg-black bg-opacity-50 flex items-center justify-center z-10">
+        <span className="text-white text-lg">Coming Soon</span>
+      </div>
+    )}
     <form onSubmit={formik.handleSubmit} className="md:col-span-2">
       <div className="font-bold text-xl mb-6">Organization Details</div>
       <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:max-w-xl sm:grid-cols-6">

@@ -34,8 +34,8 @@ export default function Contact() {
             </div>
             <h2 className="text-3xl font-bold tracking-tight text-gray-900">Get in touch</h2>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              Proin volutpat consequat porttitor cras nullam gravida at. Orci molestie a eu arcu. Sed ut tincidunt
-              integer elementum id sem. Arcu sed malesuada et magna.
+              If you have questions about any of the products or services we offer, please contact us. We are here to
+              help you!
             </p>
             <dl className="mt-10 space-y-4 text-base leading-7 text-gray-600">
               <div className="flex gap-x-4">
@@ -44,12 +44,10 @@ export default function Contact() {
                   <BuildingOffice2Icon className="h-7 w-6 text-gray-400" aria-hidden="true" />
                 </dt>
                 <dd>
-                  545 Mavis Island
-                  <br />
-                  Chicago, IL 99191
+                  Portland, Oregon
                 </dd>
               </div>
-              <div className="flex gap-x-4">
+              {/* <div className="flex gap-x-4">
                 <dt className="flex-none">
                   <span className="sr-only">Telephone</span>
                   <PhoneIcon className="h-7 w-6 text-gray-400" aria-hidden="true" />
@@ -59,7 +57,7 @@ export default function Contact() {
                     +1 (555) 234-5678
                   </a>
                 </dd>
-              </div>
+              </div> */}
               <div className="flex gap-x-4">
                 <dt className="flex-none">
                   <span className="sr-only">Email</span>
@@ -67,7 +65,7 @@ export default function Contact() {
                 </dt>
                 <dd>
                   <a className="hover:text-gray-900" href="mailto:hello@example.com">
-                    hello@example.com
+                    support@rosewareintegrations.com
                   </a>
                 </dd>
               </div>

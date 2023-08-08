@@ -41,15 +41,15 @@ const Navbar = ({ showAuthPortal }) => {
       current: currentPage.toLowerCase() === 'about',
     },
     {
+      name: 'Articles',
+      to: '/articles',
+      current: currentPage.toLowerCase() === 'articles',
+    },
+    {
       name: 'Contact',
       to: '/contact',
       current: currentPage.toLowerCase() === 'contact',
     },
-    // {
-    //   name: 'Journal',
-    //   to: '/journal',
-    //   current: currentPage.toLowerCase() === 'journal',
-    // },
   ];
 
   useEffect(() => {
@@ -102,7 +102,7 @@ const Navbar = ({ showAuthPortal }) => {
               </div>
               <div className='hidden md:block'>
                 <div className='ml-4 flex items-center md:ml-6'>
-                  {isLoggedIn && (
+                  {/* {isLoggedIn && (
                     <button
                       type='button'
                       className='rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'
@@ -110,7 +110,7 @@ const Navbar = ({ showAuthPortal }) => {
                       <span className='sr-only'>View notifications</span>
                       <BellIcon className='h-6 w-6' aria-hidden='true' />
                     </button>
-                  )}
+                  )} */}
 
                   {/* Profile dropdown */}
                   {isLoggedIn ? (

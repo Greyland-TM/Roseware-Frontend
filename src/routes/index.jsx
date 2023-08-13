@@ -8,7 +8,8 @@ import RegisterRoute from './pages/RegisterRoute.jsx';
 import ServicesRoute from './pages/ServicesRoute.jsx';
 import AboutRoute from './pages/AboutRoute.jsx';
 import ContactRoute from './pages/ContactRoute.jsx';
-import ArticlesRoute from './pages/ArticlesRoute.jsx';
+import AllArticlesRoute from './pages/article-routes/AllArticlesRoute.jsx';
+import ArticleRoute from './pages/article-routes/ArticleRoute.jsx';
 import Dashboard from './pages/dashboard-subnav/Dashboard.jsx';
 import Integrations from './pages/dashboard-subnav/Integrations';
 import Account from './pages/dashboard-subnav/Account';
@@ -68,7 +69,11 @@ export const router = createBrowserRouter([
             },
             {
                 path: "articles",
-                element: <ArticlesRoute />,
+                element: <AllArticlesRoute />,
+            },
+            {
+                path: "articles/:id",
+                element: <ArticleRoute />,
             },
             {
                 path: "terms",

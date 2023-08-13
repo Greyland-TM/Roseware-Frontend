@@ -16,6 +16,7 @@
     "@heroicons/react": "^2.0.18",
     "@reduxjs/toolkit": "^1.9.5",
     "@tailwindcss/forms": "^0.5.4",
+    "clsx": "^2.0.0",
     "formik": "^2.4.3",
     "google-libphonenumber": "^3.2.33",
     "react": "^18.2.0",

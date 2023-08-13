@@ -25,7 +25,7 @@ const Hero = () => {
         for simplified business management.
       </h1>
       <p className="mx-auto mt-6 max-w-2xl text-lg tracking-tight text-slate-700">
-        We are a Portland, Oregon local start up that is dedicated to making advanced buisness management software that is easy to use and understand.
+        We&apos;re a local Portland, Oregon start up that is dedicated to creating tools that ease the stress of managing your business.
       </p>
       <div className="mt-10 flex justify-center gap-x-6">
         <Button href="/dashboard">Get Started</Button>

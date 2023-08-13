@@ -16,10 +16,10 @@ const Service = () => {
             </div>
           </section>
         </div>
-        <div className="flex flex-wrap -mx-4">
+        <div className="flex justify-around flex-wrap -mx-4">
           <ServiceCard
-            title="Refreshing Design"
-            details="We dejoy working with discerning clients, people for whom qualuty, service, integrity & aesthetics."
+            title="Apps"
+            details="By apps we mean websites, mobile apps, desktop apps, and any other digital tool that can be used to solve a problem. We can host them, create them or update them. If you can think of it, we can make it."
             icon={
               <svg
                 width="32"
@@ -36,8 +36,8 @@ const Service = () => {
             }
           />
           <ServiceCard
-            title="Based on Tailwind CSS"
-            details="We dejoy working with discerning clients, people for whom qualuty, service, integrity & aesthetics."
+            title="Integrations"
+            details="Tools created by Roseware Integrations are all available for use to anyone with an account, and most apps made by roseware integrations will have their dashboard integrated into their app."
             icon={
               <svg
                 width="39"
@@ -60,7 +60,7 @@ const Service = () => {
               </svg>
             }
           />
-          <ServiceCard
+          {/* <ServiceCard
             title="100+ Components"
             details="We dejoy working with discerning clients, people for whom qualuty, service, integrity & aesthetics."
             icon={
@@ -89,7 +89,7 @@ const Service = () => {
                 />
               </svg>
             }
-          />
+          /> */}
         </div>
       </div>
     </div>

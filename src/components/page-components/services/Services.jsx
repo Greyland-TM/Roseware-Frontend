@@ -1,156 +1,127 @@
 const Index = () => (
-  <div>
-      <section className="px-6 xl:px-0">
-          <div className="mt-8 mx-auto container">
-              {/* <div className="flex flex-col lg:items-center justify-center w-full">
-                  <h1 className="font-semibold text-gray-800 text-3xl md:text-4xl">The Right Plan for your business</h1>
-                  <p className="mt-2.5 lg:w-1/2 lg:text-center text-2xl">We have several plans to showcase your Business. Get everything you need</p>
-              </div> */}
-              <div className="flex items-center justify-center w-full">
-                  <div className="pt-14">
-                      <div className="container mx-auto">
-                          {/* <div className="xl:w-4/5 w-11/12 mx-auto mb-28">
-                              <div className="flex justify-center items-center" role="button">
-                                  <p className="mr-3 text-lg text-gray-600 font-bold">Bill Monthly</p>
-                                  <div className="cursor-pointer w-12 h-6 rounded-full relative shadow-sm">
-                                      <input defaultChecked type="checkbox" name="toggle" id="toggle2" className="focus:outline-none checkbox w-4 h-4 rounded-full bg-indigo-700 transition duration-150 ease-in-out absolute m-1 shadow-sm appearance-none cursor-pointer" />
-                                      <label htmlFor="toggle2" className="toggle-label block w-12 h-6 overflow-hidden rounded-full border border-indigo-700 cursor-pointer" />
-                                  </div>
-                                  <p className="ml-3 text-lg font-normal text-gray-800">Bill Anually</p>
-                              </div>
-                          </div> */}
-                          <div className="flex flex-wrap mb-12 justify-between sm:justify-center -mx-6">
-                              <div className="w-full xl:w-1/3 lg:w-1/3 md:w-1/2 sm:w-1/2 mb-4 px-6">
-                                  <div className="py-5 px-4 bg-white border border-gray-200shadow rounded-lg text-left">
-                                      <h4 className="text-2xl text-indigo-700 font-semibold pb-8">Basic</h4>
-                                      <ul className="flex flex-col mb-6">
-                                          <li className="flex items-center mb-2.5">
-                                              <img src="https://cdn.tuk.dev/assets/templates/weCare/checkMark.png" className="mr-4" alt="check-mark" />
-                                              <p className="text-gray-800 text-base font-normal">24/7 access</p>
-                                          </li>
-                                          <li className="flex items-center mb-2.5">
-                                              <img src="https://cdn.tuk.dev/assets/templates/weCare/checkMark.png" className="mr-4" alt="check-mark" />
-                                              <p className="text-gray-800 text-base font-normal">Order labs + Results</p>
-                                          </li>
-                                          <li className="flex items-center mb-2.5">
-                                              <img src="https://cdn.tuk.dev/assets/templates/weCare/checkMark.png" className="opacity-0 mr-4" alt="check-mark" />
-                                              <p className="text-gray-400 text-base font-normal">Radiology tests + Results</p>
-                                          </li>
-                                          <li className="flex items-center mb-2.5">
-                                              <img src="https://cdn.tuk.dev/assets/templates/weCare/checkMark.png" className="opacity-0 mr-4" alt="check-mark" />
-                                              <p className="text-gray-400 text-base font-normal">Partnership + Discounts</p>
-                                          </li>
-                                          <li className="flex items-center mb-2.5">
-                                              <img src="https://cdn.tuk.dev/assets/templates/weCare/checkMark.png" className="opacity-0 mr-4" alt="check-mark" />
-                                              <p className="text-gray-400 text-base font-normal">Direct doctor phone number</p>
-                                          </li>
-                                          <li className="flex items-center mb-2.5">
-                                              <img src="https://cdn.tuk.dev/assets/templates/weCare/checkMark.png" className="opacity-0 mr-4" alt="check-mark" />
-                                              <p className="text-gray-400 text-base font-normal">Specialists appoinments</p>
-                                          </li>
-                                      </ul>
-                                      <p className="text-base text-indigo-700 relative pl-3">
-                                          <span className="font-light text-lg">$</span>
-                                          <span className="text-2xl font-semibold">20</span>
-                                          <span className="text-gray-600 font-light text-lg">/month</span>
-                                      </p>
-                                      <button className="mt-5 w-full bg-gray-200 hover:bg-gray-300 focus:outline-none transition duration-150 ease-in-out rounded text-indigo-700 px-8 py-3 text-base font-semibold py-3">Choose</button>
-                                  </div>
-                              </div>
-                              <div className="w-full xl:w-1/3 lg:w-1/3 md:w-1/2 sm:w-1/2 mb-4 px-6">
-                                  <div className="py-5 px-4 bg-indigo-700 border border-gray-200 shadow rounded-lg text-left">
-                                      <h4 className="text-2xl text-white font-semibold pb-8">Pro</h4>
-                                      <ul className="flex flex-col mb-6">
-                                          <li className="flex items-center mb-2.5">
-                                              <img src="https://cdn.tuk.dev/assets/templates/weCare/checkMarkWhite.png" className="mr-4" alt="check-mark" />
-                                              <p className="text-white text-base font-normal">24/7 access</p>
-                                          </li>
-                                          <li className="flex items-center mb-2.5">
-                                              <img src="https://cdn.tuk.dev/assets/templates/weCare/checkMarkWhite.png" className="mr-4" alt="check-mark" />
-                                              <p className="text-white text-base font-normal">Order labs + Results</p>
-                                          </li>
-                                          <li className="flex items-center mb-2.5">
-                                              <img src="https://cdn.tuk.dev/assets/templates/weCare/checkMarkWhite.png" className="mr-4" alt="check-mark" />
-                                              <p className="text-white text-base font-normal">Radiology tests + Results</p>
-                                          </li>
-                                          <li className="flex items-center mb-2.5">
-                                              <img src="https://cdn.tuk.dev/assets/templates/weCare/checkMarkWhite.png" className="mr-4" alt="check-mark" />
-                                              <p className="text-white text-base font-normal">Partnership + Discounts</p>
-                                          </li>
-                                          <li className="flex items-center mb-2.5">
-                                              <img src="https://cdn.tuk.dev/assets/templates/weCare/checkMark.png" className="mr-4 opacity-0" alt="check-mark" />
-                                              <p className="text-indigo-700 text-base font-normal">Direct doctor phone number</p>
-                                          </li>
-                                          <li className="flex items-center mb-2.5">
-                                              <img src="https://cdn.tuk.dev/assets/templates/weCare/checkMark.png" className="mr-4 opacity-0" alt="check-mark" />
-                                              <p className="text-indigo-700 text-base font-normal">Specialists appoinments</p>
-                                          </li>
-                                      </ul>
-                                      <p className="text-base text-white relative pl-3">
-                                          <span className="font-light text-lg">$</span>
-                                          <span className="text-2xl font-semibold">100</span>
-                                          <span className="font-light text-lg">/month</span>
-                                      </p>
-                                      <button className="mt-5 w-full text-indigo-700 focus:outline-none transition duration-150 ease-in-out rounded bg-white hover:bg-gray-100 px-8 py-3 text-base font-semibold py-3">Try</button>
-                                  </div>
-                              </div>
-                              <div className="w-full xl:w-1/3 lg:w-1/3 md:w-1/2 sm:w-1/2 mb-4 px-6">
-                                  <div className="py-5 px-4 bg-white border border-gray-200shadow rounded-lg text-left">
-                                      <h4 className="text-2xl text-indigo-700 font-semibold pb-8">Enterprise</h4>
-                                      <ul className="flex flex-col mb-6">
-                                          <li className="flex items-center mb-2.5">
-                                              <img src="https://cdn.tuk.dev/assets/templates/weCare/checkMark.png" className="mr-4" alt="check-mark" />
-                                              <p className="text-gray-800 text-base font-normal">24/7 access</p>
-                                          </li>
-                                          <li className="flex items-center mb-2.5">
-                                              <img src="https://cdn.tuk.dev/assets/templates/weCare/checkMark.png" className="mr-4" alt="check-mark" />
-                                              <p className="text-gray-800 text-base font-normal">Order labs + Results</p>
-                                          </li>
-                                          <li className="flex items-center mb-2.5">
-                                              <img src="https://cdn.tuk.dev/assets/templates/weCare/checkMark.png" className="mr-4" alt="check-mark" />
-                                              <p className="text-gray-800 text-base font-normal">Radiology tests + Results</p>
-                                          </li>
-                                          <li className="flex items-center mb-2.5">
-                                              <img src="https://cdn.tuk.dev/assets/templates/weCare/checkMark.png" className="mr-4" alt="check-mark" />
-                                              <p className="text-gray-800 text-base font-normal">Partnership + Discounts</p>
-                                          </li>
-                                          <li className="flex items-center mb-2.5">
-                                              <img src="https://cdn.tuk.dev/assets/templates/weCare/checkMark.png" className="mr-4" alt="check-mark" />
-                                              <p className="text-gray-800 text-base font-normal">Direct doctor phone number</p>
-                                          </li>
-                                          <li className="flex items-center mb-2.5">
-                                              <img src="https://cdn.tuk.dev/assets/templates/weCare/checkMark.png" className="mr-4" alt="check-mark" />
-                                              <p className="text-gray-800 text-base font-normal">Specialists appoinments</p>
-                                          </li>
-                                      </ul>
-                                      <p className="text-base text-indigo-700 relative pl-3">
-                                          <span className="font-light text-lg">$</span>
-                                          <span className="text-2xl font-semibold">200</span>
-                                          <span className="font-light text-lg">/month</span>
-                                      </p>
-                                      <button className="mt-5 w-full bg-gray-200 hover:bg-gray-300 focus:outline-none transition duration-150 ease-in-out rounded text-indigo-700 px-8 py-3 text-base font-semibold py-3">Choose</button>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      <style
-                          dangerouslySetInnerHTML={{
-                              __html: "",
-                          }}
-                      />
-                  </div>
+  <section class="bg-white ">
+  <div class="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
+      <div class="mx-auto max-w-screen-md text-center mb-8 lg:mb-12">
+          <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 ">Designed for business teams like yours</h2>
+          <p class="mb-5 font-light text-gray-500 sm:text-xl ">Here at Flowbite we focus on markets where technology, innovation, and capital can unlock long-term value and drive economic growth.</p>
+      </div>
+      <div class="space-y-8 lg:grid lg:grid-cols-3 sm:gap-6 xl:gap-10 lg:space-y-0">
+          
+          <div class="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow ">
+              <h3 class="mb-4 text-2xl font-semibold">Starter</h3>
+              <p class="font-light text-gray-500 sm:text-lg ">Best option for personal use & for your next project.</p>
+              <div class="flex justify-center items-baseline my-8">
+                  <span class="mr-2 text-5xl font-extrabold">$29</span>
+                  <span class="text-gray-500 ">/month</span>
               </div>
+              
+              <ul role="list" class="mb-8 space-y-4 text-left">
+                  <li class="flex items-center space-x-3">
+                
+                      <svg class="flex-shrink-0 w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                      <span>Individual configuration</span>
+                  </li>
+                  <li class="flex items-center space-x-3">
+                
+                      <svg class="flex-shrink-0 w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                      <span>No setup, or hidden fees</span>
+                  </li>
+                  <li class="flex items-center space-x-3">
+                
+                      <svg class="flex-shrink-0 w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                      <span>Team size: <span class="font-semibold">1 developer</span></span>
+                  </li>
+                  <li class="flex items-center space-x-3">
+                
+                      <svg class="flex-shrink-0 w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                      <span>Premium support: <span class="font-semibold">6 months</span></span>
+                  </li>
+                  <li class="flex items-center space-x-3">
+                
+                      <svg class="flex-shrink-0 w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                      <span>Free updates: <span class="font-semibold">6 months</span></span>
+                  </li>
+              </ul>
+              <a href="#" class="text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Get started</a>
           </div>
-      </section>
-
-      <style>
-          {` 
-          .checkbox:checked {
-              right: 0;
-              background-color: #4338ca;
-          }
-          `}
-      </style>
+          
+          <div class="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow  xl:p-8">
+              <h3 class="mb-4 text-2xl font-semibold">Company</h3>
+              <p class="font-light text-gray-500 sm:text-lg ">Relevant for multiple users, extended & premium support.</p>
+              <div class="flex justify-center items-baseline my-8">
+                  <span class="mr-2 text-5xl font-extrabold">$99</span>
+                  <span class="text-gray-500">/month</span>
+              </div>
+              
+              <ul role="list" class="mb-8 space-y-4 text-left">
+                  <li class="flex items-center space-x-3">
+                
+                      <svg class="flex-shrink-0 w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                      <span>Individual configuration</span>
+                  </li>
+                  <li class="flex items-center space-x-3">
+                
+                      <svg class="flex-shrink-0 w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                      <span>No setup, or hidden fees</span>
+                  </li>
+                  <li class="flex items-center space-x-3">
+                
+                      <svg class="flex-shrink-0 w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                      <span>Team size: <span class="font-semibold">10 developers</span></span>
+                  </li>
+                  <li class="flex items-center space-x-3">
+                
+                      <svg class="flex-shrink-0 w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                      <span>Premium support: <span class="font-semibold">24 months</span></span>
+                  </li>
+                  <li class="flex items-center space-x-3">
+                
+                      <svg class="flex-shrink-0 w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                      <span>Free updates: <span class="font-semibold">24 months</span></span>
+                  </li>
+              </ul>
+              <a href="#" class="text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Get started</a>
+          </div>
+          
+          <div class="flex flex-col p-6 mx-auto max-w-lg text-center text-gray-900 bg-white rounded-lg border border-gray-100 shadow ">
+              <h3 class="mb-4 text-2xl font-semibold">Enterprise</h3>
+              <p class="font-light text-gray-500 sm:text-lg">Best for large scale uses and extended redistribution rights.</p>
+              <div class="flex justify-center items-baseline my-8">
+                  <span class="mr-2 text-5xl font-extrabold">$499</span>
+                  <span class="text-gray-500">/month</span>
+              </div>
+              
+              <ul role="list" class="mb-8 space-y-4 text-left">
+                  <li class="flex items-center space-x-3">
+                
+                      <svg class="flex-shrink-0 w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                      <span>Individual configuration</span>
+                  </li>
+                  <li class="flex items-center space-x-3">
+                
+                      <svg class="flex-shrink-0 w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                      <span>No setup, or hidden fees</span>
+                  </li>
+                  <li class="flex items-center space-x-3">
+                
+                      <svg class="flex-shrink-0 w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                      <span>Team size: <span class="font-semibold">100+ developers</span></span>
+                  </li>
+                  <li class="flex items-center space-x-3">
+                
+                      <svg class="flex-shrink-0 w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                      <span>Premium support: <span class="font-semibold">36 months</span></span>
+                  </li>
+                  <li class="flex items-center space-x-3">
+                
+                      <svg class="flex-shrink-0 w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                      <span>Free updates: <span class="font-semibold">36 months</span></span>
+                  </li>
+              </ul>
+              <a href="#" class="text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:ring-primary-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Get started</a>
+          </div>
+      </div>
   </div>
+</section>
 );
 export default Index;

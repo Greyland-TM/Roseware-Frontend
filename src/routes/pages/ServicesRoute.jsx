@@ -6,7 +6,7 @@ const ServicesRoute = () => {
   return (
     <>
       <ServicesHeader />
-      <ServiceFeatures />
+      {/* <ServiceFeatures /> */}
       <Services />
     </>
   );

@@ -7,8 +7,7 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../Button';
 import defaultProfilePicture from "../../../images/general/default_profile_picture.jpg";
-// import logo from '../../../images/logos/roseware-logo-2.jpg';
-// import rosewareLogo from "../../../../public/roseware-logo-2.jpg";
+import logo from '../../../images/logos/roseware-logo-1.png';
 
 const userNavigation = [{ name: 'Your Profile', to: '/dashboard/' }];
 
@@ -78,10 +77,10 @@ const Navbar = ({ showAuthPortal }) => {
               <div className='flex items-center justify-center'>
                 {/* <div className='flex-shrink-0'> */}
                 <Link className='font-bold text-blue-500 text-4xl' to='/'>
-                  <div className={`flex items-center justify-center p-1 rounded-full mb-4 bg-slate-300 h-12 w-12`}>
+                  <div className={`flex items-center justify-center p-1 rounded-full bg-slate-300 h-12 w-12`}>
                     <img
                       className="inline-block rounded-full h-full w-full"
-                      src={"../../../images/logos/roseware-logo-2.jpg"}
+                      src={logo}
                       alt="smthn"
                     />
                     {/* TEST */}

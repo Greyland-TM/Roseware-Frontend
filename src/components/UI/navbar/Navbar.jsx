@@ -33,14 +33,14 @@ const Navbar = ({ showAuthPortal }) => {
 
   const navigation = [
     {
-      name: 'Services',
-      to: '/services',
-      current: currentPage.toLowerCase() === 'services'
-    },
-    {
       name: 'About',
       to: '/about',
       current: currentPage.toLowerCase() === 'about',
+    },
+    {
+      name: 'Services',
+      to: '/services',
+      current: currentPage.toLowerCase() === 'services'
     },
     {
       name: 'Articles',

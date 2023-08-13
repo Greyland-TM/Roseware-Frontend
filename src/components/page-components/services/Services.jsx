@@ -1,55 +1,156 @@
-import { ChatBubbleOvalLeftEllipsisIcon, HeartIcon, PencilSquareIcon, TrashIcon } from '@heroicons/react/24/outline'
-
-const features = [
-  {
-    name: 'Spam report',
-    description:
-      'Autem reprehenderit aut debitis ut. Officiis harum omnis placeat blanditiis delectus sint vel et voluptatum. Labore asperiores non corporis molestiae.',
-    icon: TrashIcon,
-  },
-  {
-    name: 'Compose in markdown',
-    description:
-      'Illum et aut inventore. Ut et dignissimos quasi. Omnis saepe dolorum. Hic autem fugiat. Voluptatem officiis necessitatibus est.',
-    icon: PencilSquareIcon,
-  },
-  {
-    name: 'Email commenting',
-    description:
-      'Commodi quam quo. In quasi mollitia optio voluptate et est reiciendis. Ut et sunt id officiis vitae perspiciatis. Et accusantium sapiente.',
-    icon: ChatBubbleOvalLeftEllipsisIcon,
-  },
-  {
-    name: 'Customer connections',
-    description:
-      'Deserunt corrupti praesentium quo vel cupiditate est occaecati ad. Aperiam libero modi similique iure praesentium facilis quo cumque quibusdam.',
-    icon: HeartIcon,
-  },
-]
-
-export default function Example() {
-  return (
-    <div className="bg-white py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-            Stay on top of customer support
-          </h2>
-          <dl className="col-span-2 grid grid-cols-1 gap-x-8 gap-y-16 sm:grid-cols-2">
-            {features.map((feature) => (
-              <div key={feature.name}>
-                <dt className="text-base font-semibold leading-7 text-gray-900">
-                  <div className="mb-6 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600">
-                    <feature.icon className="h-6 w-6 text-white" aria-hidden="true" />
+const Index = () => (
+  <div>
+      <section className="px-6 xl:px-0">
+          <div className="mt-8 mx-auto container">
+              {/* <div className="flex flex-col lg:items-center justify-center w-full">
+                  <h1 className="font-semibold text-gray-800 text-3xl md:text-4xl">The Right Plan for your business</h1>
+                  <p className="mt-2.5 lg:w-1/2 lg:text-center text-2xl">We have several plans to showcase your Business. Get everything you need</p>
+              </div> */}
+              <div className="flex items-center justify-center w-full">
+                  <div className="pt-14">
+                      <div className="container mx-auto">
+                          {/* <div className="xl:w-4/5 w-11/12 mx-auto mb-28">
+                              <div className="flex justify-center items-center" role="button">
+                                  <p className="mr-3 text-lg text-gray-600 font-bold">Bill Monthly</p>
+                                  <div className="cursor-pointer w-12 h-6 rounded-full relative shadow-sm">
+                                      <input defaultChecked type="checkbox" name="toggle" id="toggle2" className="focus:outline-none checkbox w-4 h-4 rounded-full bg-indigo-700 transition duration-150 ease-in-out absolute m-1 shadow-sm appearance-none cursor-pointer" />
+                                      <label htmlFor="toggle2" className="toggle-label block w-12 h-6 overflow-hidden rounded-full border border-indigo-700 cursor-pointer" />
+                                  </div>
+                                  <p className="ml-3 text-lg font-normal text-gray-800">Bill Anually</p>
+                              </div>
+                          </div> */}
+                          <div className="flex flex-wrap mb-12 justify-between sm:justify-center -mx-6">
+                              <div className="w-full xl:w-1/3 lg:w-1/3 md:w-1/2 sm:w-1/2 mb-4 px-6">
+                                  <div className="py-5 px-4 bg-white border border-gray-200shadow rounded-lg text-left">
+                                      <h4 className="text-2xl text-indigo-700 font-semibold pb-8">Basic</h4>
+                                      <ul className="flex flex-col mb-6">
+                                          <li className="flex items-center mb-2.5">
+                                              <img src="https://cdn.tuk.dev/assets/templates/weCare/checkMark.png" className="mr-4" alt="check-mark" />
+                                              <p className="text-gray-800 text-base font-normal">24/7 access</p>
+                                          </li>
+                                          <li className="flex items-center mb-2.5">
+                                              <img src="https://cdn.tuk.dev/assets/templates/weCare/checkMark.png" className="mr-4" alt="check-mark" />
+                                              <p className="text-gray-800 text-base font-normal">Order labs + Results</p>
+                                          </li>
+                                          <li className="flex items-center mb-2.5">
+                                              <img src="https://cdn.tuk.dev/assets/templates/weCare/checkMark.png" className="opacity-0 mr-4" alt="check-mark" />
+                                              <p className="text-gray-400 text-base font-normal">Radiology tests + Results</p>
+                                          </li>
+                                          <li className="flex items-center mb-2.5">
+                                              <img src="https://cdn.tuk.dev/assets/templates/weCare/checkMark.png" className="opacity-0 mr-4" alt="check-mark" />
+                                              <p className="text-gray-400 text-base font-normal">Partnership + Discounts</p>
+                                          </li>
+                                          <li className="flex items-center mb-2.5">
+                                              <img src="https://cdn.tuk.dev/assets/templates/weCare/checkMark.png" className="opacity-0 mr-4" alt="check-mark" />
+                                              <p className="text-gray-400 text-base font-normal">Direct doctor phone number</p>
+                                          </li>
+                                          <li className="flex items-center mb-2.5">
+                                              <img src="https://cdn.tuk.dev/assets/templates/weCare/checkMark.png" className="opacity-0 mr-4" alt="check-mark" />
+                                              <p className="text-gray-400 text-base font-normal">Specialists appoinments</p>
+                                          </li>
+                                      </ul>
+                                      <p className="text-base text-indigo-700 relative pl-3">
+                                          <span className="font-light text-lg">$</span>
+                                          <span className="text-2xl font-semibold">20</span>
+                                          <span className="text-gray-600 font-light text-lg">/month</span>
+                                      </p>
+                                      <button className="mt-5 w-full bg-gray-200 hover:bg-gray-300 focus:outline-none transition duration-150 ease-in-out rounded text-indigo-700 px-8 py-3 text-base font-semibold py-3">Choose</button>
+                                  </div>
+                              </div>
+                              <div className="w-full xl:w-1/3 lg:w-1/3 md:w-1/2 sm:w-1/2 mb-4 px-6">
+                                  <div className="py-5 px-4 bg-indigo-700 border border-gray-200 shadow rounded-lg text-left">
+                                      <h4 className="text-2xl text-white font-semibold pb-8">Pro</h4>
+                                      <ul className="flex flex-col mb-6">
+                                          <li className="flex items-center mb-2.5">
+                                              <img src="https://cdn.tuk.dev/assets/templates/weCare/checkMarkWhite.png" className="mr-4" alt="check-mark" />
+                                              <p className="text-white text-base font-normal">24/7 access</p>
+                                          </li>
+                                          <li className="flex items-center mb-2.5">
+                                              <img src="https://cdn.tuk.dev/assets/templates/weCare/checkMarkWhite.png" className="mr-4" alt="check-mark" />
+                                              <p className="text-white text-base font-normal">Order labs + Results</p>
+                                          </li>
+                                          <li className="flex items-center mb-2.5">
+                                              <img src="https://cdn.tuk.dev/assets/templates/weCare/checkMarkWhite.png" className="mr-4" alt="check-mark" />
+                                              <p className="text-white text-base font-normal">Radiology tests + Results</p>
+                                          </li>
+                                          <li className="flex items-center mb-2.5">
+                                              <img src="https://cdn.tuk.dev/assets/templates/weCare/checkMarkWhite.png" className="mr-4" alt="check-mark" />
+                                              <p className="text-white text-base font-normal">Partnership + Discounts</p>
+                                          </li>
+                                          <li className="flex items-center mb-2.5">
+                                              <img src="https://cdn.tuk.dev/assets/templates/weCare/checkMark.png" className="mr-4 opacity-0" alt="check-mark" />
+                                              <p className="text-indigo-700 text-base font-normal">Direct doctor phone number</p>
+                                          </li>
+                                          <li className="flex items-center mb-2.5">
+                                              <img src="https://cdn.tuk.dev/assets/templates/weCare/checkMark.png" className="mr-4 opacity-0" alt="check-mark" />
+                                              <p className="text-indigo-700 text-base font-normal">Specialists appoinments</p>
+                                          </li>
+                                      </ul>
+                                      <p className="text-base text-white relative pl-3">
+                                          <span className="font-light text-lg">$</span>
+                                          <span className="text-2xl font-semibold">100</span>
+                                          <span className="font-light text-lg">/month</span>
+                                      </p>
+                                      <button className="mt-5 w-full text-indigo-700 focus:outline-none transition duration-150 ease-in-out rounded bg-white hover:bg-gray-100 px-8 py-3 text-base font-semibold py-3">Try</button>
+                                  </div>
+                              </div>
+                              <div className="w-full xl:w-1/3 lg:w-1/3 md:w-1/2 sm:w-1/2 mb-4 px-6">
+                                  <div className="py-5 px-4 bg-white border border-gray-200shadow rounded-lg text-left">
+                                      <h4 className="text-2xl text-indigo-700 font-semibold pb-8">Enterprise</h4>
+                                      <ul className="flex flex-col mb-6">
+                                          <li className="flex items-center mb-2.5">
+                                              <img src="https://cdn.tuk.dev/assets/templates/weCare/checkMark.png" className="mr-4" alt="check-mark" />
+                                              <p className="text-gray-800 text-base font-normal">24/7 access</p>
+                                          </li>
+                                          <li className="flex items-center mb-2.5">
+                                              <img src="https://cdn.tuk.dev/assets/templates/weCare/checkMark.png" className="mr-4" alt="check-mark" />
+                                              <p className="text-gray-800 text-base font-normal">Order labs + Results</p>
+                                          </li>
+                                          <li className="flex items-center mb-2.5">
+                                              <img src="https://cdn.tuk.dev/assets/templates/weCare/checkMark.png" className="mr-4" alt="check-mark" />
+                                              <p className="text-gray-800 text-base font-normal">Radiology tests + Results</p>
+                                          </li>
+                                          <li className="flex items-center mb-2.5">
+                                              <img src="https://cdn.tuk.dev/assets/templates/weCare/checkMark.png" className="mr-4" alt="check-mark" />
+                                              <p className="text-gray-800 text-base font-normal">Partnership + Discounts</p>
+                                          </li>
+                                          <li className="flex items-center mb-2.5">
+                                              <img src="https://cdn.tuk.dev/assets/templates/weCare/checkMark.png" className="mr-4" alt="check-mark" />
+                                              <p className="text-gray-800 text-base font-normal">Direct doctor phone number</p>
+                                          </li>
+                                          <li className="flex items-center mb-2.5">
+                                              <img src="https://cdn.tuk.dev/assets/templates/weCare/checkMark.png" className="mr-4" alt="check-mark" />
+                                              <p className="text-gray-800 text-base font-normal">Specialists appoinments</p>
+                                          </li>
+                                      </ul>
+                                      <p className="text-base text-indigo-700 relative pl-3">
+                                          <span className="font-light text-lg">$</span>
+                                          <span className="text-2xl font-semibold">200</span>
+                                          <span className="font-light text-lg">/month</span>
+                                      </p>
+                                      <button className="mt-5 w-full bg-gray-200 hover:bg-gray-300 focus:outline-none transition duration-150 ease-in-out rounded text-indigo-700 px-8 py-3 text-base font-semibold py-3">Choose</button>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <style
+                          dangerouslySetInnerHTML={{
+                              __html: "",
+                          }}
+                      />
                   </div>
-                  {feature.name}
-                </dt>
-                <dd className="mt-1 text-base leading-7 text-gray-600">{feature.description}</dd>
               </div>
-            ))}
-          </dl>
-        </div>
-      </div>
-    </div>
-  )
-}
+          </div>
+      </section>
+
+      <style>
+          {` 
+          .checkbox:checked {
+              right: 0;
+              background-color: #4338ca;
+          }
+          `}
+      </style>
+  </div>
+);
+export default Index;

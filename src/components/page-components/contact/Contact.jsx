@@ -5,6 +5,15 @@ export default function Contact() {
 
   return (
     <div className="bg-white">
+      <div className>
+        <section className="mx-auto container w-full py-36">
+          <div className="flex flex-col justify-center items-center">
+              <div className="md:text-5xl text-4xl font-black text-center text-gray-800 leading-snug lg:w-3/4">
+                  <h2>Project in mind, or just a question?</h2>
+              </div>
+          </div>
+        </section>
+      </div>
       <div className="mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-2">
         <div className="relative px-6 pb-20 pt-24 sm:pt-32 lg:static lg:px-8 lg:py-48">
           <div className="mx-auto max-w-xl lg:mx-0 lg:max-w-lg">

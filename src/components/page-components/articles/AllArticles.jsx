@@ -4,9 +4,8 @@ export default function AllArticles(props) {
   const { articles } = props
 
   return (
-    <div className="bg-white py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className>
+    <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        {/* <div className>
           <section className="mx-auto container w-full py-8">
             <div className="flex flex-col justify-center items-center">
               <div className="md:text-5xl text-4xl font-black text-center text-gray-800 leading-snug lg:w-3/4">
@@ -17,8 +16,8 @@ export default function AllArticles(props) {
               </p>
             </div>
           </section>
-        </div>
-        <div className="mx-auto mt-24 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+        </div> */}
+        <div className="mx-auto mt- grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
           {articles.map((article) => (
             <Link to={`/articles/${article.id}`}>
               <article key={article.id} className="flex flex-col items-start justify-between cursor-pointer">
@@ -69,6 +68,5 @@ export default function AllArticles(props) {
           ))}
         </div>
       </div>
-    </div>
   )
 }

@@ -32,7 +32,7 @@ const people = [
 export default function Example() {
   return (
     <div class="2xl:container 2xl:mx-auto lg:py-11 lg:px-11 md:py-10 md:px-6 py-9 px-4">
-      <div className>
+      {/* <div className>
         <section className="mx-auto container w-full py-36">
           <div className="flex flex-col justify-center items-center">
               <div className="md:text-5xl text-4xl font-black text-center text-gray-800 leading-snug lg:w-3/4">
@@ -40,10 +40,10 @@ export default function Example() {
               </div>
           </div>
         </section>
-      </div>
+      </div> */}
       <div class="flex flex-col lg:flex-row justify-between gap-8">
           <div class="w-full lg:w-5/12 flex flex-col justify-center">
-              <h1 class="text-3xl lg:text-4xl font-bold leading-9 text-gray-800 pb-4">About Us</h1>
+              <h1 class="text-3xl lg:text-4xl font-bold leading-9 text-gray-800 pb-4">What we do</h1>
               <p class="font-normal text-base leading-6 text-gray-600">
                 We are roseware integrations. A software development agency proudly established in Portland Oregon. We build websites, apps, 
                 platforms, API's and pretty much any other software related product you can think of. Applications built by or integrated into 
@@ -58,7 +58,7 @@ export default function Example() {
 
       <div class="flex lg:flex-row flex-col justify-between gap-8 pt-12">
           <div class="w-full lg:w-5/12 flex flex-col justify-center">
-              <h1 class="text-3xl lg:text-4xl font-bold leading-9 text-gray-800 pb-4">Our Story</h1>
+              <h1 class="text-3xl lg:text-4xl font-bold leading-9 text-gray-800 pb-4">Who we are</h1>
               <p class="font-normal text-base leading-6 text-gray-600">
                 There are two of us contributing at the moment, and we each have our own story. But as an organization i think it's fair to say our story 
                 is fairly new. We know software, and want to do some good. 

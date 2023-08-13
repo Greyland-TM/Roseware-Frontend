@@ -1,3 +1,5 @@
+
+import PageHeader from "../../../components/UI/PageHeader";
 import AllArticles from "../../../components/page-components/articles/AllArticles";
 
 const articles = [
@@ -63,6 +65,7 @@ const articles = [
 const JournalRoute = () => {
   return (
     <div>
+      <PageHeader title="Articles"/>
       <AllArticles articles={articles}/>
     </div>
   );

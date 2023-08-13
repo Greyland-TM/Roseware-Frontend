@@ -2,11 +2,11 @@ import { Link } from 'react-router-dom'
 
 const navigation = {
   main: [
-    { name: 'Services', href: '/services' },
     { name: 'About', href: '/about' },
+    { name: 'Services', href: '/services' },
     { name: 'Contact', href: '/contact' },
     { name: 'Articles', href: '/articles' },
-    { name: 'Terms & Conditions', href: '/terms' },
+    // { name: 'Terms & Conditions', href: '/terms' },
   ],
   social: [
     {
@@ -98,7 +98,7 @@ export default function Footer() {
           ))}
         </div>
         <p className="mt-10 text-center text-xs leading-5 text-gray-500">
-          &copy; 2020 Your Company, Inc. All rights reserved.
+          &copy; 2023 Roseware Integrations, LLC. All rights reserved.
         </p>
       </div>
     </footer>

@@ -11,7 +11,7 @@ const Index = () => (
               <h3 class="mb-4 text-2xl font-semibold">Starter</h3>
               <p class="font-light text-gray-500 sm:text-lg ">Best option for personal use & for your next project.</p>
               <div class="flex justify-center items-baseline my-8">
-                  <span class="mr-2 text-5xl font-extrabold">~$700</span>
+                  <span class="mr-2 text-5xl font-extrabold">~$1,000</span>
                   <span class="text-gray-500 ">+ hosting fees</span>
               </div>
               
@@ -49,8 +49,8 @@ const Index = () => (
               <h3 class="mb-4 text-2xl font-semibold">Company</h3>
               <p class="font-light text-gray-500 sm:text-lg ">Relevant for multiple users, extended & premium support.</p>
               <div class="flex justify-center items-baseline my-8">
-                  <span class="mr-2 text-5xl font-extrabold">$99</span>
-                  <span class="text-gray-500">/month</span>
+                  <span class="mr-2 text-5xl font-extrabold">~$2,000</span>
+                  <span class="text-gray-500 ">+ hosting fees</span>
               </div>
               
               <ul role="list" class="mb-8 space-y-4 text-left">
@@ -87,8 +87,8 @@ const Index = () => (
               <h3 class="mb-4 text-2xl font-semibold">Enterprise</h3>
               <p class="font-light text-gray-500 sm:text-lg">Best for large scale uses and extended redistribution rights.</p>
               <div class="flex justify-center items-baseline my-8">
-                  <span class="mr-2 text-5xl font-extrabold">$499</span>
-                  <span class="text-gray-500">/month</span>
+                  <span class="mr-2 text-5xl font-extrabold">~$5,000</span>
+                  <span class="text-gray-500 ">+ hosting fees</span>
               </div>
               
               <ul role="list" class="mb-8 space-y-4 text-left">

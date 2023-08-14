@@ -4,7 +4,7 @@ import Contact from "../../components/page-components/contact/Contact";
 const ContactRoute = () => {
   return (
     <div className="">
-      <PageHeader title="Contact" subTitle=""/>
+      <PageHeader title="Support" subTitle=""/>
       <Contact />
     </div>
   );

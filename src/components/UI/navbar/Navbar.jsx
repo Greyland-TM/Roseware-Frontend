@@ -47,9 +47,9 @@ const Navbar = ({ showAuthPortal }) => {
       current: currentPage.toLowerCase() === 'about',
     },
     {
-      name: 'Contact',
-      to: '/contact',
-      current: currentPage.toLowerCase() === 'contact',
+      name: 'Support',
+      to: '/support',
+      current: currentPage.toLowerCase() === 'support',
     },
   ];
 

@@ -7,6 +7,7 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../Button';
 import defaultProfilePicture from "../../../images/general/default_profile_picture.jpg";
+import logo from '../../../images/logos/roseware-logo-3.png';
 
 const userNavigation = [{ name: 'Your Profile', to: '/dashboard/' }];
 
@@ -36,19 +37,19 @@ const Navbar = ({ showAuthPortal }) => {
       current: currentPage.toLowerCase() === 'services'
     },
     {
-      name: 'About',
-      to: '/about',
-      current: currentPage.toLowerCase() === 'about',
-    },
-    {
       name: 'Articles',
       to: '/articles',
       current: currentPage.toLowerCase() === 'articles',
     },
     {
-      name: 'Contact',
-      to: '/contact',
-      current: currentPage.toLowerCase() === 'contact',
+      name: 'About',
+      to: '/about',
+      current: currentPage.toLowerCase() === 'about',
+    },
+    {
+      name: 'Support',
+      to: '/support',
+      current: currentPage.toLowerCase() === 'support',
     },
   ];
 
@@ -73,12 +74,19 @@ const Navbar = ({ showAuthPortal }) => {
         <>
           <div className='relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
             <div className='flex h-16 items-center justify-between'>
-              <div className='flex items-center'>
-                <div className='flex-shrink-0'>
-                  <Link className='font-bold text-blue-500 text-4xl' to='/'>
-                    Roseware
-                  </Link>
-                </div>
+              <div className='flex items-center justify-center'>
+                {/* <div className='flex-shrink-0'> */}
+                <Link className='font-bold text-blue-500 text-4xl' to='/'>
+                  <div className={`flex items-center justify-center p-1 rounded-full bg-gray-300 h-12 w-12`}>
+                    <img
+                      className="inline-block rounded-full h-full w-full"
+                      src={logo}
+                      alt="smthn"
+                    />
+                    {/* TEST */}
+                  </div>
+                </Link>
+                {/* </div> */}
                 <div className='hidden md:block'>
                   <div className='ml-10 flex items-baseline space-x-4'>
                     {navigation.map((item) => (

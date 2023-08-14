@@ -1,64 +1,75 @@
-import { ArrowPathIcon, CloudArrowUpIcon, LockClosedIcon } from '@heroicons/react/20/solid'
+import { LifebuoyIcon, NewspaperIcon, PhoneIcon } from '@heroicons/react/24/outline'
 
-const features = [
+const supportLinks = [
   {
-    name: 'Push to deploy',
-    description:
-      'Commodo nec sagittis tortor mauris sed. Turpis tortor quis scelerisque diam id accumsan nullam tempus. Pulvinar etiam lacus volutpat eu. Phasellus praesent ligula sit faucibus.',
+    name: 'Custom Apps',
     href: '#',
-    icon: CloudArrowUpIcon,
+    description:
+      'We build them, maintain them, and host them.',
+    icon: PhoneIcon,
   },
   {
-    name: 'SSL certificates',
-    description:
-      'Pellentesque enim a commodo malesuada turpis eleifend risus. Facilisis donec placerat sapien consequat tempor fermentum nibh.',
+    name: 'Buisness Integrations',
     href: '#',
-    icon: LockClosedIcon,
+    description:
+      'With access to our dashbaord you can integrate your company into some gret tools.',
+    icon: LifebuoyIcon,
   },
   {
-    name: 'Simple queues',
-    description:
-      'Pellentesque sit elit congue ante nec amet. Dolor aenean curabitur viverra suspendisse iaculis eget. Nec mollis placerat ultricies euismod ut condimentum.',
+    name: 'Personal Dashboard',
     href: '#',
-    icon: ArrowPathIcon,
+    description:
+      'As we develop our specialized software we will be releasing it to the public.',
+    icon: NewspaperIcon,
   },
 ]
 
-export default function Example() {
+export default function ServicesHeader() {
   return (
-    <div className="bg-white py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl lg:text-center">
-          <h2 className="text-base font-semibold leading-7 text-indigo-600">Deploy faster</h2>
-          <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-            Everything you need to deploy your app
-          </p>
-          <p className="mt-6 text-lg leading-8 text-gray-600">
-            Quis tellus eget adipiscing convallis sit sit eget aliquet quis. Suspendisse eget egestas a elementum
-            pulvinar et feugiat blandit at. In mi viverra elit nunc.
-          </p>
+    <div className="bg-white">
+      {/* Header */}
+      <div className="relative bg-gray-800 pb-32">
+        <div className="absolute inset-0">
+          <img
+            className="h-full w-full object-cover"
+            src="https://images.unsplash.com/photo-1525130413817-d45c1d127c42?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1920&q=60&&sat=-100"
+            alt=""
+          />
+          <div className="absolute inset-0 bg-gray-800 mix-blend-multiply" aria-hidden="true" />
         </div>
-        <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
-          <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
-            {features.map((feature) => (
-              <div key={feature.name} className="flex flex-col">
-                <dt className="flex items-center gap-x-3 text-base font-semibold leading-7 text-gray-900">
-                  <feature.icon className="h-5 w-5 flex-none text-indigo-600" aria-hidden="true" />
-                  {feature.name}
-                </dt>
-                <dd className="mt-4 flex flex-auto flex-col text-base leading-7 text-gray-600">
-                  <p className="flex-auto">{feature.description}</p>
-                  <p className="mt-6">
-                    <a href={feature.href} className="text-sm font-semibold leading-6 text-indigo-600">
-                      Learn more <span aria-hidden="true">→</span>
-                    </a>
-                  </p>
-                </dd>
-              </div>
-            ))}
-          </dl>
+        <div className="relative mx-auto max-w-7xl px-16 py-24 py-16 sm:py-32 lg:px-8">
+          <h1 className="text-4xl font-bold tracking-tight text-white md:text-5xl lg:text-6xl">Services</h1>
+          {/* <p className="mt-6 max-w-3xl text-xl text-gray-300">
+            Varius facilisi mauris sed sit. Non sed et duis dui leo, vulputate id malesuada non. Cras aliquet purus dui
+            laoreet diam sed lacus, fames. Dui, amet, nec sit pulvinar.
+          </p> */}
         </div>
       </div>
+
+      {/* Overlapping cards */}
+      <section className="relative z-10 mx-auto -mt-32 max-w-7xl px-6 pb-32 lg:px-8" aria-labelledby="contact-heading">
+        <h2 className="sr-only" id="contact-heading">
+          Contact us
+        </h2>
+        <div className="grid grid-cols-1 gap-y-20 lg:grid-cols-3 lg:gap-x-8 lg:gap-y-0">
+          {supportLinks.map((link) => (
+            <div key={link.name} className="flex flex-col rounded-2xl bg-white shadow-xl">
+              <div className="relative flex-1 px-6 pb-8 pt-16 md:px-8">
+                <div className="absolute top-0 inline-block -translate-y-1/2 transform rounded-xl bg-indigo-600 p-5 shadow-lg">
+                  <link.icon className="h-6 w-6 text-white" aria-hidden="true" />
+                </div>
+                <h3 className="text-xl font-medium text-gray-900">{link.name}</h3>
+                <p className="mt-4 text-base text-gray-500">{link.description}</p>
+              </div>
+              {/* <div className="rounded-bl-2xl rounded-br-2xl bg-gray-50 p-6 md:px-8">
+                <a href={link.href} className="text-base font-medium text-indigo-700 hover:text-indigo-600">
+                  Contact us<span aria-hidden="true"> &rarr;</span>
+                </a>
+              </div> */}
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   )
 }

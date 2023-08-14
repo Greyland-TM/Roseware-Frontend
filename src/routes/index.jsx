@@ -8,13 +8,15 @@ import RegisterRoute from './pages/RegisterRoute.jsx';
 import ServicesRoute from './pages/ServicesRoute.jsx';
 import AboutRoute from './pages/AboutRoute.jsx';
 import ContactRoute from './pages/ContactRoute.jsx';
-import ArticlesRoute from './pages/ArticlesRoute.jsx';
+import AllArticlesRoute from './pages/article-routes/AllArticlesRoute.jsx';
+import ArticleRoute from './pages/article-routes/ArticleRoute.jsx';
 import Dashboard from './pages/dashboard-subnav/Dashboard.jsx';
 import Integrations from './pages/dashboard-subnav/Integrations';
 import Account from './pages/dashboard-subnav/Account';
 import Websites from './pages/dashboard-subnav/Websites';
 import Plans from './pages/dashboard-subnav/Plans';
 import TermsRoute from './pages/TermsRoute.jsx';
+import NotFoundPage from './pages/NotFoundPage.jsx';
 
 export const router = createBrowserRouter([
     {
@@ -62,17 +64,25 @@ export const router = createBrowserRouter([
                 element: <AboutRoute />,
             },
             {
-                path: "contact",
+                path: "support",
                 element: <ContactRoute />,
             },
             {
                 path: "articles",
-                element: <ArticlesRoute />,
+                element: <AllArticlesRoute />,
+            },
+            {
+                path: "articles/:id",
+                element: <ArticleRoute />,
             },
             {
                 path: "terms",
                 element: <TermsRoute />,
             },
+            {
+                path: '*',
+                element: <NotFoundPage />,
+            }
         ],
     },
 ]);

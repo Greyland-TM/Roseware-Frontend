@@ -17,7 +17,7 @@ export default function LoginForm() {
     e.preventDefault();
 
     const body = {
-      email: nameRef.current.value,
+      username: nameRef.current.value,
       password: passwordRef.current.value,
     };
     handleLogin(ctx, body, navigate);

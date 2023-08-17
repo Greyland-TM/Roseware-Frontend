@@ -30,7 +30,6 @@ export default function LoginForm({ overlayClicked, pipedriveOuthCode }) {
     };
     dispatch(handleLogin(body))
       .then((result) => {
-        console.log(result.payload);
         if (result.meta.requestStatus === "fulfilled") {
           setError(null);
           navigate(

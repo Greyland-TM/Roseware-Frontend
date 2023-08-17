@@ -14,7 +14,7 @@ export default function LoginForm({overlayClicked, pipedriveOuthCode}) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const passwordRef = useRef();
-  const emailRef = useRef();
+  const usernameRef = useRef();
 
   const handleOverlayClicked = () => {
     overlayClicked();
@@ -24,7 +24,7 @@ export default function LoginForm({overlayClicked, pipedriveOuthCode}) {
     e.preventDefault();
 
     const body = {
-      username: emailRef.current.value,
+      username: usernameRef.current.value,
       password: passwordRef.current.value,
     };
     dispatch(handleLogin(body))
@@ -60,11 +60,11 @@ export default function LoginForm({overlayClicked, pipedriveOuthCode}) {
                   <label
                     htmlFor="username"
                     className="block text-sm font-medium leading-6 text-gray-900">
-                    Email:
+                    Username:
                   </label>
                   <div className="mt-2">
                     <Input
-                      ref={emailRef}
+                      ref={usernameRef}
                       id="username"
                       name="username"
                       type="text"

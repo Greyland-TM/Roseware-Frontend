@@ -14,7 +14,7 @@ export default function LoginForm({overlayClicked, pipedriveOuthCode}) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const passwordRef = useRef();
-  const usernameRef = useRef();
+  const emailRef = useRef();
 
   const handleOverlayClicked = () => {
     overlayClicked();
@@ -24,7 +24,7 @@ export default function LoginForm({overlayClicked, pipedriveOuthCode}) {
     e.preventDefault();
 
     const body = {
-      username: usernameRef.current.value,
+      email: emailRef.current.value,
       password: passwordRef.current.value,
     };
     dispatch(handleLogin(body))
@@ -58,17 +58,17 @@ export default function LoginForm({overlayClicked, pipedriveOuthCode}) {
               <form className="space-y-6" onSubmit={formSubmit}>
                 <div>
                   <label
-                    htmlFor="username"
+                    htmlFor="email"
                     className="block text-sm font-medium leading-6 text-gray-900">
-                    Username:
+                    email:
                   </label>
                   <div className="mt-2">
                     <Input
-                      ref={usernameRef}
-                      id="username"
-                      name="username"
+                      ref={emailRef}
+                      id="email"
+                      name="email"
                       type="text"
-                      autoComplete="username"
+                      autoComplete="email"
                       required
                     />
                   </div>

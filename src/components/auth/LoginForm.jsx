@@ -24,7 +24,7 @@ export default function LoginForm({overlayClicked, pipedriveOuthCode}) {
     e.preventDefault();
 
     const body = {
-      email: emailRef.current.value,
+      username: emailRef.current.value,
       password: passwordRef.current.value,
     };
     dispatch(handleLogin(body))
@@ -60,7 +60,7 @@ export default function LoginForm({overlayClicked, pipedriveOuthCode}) {
                   <label
                     htmlFor="email"
                     className="block text-sm font-medium leading-6 text-gray-900">
-                    email:
+                    Email:
                   </label>
                   <div className="mt-2">
                     <Input

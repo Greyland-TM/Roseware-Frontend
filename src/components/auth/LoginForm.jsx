@@ -3,18 +3,19 @@
 // in the local app context and in the browser local storage.
 
 import React from "react";
-import {useNavigate, Link} from "react-router-dom";
-import {useRef, useContext} from "react";
-import {useDispatch} from "react-redux";
+import { useNavigate, Link } from "react-router-dom";
+import { useRef, useContext, useState } from "react";
+import { useDispatch } from "react-redux";
 import Modal from "../Modal";
 import Input from "../UI/Input";
-import {handleLogin} from "../../redux/slices/sessionSlice";
+import { handleLogin } from "../../redux/slices/sessionSlice";
 
-export default function LoginForm({overlayClicked, pipedriveOuthCode}) {
+export default function LoginForm({ overlayClicked, pipedriveOuthCode }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const passwordRef = useRef();
   const emailRef = useRef();
+  const [error, setError] = useState(null);
 
   const handleOverlayClicked = () => {
     overlayClicked();
@@ -29,14 +30,25 @@ export default function LoginForm({overlayClicked, pipedriveOuthCode}) {
     };
     dispatch(handleLogin(body))
       .then((result) => {
+        console.log(result.payload);
         if (result.meta.requestStatus === "fulfilled") {
-          navigate(`/dashboard${pipedriveOuthCode ? `/integrations?code=${pipedriveOuthCode}` : ''}`);
+          setError(null);
+          navigate(
+            `/dashboard${
+              pipedriveOuthCode ? `/integrations?code=${pipedriveOuthCode}` : ""
+            }`
+          );
+          overlayClicked();
+        } else if (
+          result.payload ===
+          "{'non_field_errors': [ErrorDetail(string='Incorrect Credentials', code='invalid')]}"
+        ) {
+          setError("Incorrect Email or Password");
         }
       })
       .catch((error) => {
         console.log("Got an error 3: ", error);
       });
-    overlayClicked();
   };
 
   return (
@@ -59,7 +71,8 @@ export default function LoginForm({overlayClicked, pipedriveOuthCode}) {
                 <div>
                   <label
                     htmlFor="email"
-                    className="block text-sm font-medium leading-6 text-gray-900">
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
                     Email:
                   </label>
                   <div className="mt-2">
@@ -77,7 +90,8 @@ export default function LoginForm({overlayClicked, pipedriveOuthCode}) {
                 <div>
                   <label
                     htmlFor="password"
-                    className="block text-sm font-medium leading-6 text-gray-900">
+                    className="block text-sm font-medium leading-6 text-gray-900"
+                  >
                     Password
                   </label>
                   <div className="mt-2">
@@ -117,11 +131,14 @@ export default function LoginForm({overlayClicked, pipedriveOuthCode}) {
                     </a>
                   </div>
                 </div> */}
-
+                <div>
+                  <p className="text-sm text-red-500">{error}</p>
+                </div>
                 <div>
                   <button
                     type="submit"
-                    className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                    className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  >
                     Sign in
                   </button>
                 </div>
@@ -131,9 +148,12 @@ export default function LoginForm({overlayClicked, pipedriveOuthCode}) {
             <p className="mt-2 text-center text-sm text-gray-500">
               Not a member?{" "}
               <Link
-                to={`/register${pipedriveOuthCode ? `?code=${pipedriveOuthCode}` : ''}`}
+                to={`/register${
+                  pipedriveOuthCode ? `?code=${pipedriveOuthCode}` : ""
+                }`}
                 onClick={handleOverlayClicked}
-                className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+                className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+              >
                 Sign Up Here
               </Link>
             </p>

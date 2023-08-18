@@ -18,6 +18,7 @@ function classNames(...classes) {
 const Navbar = ({ showAuthPortal }) => {
   const { isLoggedIn, user } = useSelector((state) => state.session);
   const [currentPage, setCurrentPage] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
   const [navImage, setNavImage] = useState(defaultProfilePicture);
   const dispatch = useDispatch();
   const location = useLocation();
@@ -97,7 +98,7 @@ const Navbar = ({ showAuthPortal }) => {
   };
 
   return (
-    <Disclosure as='nav' className='bg-gray-800'>
+    <Disclosure open={isOpen} onChange={setIsOpen} as='nav' className='bg-gray-800'>
       {({ open }) => (
         <>
           <div className='relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8'>
@@ -291,7 +292,10 @@ const Navbar = ({ showAuthPortal }) => {
                   <Link 
                     key={item.name}
                     to={item.to}
-                    onClick={() => setCurrentPage(item.name)} 
+                    onClick={() => {
+                      setCurrentPage(item.name);
+                      setIsOpen(false);
+                    }}
                   >
                     <Disclosure.Button
                       className={classNames(

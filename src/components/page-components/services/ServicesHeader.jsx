@@ -12,7 +12,7 @@ const supportLinks = [
     name: 'Buisness Integrations',
     href: '#',
     description:
-      'With access to our dashbaord you can integrate your company into some gret tools.',
+      'With access to our dashbaord you can integrate your company into some great tools.',
     icon: LifebuoyIcon,
   },
   {

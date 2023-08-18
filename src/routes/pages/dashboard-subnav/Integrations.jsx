@@ -39,7 +39,7 @@ const Integrations = () => {
           </p>
         </div>
       </div>
-      <div className="flex justify-around w-full">
+      <div className="flex flex-wrap justify-around w-full gap-18">
         {integrations.map((integration, idx) => (
           <IntegrationCard key={idx} integrationDetails={integration} />
         ))}

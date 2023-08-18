@@ -53,6 +53,34 @@ const Navbar = ({ showAuthPortal }) => {
     },
   ];
 
+  const mobileDashboardNavigation = [
+    {
+      name: 'Dashboard',
+      to: '/dashboard',
+      current: currentPage.toLowerCase() === 'dashboard',
+    },
+    {
+      name: 'Apps',
+      to: '/dashboard/websites',
+      current: currentPage.toLowerCase() === 'dashboard/websites',
+    },
+    {
+      name: 'Integrations',
+      to: '/dashboard/integrations',
+      current: currentPage.toLowerCase() === 'dashboard/integrations',
+    },
+    {
+      name: 'Settings',
+      to: '/dashboard/settings',
+      current: currentPage.toLowerCase() === 'dashboard/settings',
+    },
+    {
+      name: 'Plans',
+      to: '/dashboard/plans',
+      current: currentPage.toLowerCase() === 'dashboard/plans',
+    },
+  ];
+
   useEffect(() => {
     const currentPath = location.pathname.slice(1);
     setCurrentPage(currentPath);
@@ -233,16 +261,16 @@ const Navbar = ({ showAuthPortal }) => {
                       {user.email}
                     </div>
                   </div>
-                  <button
+                  {/* <button
                     type='button'
                     className='ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'
                   >
                     <span className='sr-only'>View notifications</span>
                     <BellIcon className='h-6 w-6' aria-hidden='true' />
-                  </button>
+                  </button> */}
                 </div>
                 <div className='mt-3 space-y-1 px-2'>
-                  {userNavigation.map((item) => (
+                  {/* {userNavigation.map((item) => (
                     <Link 
                       key={item.name}
                       to={item.to}
@@ -257,8 +285,27 @@ const Navbar = ({ showAuthPortal }) => {
                         {item.name}
                       </Disclosure.Button>
                     </Link>
-                  ))}
+                  ))} */}
                 </div>
+                {mobileDashboardNavigation.map((item) => (
+                  <Link 
+                    key={item.name}
+                    to={item.to}
+                    onClick={() => setCurrentPage(item.name)} 
+                  >
+                    <Disclosure.Button
+                      className={classNames(
+                        item.current
+                          ? 'bg-gray-900 text-white'
+                          : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                        'block rounded-md px-3 py-2 text-base font-medium'
+                      )}
+                      aria-current={item.current ? 'page' : undefined}
+                    >
+                      {item.name}
+                    </Disclosure.Button>
+                  </Link>
+                ))}
               </div>
             ) : (
               <div className='flex justify-center pb-3'>

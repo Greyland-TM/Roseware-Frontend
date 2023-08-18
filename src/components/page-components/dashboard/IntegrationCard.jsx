@@ -8,7 +8,7 @@ export default function IntegrationCard(props) {
   
   return (
     <div 
-      className={`relative max-w-sm rounded-xl overflow-hidden shadow-lg h-fit ${isConnected ? 'ring-2 ring-green-500 p-2' : 'p-0'}`}
+      className={`relative max-w-sm m-5 rounded-xl overflow-hidden shadow-lg h-fit ${isConnected ? 'ring-2 ring-green-500 p-2' : 'p-0'}`}
     >
       {/* The overlay to show the card is not available */}
       {!user.beta_feature_flag && (

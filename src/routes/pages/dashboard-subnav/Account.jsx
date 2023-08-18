@@ -14,7 +14,7 @@ const Account = () => {
           </p> */}
         </div>
       </div>
-      <div className='inline-grid grid-cols-3 gap-6 m-6'>
+      <div className='flex flex-wrap justify-around w-full gap-18'>
         <AccountForm />
         <PaymentInfoForm />
         <OrganizationForm />

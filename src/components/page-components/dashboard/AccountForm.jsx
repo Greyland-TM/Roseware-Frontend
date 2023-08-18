@@ -73,7 +73,7 @@ export default function AccountForm() {
   };
 
   return (
-    <div className='max-w-md rounded-xl overflow-hidden shadow-lg h-fit p-6'>
+    <div className='max-w-md w-lg rounded-xl overflow-hidden shadow-lg h-fit p-6 m-18'>
       <form onSubmit={formik.handleSubmit} className="md:col-span-2">
         <div className="mb-6 flex align-middle">
           <p className="font-bold text-xl leading-tight">Contact Details</p>

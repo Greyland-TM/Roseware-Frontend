@@ -37,7 +37,7 @@ export default function ServicesHeader() {
           />
           <div className="absolute inset-0 bg-gray-800 mix-blend-multiply" aria-hidden="true" />
         </div>
-        <div className="relative mx-auto max-w-7xl px-16 py-24 py-16 sm:py-32 lg:px-8">
+        <div className="relative mx-auto max-w-7xl px-16 py-16 sm:py-32 lg:px-8">
           <h1 className="text-4xl font-bold tracking-tight text-white md:text-5xl lg:text-6xl">Services</h1>
           {/* <p className="mt-6 max-w-3xl text-xl text-gray-300">
             Varius facilisi mauris sed sit. Non sed et duis dui leo, vulputate id malesuada non. Cras aliquet purus dui

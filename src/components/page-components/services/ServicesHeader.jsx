@@ -2,25 +2,25 @@ import { LifebuoyIcon, NewspaperIcon, PhoneIcon } from '@heroicons/react/24/outl
 
 const supportLinks = [
   {
-    name: 'Custom Apps',
+    name: 'Dashboard',
     href: '#',
     description:
-      'We build them, maintain them, and host them.',
-    icon: PhoneIcon,
+      'This is where everything starts. Free to anyone, you can manage the Roseware Integrations tools and services you have access to. And no matter which services you are interested in, you will always find them here.',
+    icon: NewspaperIcon,
   },
   {
-    name: 'Buisness Integrations',
+    name: 'Tools & Integrations',
     href: '#',
     description:
-      'With access to our dashbaord you can integrate your company into some gret tools.',
+      'At the moment we only have a few tools available, but we are working on more. As they become available you will find them in the dashboard under the "Integrations" section. ',
     icon: LifebuoyIcon,
   },
   {
-    name: 'Personal Dashboard',
+    name: 'Apps',
     href: '#',
     description:
-      'As we develop our specialized software we will be releasing it to the public.',
-    icon: NewspaperIcon,
+      'You can submit existing webistes or apps to be hosted and maintained by us, or request that we build you a brand new custom app. The choice is up to you, and there are no limits.',
+    icon: PhoneIcon,
   },
 ]
 
@@ -37,7 +37,7 @@ export default function ServicesHeader() {
           />
           <div className="absolute inset-0 bg-gray-800 mix-blend-multiply" aria-hidden="true" />
         </div>
-        <div className="relative mx-auto max-w-7xl px-16 py-24 py-16 sm:py-32 lg:px-8">
+        <div className="relative mx-auto max-w-7xl px-16 py-16 sm:py-32 lg:px-8">
           <h1 className="text-4xl font-bold tracking-tight text-white md:text-5xl lg:text-6xl">Services</h1>
           {/* <p className="mt-6 max-w-3xl text-xl text-gray-300">
             Varius facilisi mauris sed sit. Non sed et duis dui leo, vulputate id malesuada non. Cras aliquet purus dui

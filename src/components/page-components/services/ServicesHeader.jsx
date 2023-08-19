@@ -5,22 +5,22 @@ const supportLinks = [
     name: 'Custom Apps',
     href: '#',
     description:
-      'We build them, maintain them, and host them.',
-    icon: PhoneIcon,
+      'This is where everything starts. Free to anyone, you can manage the Roseware Integrations tools and services you have access to. And no matter which services you are interested in, you will always find them here.',
+    icon: NewspaperIcon,
   },
   {
-    name: 'Buisness Integrations',
+    name: 'Tools & Integrations',
     href: '#',
     description:
-      'With access to our dashbaord you can integrate your company into some gret tools.',
+      'At the moment we only have a few tools and integrations available, but we are working on more. The ones available can be found in the "Integrations" section of the dashboard. And if you have any questions, you can always contact us.',
     icon: LifebuoyIcon,
   },
   {
-    name: 'Personal Dashboard',
+    name: 'Apps',
     href: '#',
     description:
-      'As we develop our specialized software we will be releasing it to the public.',
-    icon: NewspaperIcon,
+      'You can submit existing webistes or apps to be hosted and maintained by us, or request that we build you a brand new custom app. The choice is up to you, and there are no limits and we can handle anything from websites to mobile apps.',
+    icon: PhoneIcon,
   },
 ]
 

@@ -18,7 +18,8 @@ function classNames(...classes) {
 
 const Navbar = ({ showAuthPortal }) => {
   const { isLoggedIn, user } = useSelector((state) => state.session);
-  const [currentPage, setCurrentPage] = useState("");
+  const [currentPage, setCurrentPage] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
   const [navImage, setNavImage] = useState(defaultProfilePicture);
   const dispatch = useDispatch();
   const location = useLocation();
@@ -53,7 +54,36 @@ const Navbar = ({ showAuthPortal }) => {
     },
   ];
 
+  const mobileDashboardNavigation = [
+    {
+      name: 'Dashboard',
+      to: '/dashboard',
+      current: currentPage.toLowerCase() === 'dashboard',
+    },
+    {
+      name: 'Apps',
+      to: '/dashboard/websites',
+      current: currentPage.toLowerCase() === 'dashboard/websites',
+    },
+    {
+      name: 'Integrations',
+      to: '/dashboard/integrations',
+      current: currentPage.toLowerCase() === 'dashboard/integrations',
+    },
+    {
+      name: 'Settings',
+      to: '/dashboard/settings',
+      current: currentPage.toLowerCase() === 'dashboard/settings',
+    },
+    {
+      name: 'Plans',
+      to: '/dashboard/plans',
+      current: currentPage.toLowerCase() === 'dashboard/plans',
+    },
+  ];
+
   useEffect(() => {
+    setIsOpen(false);
     const currentPath = location.pathname.slice(1);
     setCurrentPage(currentPath);
   }, [location.pathname]);
@@ -68,7 +98,7 @@ const Navbar = ({ showAuthPortal }) => {
   };
 
   return (
-    <Disclosure as="nav" className="bg-gray-800">
+    <Disclosure open={isOpen} onChange={setIsOpen} as='nav' className='bg-gray-800'>
       {({ open }) => (
         <>
           <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -224,9 +254,33 @@ const Navbar = ({ showAuthPortal }) => {
               ))}
             </div>
             {isLoggedIn ? (
-              <div className="border-t border-gray-700 pb-3 pt-4">
-                <div className="flex items-center px-5">
-                  <div className="flex-shrink-0">
+              <div className='border-t border-gray-700 pb-3 pt-4'>
+                {/* <div className='mt-3 space-y-1 px-2'>
+                </div> */}
+                {mobileDashboardNavigation.map((item) => (
+                  <Link 
+                    key={item.name}
+                    to={item.to}
+                    onClick={() => {
+                      setIsOpen(false);
+                      setCurrentPage(item.name);
+                    }}
+                  >
+                    <Disclosure.Button
+                      className={classNames(
+                        item.current
+                          ? 'bg-gray-900 text-white'
+                          : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                        'block rounded-md px-3 py-2 text-base font-medium'
+                      )}
+                      aria-current={item.current ? 'page' : undefined}
+                    >
+                      {item.name}
+                    </Disclosure.Button>
+                  </Link>
+                ))}
+                <div className='flex items-center px-5 mt-5'>
+                  <div className='flex-shrink-0'>
                     <img
                       className="h-10 w-10 rounded-full"
                       src={navImage}
@@ -238,31 +292,9 @@ const Navbar = ({ showAuthPortal }) => {
                       {user.email}
                     </div>
                   </div>
-                  <button
-                    type="button"
-                    className="ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                  >
-                    <span className="sr-only">View notifications</span>
-                    <BellIcon className="h-6 w-6" aria-hidden="true" />
-                  </button>
-                </div>
-                <div className="mt-3 space-y-1 px-2">
-                  {userNavigation.map((item) => (
-                    <Link
-                      key={item.name}
-                      to={item.to}
-                      onClick={() => setCurrentPage(item.name)}
-                    >
-                      <Disclosure.Button
-                        key={item.name}
-                        as="a"
-                        to={item.to}
-                        className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
-                      >
-                        {item.name}
-                      </Disclosure.Button>
-                    </Link>
-                  ))}
+                  <div className='ml-auto'>
+                    <Button onClick={logoutUser}>Sign Out</Button>
+                  </div>
                 </div>
               </div>
             ) : (

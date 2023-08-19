@@ -2,25 +2,25 @@ import { LifebuoyIcon, NewspaperIcon, PhoneIcon } from '@heroicons/react/24/outl
 
 const supportLinks = [
   {
-    name: 'Custom Apps',
+    name: 'Dashboard',
     href: '#',
     description:
-      'We build them, maintain them, and host them.',
+      'This is where everything starts. Free to anyone, you can manage the Roseware Integrations tools and services you have access to. And no matter which services you are interested in, you will always find them here.',
+    icon: NewspaperIcon,
+  },
+  {
+    name: 'Apps',
+    href: '#',
+    description:
+      'You can submit existing webistes or apps to be hosted and maintained by us, or request that we build you a brand new custom app. The choice is up to you, and there are no limits.',
     icon: PhoneIcon,
   },
   {
-    name: 'Buisness Integrations',
+    name: 'Tools & Integrations',
     href: '#',
     description:
-      'With access to our dashbaord you can integrate your company into some gret tools.',
+      'Give you buisness a boost with the tools and integrations you need to succeed. We offer a wide range of services, from marketing and advertising to web design and development.',
     icon: LifebuoyIcon,
-  },
-  {
-    name: 'Personal Dashboard',
-    href: '#',
-    description:
-      'As we develop our specialized software we will be releasing it to the public.',
-    icon: NewspaperIcon,
   },
 ]
 

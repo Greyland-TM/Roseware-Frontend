@@ -83,10 +83,10 @@ const Navbar = ({ showAuthPortal }) => {
   ];
 
   useEffect(() => {
+    setIsOpen(false);
     const currentPath = location.pathname.slice(1);
     setCurrentPage(currentPath);
   }, [location.pathname]);
-
 
   const handleSignInPortal = () => {
     showAuthPortal(true);
@@ -249,52 +249,15 @@ const Navbar = ({ showAuthPortal }) => {
             </div>
             {isLoggedIn ? (
               <div className='border-t border-gray-700 pb-3 pt-4'>
-                <div className='flex items-center px-5'>
-                  <div className='flex-shrink-0'>
-                    <img
-                      className='h-10 w-10 rounded-full'
-                      src={navImage}
-                      alt=''
-                    />
-                  </div>
-                  <div className='ml-3'>
-                    <div className='text-base font-medium text-white'>
-                      {user.email}
-                    </div>
-                  </div>
-                  {/* <button
-                    type='button'
-                    className='ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800'
-                  >
-                    <span className='sr-only'>View notifications</span>
-                    <BellIcon className='h-6 w-6' aria-hidden='true' />
-                  </button> */}
-                </div>
-                <div className='mt-3 space-y-1 px-2'>
-                  {/* {userNavigation.map((item) => (
-                    <Link 
-                      key={item.name}
-                      to={item.to}
-                      onClick={() => setCurrentPage(item.name)} 
-                    >
-                      <Disclosure.Button
-                        key={item.name}
-                        as='a'
-                        to={item.to}
-                        className='block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white'
-                      >
-                        {item.name}
-                      </Disclosure.Button>
-                    </Link>
-                  ))} */}
-                </div>
+                {/* <div className='mt-3 space-y-1 px-2'>
+                </div> */}
                 {mobileDashboardNavigation.map((item) => (
                   <Link 
                     key={item.name}
                     to={item.to}
                     onClick={() => {
-                      setCurrentPage(item.name);
                       setIsOpen(false);
+                      setCurrentPage(item.name);
                     }}
                   >
                     <Disclosure.Button
@@ -310,6 +273,23 @@ const Navbar = ({ showAuthPortal }) => {
                     </Disclosure.Button>
                   </Link>
                 ))}
+                <div className='flex items-center px-5 mt-5'>
+                  <div className='flex-shrink-0'>
+                    <img
+                      className='h-10 w-10 rounded-full'
+                      src={navImage}
+                      alt=''
+                    />
+                  </div>
+                  <div className='ml-3'>
+                    <div className='text-base font-medium text-white'>
+                      {user.email}
+                    </div>
+                  </div>
+                  <div className='ml-auto'>
+                    <Button onClick={logoutUser}>Sign Out</Button>
+                  </div>
+                </div>
               </div>
             ) : (
               <div className='flex justify-center pb-3'>

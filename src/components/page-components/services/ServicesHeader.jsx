@@ -9,18 +9,18 @@ const supportLinks = [
     icon: NewspaperIcon,
   },
   {
+    name: 'Tools & Integrations',
+    href: '#',
+    description:
+      'At the moment we only have a few tools available, but we are working on more. As they become available you will find them in the dashboard under the "Integrations" section. ',
+    icon: LifebuoyIcon,
+  },
+  {
     name: 'Apps',
     href: '#',
     description:
       'You can submit existing webistes or apps to be hosted and maintained by us, or request that we build you a brand new custom app. The choice is up to you, and there are no limits.',
     icon: PhoneIcon,
-  },
-  {
-    name: 'Tools & Integrations',
-    href: '#',
-    description:
-      'Give you buisness a boost with the tools and integrations you need to succeed. We offer a wide range of services, from marketing and advertising to web design and development.',
-    icon: LifebuoyIcon,
   },
 ]
 

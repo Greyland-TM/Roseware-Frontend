@@ -37,7 +37,7 @@ export default function OrganizationForm() {
   });
 
   return (
-    <div className='max-w-md w-full rounded-xl overflow-hidden shadow-lg h-fit p-6 relative m-18'> {/* Adjusted 'w-lg' to 'w-full' */}
+    <div className='max-w-md w-lg rounded-xl overflow-hidden shadow-lg h-fit p-6 relative m-18'> {/* Adjusted 'w-lg' to 'w-full' */}
       <form onSubmit={formik.handleSubmit} className="md:col-span-2">
         {!user.beta_feature_flag && (
           <div className="absolute top-0 left-0 h-full w-full bg-black bg-opacity-50 flex items-center justify-center z-10">

@@ -281,11 +281,15 @@ const Navbar = ({ showAuthPortal }) => {
                 ))}
                 <div className='flex items-center px-5 mt-5'>
                   <div className='flex-shrink-0'>
-                    <img
-                      className="h-10 w-10 rounded-full"
-                      src={navImage}
-                      alt=""
-                    />
+                    {user.profile_picture ? (
+                      <img
+                        className="h-10 w-10 rounded-full"
+                        src={navImage}
+                        alt=""
+                      />
+                    ) : (
+                      <div className="fill-white"><Avatar /></div>
+                    )}
                   </div>
                   <div className="ml-3">
                     <div className="text-base font-medium text-white">

@@ -14,10 +14,10 @@ const Account = () => {
           </p> */}
         </div>
       </div>
-      <div className='flex flex-wrap justify-around w-full gap-18'>
+      <div className='flex flex-wrap justify-around w-full gap-18 mb-20 lg:mb-5'>
         <AccountForm />
         {/* <PaymentInfoForm /> */}
-        <OrganizationForm />
+        {/* <OrganizationForm /> */}
       </div>
     </DashboardLayout> 
     

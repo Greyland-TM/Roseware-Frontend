@@ -24,7 +24,7 @@ export default function Example() {
         <rect width="100%" height="100%" strokeWidth={0} fill="url(#0787a7c5-978c-4f66-83c7-11c213f99cb7)" />
       </svg>
       <div className="mx-auto max-w-7xl px-6 pb-24 pt-10 sm:pb-32 lg:flex lg:px-8 lg:py-40">
-        <div className="mx-auto max-4xl lg:mx-0 lg:max-w-xl lg:flex-shrink-0 lg:pt-8">
+        <div className="lg:flex-shrink-0 lg:pt-8">
           <img
             className="h-11"
             src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
@@ -41,7 +41,7 @@ export default function Example() {
               </span>
             </a>
           </div> */}
-          <h1 className="font-display text-5xl font-medium tracking-tight text-slate-900 sm:text-7xl">
+          <h1 className="font-display text-5xl font-medium text-slate-900 sm:text-7xl">
             {/* Connect with {" "} */}
             <span className="relative sm:whitespace-nowrap text-blue-600 sm:whitespace-normal sm:break-words">
               <svg

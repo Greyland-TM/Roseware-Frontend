@@ -11,7 +11,7 @@ import {handleLogin} from "../../redux/slices/sessionSlice";
 import {useFormik} from "formik";
 import * as Yup from "yup";
 
-export default function LoginForm({overlayClicked, pipedriveOuthCode}) {
+export default function LoginForm({ overlayClicked, pipedriveOuthCode }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -147,7 +147,9 @@ export default function LoginForm({overlayClicked, pipedriveOuthCode}) {
                     </a>
                   </div>
                 </div> */}
-
+                <div>
+                  <p className="text-sm text-red-500">{error}</p>
+                </div>
                 <div>
                   <button
                     type="submit"
@@ -177,9 +179,12 @@ export default function LoginForm({overlayClicked, pipedriveOuthCode}) {
             <p className="mt-2 text-center w-full text-sm text-gray-500">
               Not a member?{" "}
               <Link
-                to={`/register${pipedriveOuthCode ? `?code=${pipedriveOuthCode}` : ''}`}
+                to={`/register${
+                  pipedriveOuthCode ? `?code=${pipedriveOuthCode}` : ""
+                }`}
                 onClick={handleOverlayClicked}
-                className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+                className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+              >
                 Sign Up Here
               </Link>
             </p>

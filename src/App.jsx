@@ -10,6 +10,7 @@ import {createPortal} from "react-dom";
 import LoginForm from "./components/auth/LoginForm";
 import {validateToken, validationComplete} from './redux/slices/sessionSlice';
 import {useDispatch} from 'react-redux';
+import ScrollToTop from './utils/ScrollToTop'
 
 export default function App() {
   // const { validationCheckComplete } = useSelector((state) => state.session);
@@ -33,6 +34,7 @@ export default function App() {
 
   return (
     <PageLayout>
+      <ScrollToTop />
       <Navbar showAuthPortal={toggleAuthPortal} />
       <MainLayout>
         {showAuthPortal &&

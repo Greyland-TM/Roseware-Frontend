@@ -110,7 +110,7 @@ export default function RegisterForm({pipedriveOuthCode}) {
                   className="block text-sm font-semibold leading-6 text-gray-900">
                   Last name
                 </label>
-                <div className="mt-2.5">e
+                <div className="mt-2.5">
                   <input
                     onChange={formik.handleChange}
                     value={formik.values.lastName}

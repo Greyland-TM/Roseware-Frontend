@@ -56,7 +56,7 @@ export default function LoginForm({ overlayClicked, pipedriveOuthCode }) {
   return (
     <>
       <Modal overlayClicked={overlayClicked}>
-        <div className="mt-52 sm:mx-auto sm:w-full sm:max-w-[480px]">
+        <div className="mt-10 sm:mt-20 lg:mt-52 sm:mx-auto sm:w-full sm:max-w-[480px]">
           <div className="bg-white px-6 py-6 shadow sm:rounded-lg sm:px-12">
             <div className="flex justify-center">
               <h1 className="font-extrabold text-4xl text-blue-700">

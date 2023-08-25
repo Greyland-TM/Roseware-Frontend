@@ -147,9 +147,7 @@ export default function LoginForm({ overlayClicked, pipedriveOuthCode }) {
                     </a>
                   </div>
                 </div> */}
-                <div>
-                  <p className="text-sm text-red-500">{error}</p>
-                </div>
+                
                 <div>
                   <button
                     type="submit"

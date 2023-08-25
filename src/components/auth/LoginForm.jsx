@@ -3,52 +3,55 @@
 // in the local app context and in the browser local storage.
 
 import React from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { useRef, useContext, useState } from "react";
-import { useDispatch } from "react-redux";
+import {useNavigate, Link} from "react-router-dom";
+import {useDispatch} from "react-redux";
 import Modal from "../Modal";
-import Input from "../UI/Input";
-import { handleLogin } from "../../redux/slices/sessionSlice";
+import { ThreeDots } from "react-loader-spinner";
+import {handleLogin} from "../../redux/slices/sessionSlice";
+import {useFormik} from "formik";
+import * as Yup from "yup";
 
 export default function LoginForm({ overlayClicked, pipedriveOuthCode }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const passwordRef = useRef();
-  const emailRef = useRef();
-  const [error, setError] = useState(null);
 
   const handleOverlayClicked = () => {
     overlayClicked();
   };
 
-  const formSubmit = (e) => {
-    e.preventDefault();
+  const formik = useFormik({
+    initialValues: {
+      username: "",
+      password: "",
+    },
+    validationSchema: Yup.object({
+      username: Yup.string().required("Please provide a valid username"),
+      password: Yup.string().required("Please provide a valid password")
+    }),
+    onSubmit: async (values, { setSubmitting, setErrors }) => {
+      setSubmitting(true);
 
-    const body = {
-      username: emailRef.current.value,
-      password: passwordRef.current.value,
-    };
-    dispatch(handleLogin(body))
-      .then((result) => {
+      const body = {
+        username: values.username,
+        password: values.password,
+      };
+      
+      try {
+        const result = await dispatch(handleLogin(body));
+
         if (result.meta.requestStatus === "fulfilled") {
-          setError(null);
-          navigate(
-            `/dashboard${
-              pipedriveOuthCode ? `/integrations?code=${pipedriveOuthCode}` : ""
-            }`
-          );
+          navigate(`/dashboard${pipedriveOuthCode ? `/integrations?code=${pipedriveOuthCode}` : ""}`);
           overlayClicked();
-        } else if (
-          result.payload ===
-          "{'non_field_errors': [ErrorDetail(string='Incorrect Credentials', code='invalid')]}"
-        ) {
-          setError("Incorrect Email or Password");
+        } else {
+          setErrors({ form: result.payload });
         }
-      })
-      .catch((error) => {
-        console.log("Got an error 3: ", error);
-      });
-  };
+      } catch (error) {
+        setErrors({ form: error.payload });
+      } finally {
+        setSubmitting(false);
+      }
+    }
+  });
 
   return (
     <>
@@ -66,42 +69,56 @@ export default function LoginForm({ overlayClicked, pipedriveOuthCode }) {
                   Sign in to your account
                 </h2>
               </div>
-              <form className="space-y-6" onSubmit={formSubmit}>
+              <form className="space-y-6" onSubmit={formik.handleSubmit}>
                 <div>
                   <label
-                    htmlFor="email"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
-                    Email:
+                    htmlFor="username"
+                    className="block text-sm font-semibold leading-6 text-gray-900">
+                    Email
                   </label>
-                  <div className="mt-2">
-                    <Input
-                      ref={emailRef}
-                      id="email"
-                      name="email"
+                  <div className="mt-2.5">
+                    <input
+                      onChange={formik.handleChange}
+                      value={formik.values.username}
+                      placeholder=""
                       type="text"
-                      autoComplete="email"
-                      required
+                      name="username"
+                      id="username"
+                      className={`${
+                        formik.touched.username && formik.errors.username
+                          ? "border-red-400"
+                          : "border-gray-300"
+                      } block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
                     />
+                    {formik.touched.username && formik.errors.username && (
+                      <span className="text-red-400">{formik.errors.username}</span>
+                    )}
                   </div>
                 </div>
 
                 <div>
                   <label
                     htmlFor="password"
-                    className="block text-sm font-medium leading-6 text-gray-900"
-                  >
+                    className="block text-sm font-semibold leading-6 text-gray-900">
                     Password
                   </label>
-                  <div className="mt-2">
-                    <Input
-                      ref={passwordRef}
-                      id="password"
-                      name="password"
+                  <div className="mt-2.5">
+                    <input
+                      onChange={formik.handleChange}
+                      value={formik.values.password}
+                      placeholder=""
                       type="password"
-                      autoComplete="current-password"
-                      required
+                      name="password"
+                      id="password"
+                      className={`${
+                        formik.touched.password && formik.errors.password
+                          ? "border-red-400"
+                          : "border-gray-300"
+                      } block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
                     />
+                    {formik.touched.password && formik.errors.password && (
+                      <span className="text-red-400">{formik.errors.password}</span>
+                    )}
                   </div>
                 </div>
 
@@ -136,15 +153,30 @@ export default function LoginForm({ overlayClicked, pipedriveOuthCode }) {
                 <div>
                   <button
                     type="submit"
-                    className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                  >
-                    Sign in
+                    className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                    {!formik.isSubmitting ? "Sign in" : (
+                      <ThreeDots 
+                        height="20%" 
+                        radius="2"
+                        color="#ffffff" 
+                        ariaLabel="three-dots-loading"
+                        wrapperStyle={{}}
+                        wrapperClassName=""
+                        visible={true}
+                      />
+                    )}
                   </button>
                 </div>
+
+                {formik.errors.form && (
+                  <div className="text-red-400">
+                    {formik.errors.form}
+                  </div>
+                )}
               </form>
             </div>
 
-            <p className="mt-2 text-center text-sm text-gray-500">
+            <p className="mt-2 text-center w-full text-sm text-gray-500">
               Not a member?{" "}
               <Link
                 to={`/register${

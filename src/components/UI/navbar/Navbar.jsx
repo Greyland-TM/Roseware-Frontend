@@ -3,12 +3,13 @@ import { handleLogout } from "../../../redux/slices/sessionSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "../Button";
 import defaultProfilePicture from "../../../images/general/default_profile_picture.jpg";
 import logo from "../../../images/logos/roseware-logo-3.png";
 import Avatar from "../Avatar";
+// import { ThreeDots } from "react-loader-spinner";
 
 const userNavigation = [{ name: "Your Profile", to: "/dashboard/" }];
 
@@ -21,6 +22,7 @@ const Navbar = ({ showAuthPortal }) => {
   const [currentPage, setCurrentPage] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [navImage, setNavImage] = useState(defaultProfilePicture);
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
@@ -37,11 +39,11 @@ const Navbar = ({ showAuthPortal }) => {
       to: "/services",
       current: currentPage.toLowerCase() === "services",
     },
-    {
-      name: "Articles",
-      to: "/articles",
-      current: currentPage.toLowerCase() === "articles",
-    },
+    // {
+    //   name: "Articles",
+    //   to: "/articles",
+    //   current: currentPage.toLowerCase() === "articles",
+    // },
     {
       name: "About",
       to: "/about",
@@ -93,8 +95,10 @@ const Navbar = ({ showAuthPortal }) => {
   };
 
   const logoutUser = () => {
+    setIsLoading(true);
     dispatch(handleLogout());
     navigate("");
+    setIsLoading(false);
   };
 
   return (
@@ -200,7 +204,7 @@ const Navbar = ({ showAuthPortal }) => {
                           ))}
                           <Menu.Item key="signoutbutton">
                             <div className="flex justify-center p-2">
-                              <Button onClick={logoutUser}>Sign Out</Button>
+                              <Button onClick={logoutUser}>{!isLoading ? "Sign Out" : "Loading..."}</Button>
                             </div>
                           </Menu.Item>
                         </Menu.Items>
@@ -212,7 +216,7 @@ const Navbar = ({ showAuthPortal }) => {
                       onClick={handleSignInPortal}
                       size="large"
                     >
-                      Sign In
+                      {!isLoading ? "Sign In" : "Loading..."}
                     </Button>
                   )}
                 </div>

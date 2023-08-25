@@ -7,7 +7,7 @@ export default function Team() {
       name: 'Greyland Miller',
       role: 'Principle Engineer / Founder',
       imageUrl: greylandImage,
-      bio: 'An Oregon local software engineer with an entrepenueral spirit. ',
+      bio: '',
       links: [
         {
           platform: 'linkedin',

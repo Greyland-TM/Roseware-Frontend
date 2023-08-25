@@ -39,11 +39,11 @@ const Navbar = ({ showAuthPortal }) => {
       to: "/services",
       current: currentPage.toLowerCase() === "services",
     },
-    {
-      name: "Articles",
-      to: "/articles",
-      current: currentPage.toLowerCase() === "articles",
-    },
+    // {
+    //   name: "Articles",
+    //   to: "/articles",
+    //   current: currentPage.toLowerCase() === "articles",
+    // },
     {
       name: "About",
       to: "/about",

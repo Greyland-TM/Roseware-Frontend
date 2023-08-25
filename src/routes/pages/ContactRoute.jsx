@@ -3,8 +3,8 @@ import Contact from "../../components/page-components/contact/Contact";
 
 const ContactRoute = () => {
   return (
-    <div className="">
-      <PageHeader title="Support" subTitle=""/>
+    <div>
+      <PageHeader title="Sign up" subTitle=""/>
       <Contact />
     </div>
   );

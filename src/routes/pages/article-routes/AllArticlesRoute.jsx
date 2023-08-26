@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import PageHeader from "../../../components/UI/PageHeader";
 import AllArticles from "../../../components/page-components/articles/AllArticles";
+import GeneralCTA from "../../../components/UI/GeneralCTA";
 
 const JournalRoute = () => {
   const [articles, setArticles] = useState([]);
@@ -31,6 +32,12 @@ const JournalRoute = () => {
     <div>
       <PageHeader title="Articles"/>
       <AllArticles articles={articles}/>
+      <GeneralCTA 
+        header="Want to lean more?" 
+        subheader="Check out our available services."
+        primaryLink={{link: "/services", text: "Services"}}
+        secondaryLink={{link: "/register", text: "Get Started"}}
+      />
     </div>
   );
 };

@@ -6,7 +6,7 @@ export default function Article(props) {
     <body className="bg-white font-sans leading-normal tracking-normal">
 
       <div className="text-center pt-16 md:pt-32">
-        <p className="text-sm md:text-base text-green-500 font-bold">{article.created_at}<span className="text-gray-900">/</span>{article.title}</p>
+        {/* <p className="text-sm md:text-base text-green-500 font-bold">{new Date(article.created_at).toDateString()}<span className="text-gray-900">/</span>{article.title}</p> */}
         <h1 className="font-bold break-normal text-3xl md:text-5xl">{article.description}</h1>
       </div>
 
@@ -36,14 +36,7 @@ export default function Article(props) {
                 <p class="text-base font-light text-gray-500 ">
                   {article.author_details.role}
                 </p>
-                <p class="text-base font-light text-gray-500 ">
-                  <time
-                    pubdate
-                    datetime="2022-02-08"
-                    title="February 8th, 2022">
-                    Feb. 8, 2022
-                  </time>
-                </p>
+                <p class="text-base font-light text-gray-500 ">{new Date(article.created_at).toDateString()}</p>
               </div>
               </div>
             )}
@@ -132,7 +125,7 @@ export default function Article(props) {
                     </div>
                     <div className="flex items-center justify-between inset-x-0 bottom-0 p-6">
                       <img className="w-8 h-8 rounded-full mr-4" src="http://i.pravatar.cc/300" alt="Avatar of author" />
-                      <p className="text-gray-600 text-xs md:text-sm">4 MIN READ</p>
+                      <p className="text-gray-600 text-xs md:text-sm">{new Date(article.created_at).toDateString()}</p>
                     </div>
                 </a>
               </div>

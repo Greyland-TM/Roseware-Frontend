@@ -91,7 +91,7 @@ export default function Article(props) {
         </div>
       </div>
 
-      <div className="bg-gray-200">
+      {/* <div className="bg-gray-200">
         <div className="container w-full max-w-6xl mx-auto px-2 py-8">
           <div className="flex flex-wrap -mx-2">
             <div className="w-full md:w-1/3 px-2 pb-12">
@@ -149,8 +149,8 @@ export default function Article(props) {
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        </div> 
+        </div> */}
     </body>
   );
 }

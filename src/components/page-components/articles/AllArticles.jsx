@@ -6,18 +6,6 @@ export default function AllArticles(props) {
 
   return (
     <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        {/* <div className>
-          <section className="mx-auto container w-full py-8">
-            <div className="flex flex-col justify-center items-center">
-              <div className="md:text-5xl text-4xl font-black text-center text-gray-800 leading-snug lg:w-3/4">
-                <h2>Our articles</h2>
-              </div>
-              <p className="mt-2 text-lg leading-8 text-gray-600">
-                Typically published once a month
-              </p>
-            </div>
-          </section>
-        </div> */}
         <div className="mx-auto mt- grid max-w-2xl grid-cols-1 gap-x-8 gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
           {articles.map((article) => (
             <Link to={`/articles/${article.id}`} key={article.id}>

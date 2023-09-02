@@ -5,7 +5,6 @@ export default function IntegrationCard(props) {
   const { integrationDetails } = props;
   const { user } = useSelector((state) => state.session);
   const isConnected = integrationDetails.icons.every((icon) => icon.isLinked);
-  console.log(integrationDetails);
 
   const getStripeLink = async () => {
     const backend_url =
@@ -16,7 +15,6 @@ export default function IntegrationCard(props) {
     });
 
     const data = await response.json();
-    console.log(data);
     return data.url;
   };
 
@@ -58,10 +56,8 @@ export default function IntegrationCard(props) {
               onClick={async () => {
                 if (!icon.isLinked) {
                   if (icon.platform === "Stripe") {
-                    console.log("Getting stripe link");
                     const stripeLink = await getStripeLink();
-                    console.log("Checking link: ", stripeLink);
-                    window.open(stripeLink);
+                    window.location.href = stripeLink;
                   } else {
                     window.location.href = icon.url;
                   }

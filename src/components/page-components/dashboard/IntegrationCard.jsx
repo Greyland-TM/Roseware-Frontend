@@ -26,7 +26,7 @@ export default function IntegrationCard(props) {
       const backend_url =
         import.meta.env.VITE_BACKEND_URL || 'http://127.0.0.1:8000';
       const response = await fetch(
-        `${backend_url}/stripe/payment-page-link/?pk=${integrationDetails.id}`,
+        `${backend_url}/stripe/subscription-checkout/?customer_pk=${user.id}&pk=${integrationDetails.id}`,
         {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' },
@@ -34,7 +34,7 @@ export default function IntegrationCard(props) {
       );
 
       const data = await response.json();
-      return data.url.url;
+      return data.url;
     } catch (error) {
       console.log(error);
     }

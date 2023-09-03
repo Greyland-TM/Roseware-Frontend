@@ -30,7 +30,7 @@ const Integrations = () => {
           src: pipedriveLogo,
           isLinked: hasSyncedPipedrive,
           isSyncing: isPipedriveSyncing,
-          url: "https://oauth.pipedrive.com/oauth/authorize?client_id=d090afe2511f2f8e&redirect_uri=https%3A%2F%2Frich-views-hunt.loca.lt%2Fdashboard%2Fintegrations",
+          url: "https://oauth.pipedrive.com/oauth/authorize?client_id=d090afe2511f2f8e&redirect_uri=https%3A%2F%2Ftwo-cameras-love.loca.lt%2Fdashboard%2Fintegrations",
           action: updateHasSyncedPipedrive,
         },
         {

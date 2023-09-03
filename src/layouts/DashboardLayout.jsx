@@ -1,18 +1,24 @@
 // PageLayout.jsx
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import DashboardNav from '../components/page-components/dashboard/DashboardNav';
-import { useSelector, useDispatch } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
-import { updateSyncedPipedrive, updateSyncedStripe, updateIsPipedriveSyncing } from '../redux/slices/sessionSlice'
+import { useSelector, useDispatch } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
+import {
+  updateSyncedPipedrive,
+  updateSyncedStripe,
+  updateIsPipedriveSyncing,
+} from '../redux/slices/sessionSlice';
 
 export function DashboardLayout({ children }) {
-  const {userToken} = useSelector((state) => state.session);
-  const {isLoggedIn, validationCheckComplete } = useSelector(
-    (state) => state.session
+  const { userToken, user } = useSelector((state) => state.session);
+  const { isLoggedIn, validationCheckComplete } = useSelector(
+    (state) => state.session,
   );
+  const [hasCreatedPackagePlan, setHasCreatedPackagePlan] = useState(false);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const pipedriveOuthCode = queryParams.get("code");
+  const pipedriveOuthCode = queryParams.get('code');
+  const stripePaymentSuccesss = queryParams.get('success');
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -20,7 +26,7 @@ export function DashboardLayout({ children }) {
   useEffect(() => {
     if (validationCheckComplete && !isLoggedIn) {
       navigate(
-        `/login${pipedriveOuthCode ? `?code=${pipedriveOuthCode}` : ""}`
+        `/login${pipedriveOuthCode ? `?code=${pipedriveOuthCode}` : ''}`,
       );
     }
   }, [isLoggedIn, validationCheckComplete]);
@@ -32,13 +38,13 @@ export function DashboardLayout({ children }) {
         const response = await fetch(
           `${import.meta.env.VITE_BACKEND_URL}/pipedrive/oauth/`,
           {
-            method: "POST",
+            method: 'POST',
             headers: {
-              "Content-Type": "application/json",
+              'Content-Type': 'application/json',
               Authorization: `Token ${userToken}`,
             },
-            body: JSON.stringify({code: pipedriveOuthCode}),
-          }
+            body: JSON.stringify({ code: pipedriveOuthCode }),
+          },
         );
         const data = await response.json();
         if (data.ok) {
@@ -48,20 +54,25 @@ export function DashboardLayout({ children }) {
       }
     };
     pipedriveOauthSetup();
+    ('');
   }, [pipedriveOuthCode, isLoggedIn]);
+
+  useEffect(() => {
+    dispatch(updateSyncedStripe(true));
+  }, [stripePaymentSuccesss, isLoggedIn]);
 
   if (!isLoggedIn) {
     return <></>;
   }
 
   return (
-    <div className='flex h-custom'>
+    <div className="flex h-custom">
       <div className="hidden md:block flex-shrink-0">
         <DashboardNav />
       </div>
-      <div className='flex flex-col flex-grow items-center overflow-y-auto w-full'>
+      <div className="flex flex-col flex-grow items-center overflow-y-auto w-full">
         {children}
       </div>
     </div>
-);
+  );
 }

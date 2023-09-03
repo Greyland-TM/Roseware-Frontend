@@ -20,6 +20,7 @@ const Integrations = () => {
   } = useSelector((state) => state.session);
   const [integrations, setIntegrations] = useState([
     {
+      id: 1,
       title: "Pipedrive-Stripe sync",
       description:
         "This is a 100% integration between your Pipedrive and Stripe accounts, and includes tools for creating stripe payments and subscriptions from in your Pipedrive account.",
@@ -29,8 +30,7 @@ const Integrations = () => {
           src: pipedriveLogo,
           isLinked: hasSyncedPipedrive,
           isSyncing: isPipedriveSyncing,
-          url: "https://oauth.pipedrive.com/oauth/authorize?client_id=d090afe2511f2f8e&redirect_uri=https%3A%2F%2Fthirty-regions-go.loca.lt%2Fdashboard%2Fintegrations",
-          // body: { has_synced_pipedrive: true },
+          url: "https://oauth.pipedrive.com/oauth/authorize?client_id=d090afe2511f2f8e&redirect_uri=https%3A%2F%2Frich-views-hunt.loca.lt%2Fdashboard%2Fintegrations",
           action: updateHasSyncedPipedrive,
         },
         {
@@ -39,7 +39,6 @@ const Integrations = () => {
           isLinked: hasSyncedStripe,
           isSyncing: isStripeSyncing,
           url: "",
-          // body: { has_synced_stripe: true },
           action: updateHasSyncedStripe,
         },
       ],

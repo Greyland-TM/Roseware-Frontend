@@ -1,5 +1,5 @@
-import { CheckCircleIcon } from "@heroicons/react/20/solid";
-import { useSelector } from "react-redux";
+import { CheckCircleIcon } from '@heroicons/react/20/solid';
+import { useSelector } from 'react-redux';
 
 export default function IntegrationCard(props) {
   const { integrationDetails } = props;
@@ -8,20 +8,42 @@ export default function IntegrationCard(props) {
 
   const getStripeLink = async () => {
     const backend_url =
-      import.meta.env.VITE_BACKEND_URL || "http://127.0.0.1:8000";
-    const response = await fetch(`${backend_url}stripe/link/?pk=${user.id}`, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    });
+      import.meta.env.VITE_BACKEND_URL || 'http://127.0.0.1:8000';
+    const response = await fetch(
+      `${backend_url}/stripe/connect-link/?pk=${user.id}`,
+      {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' },
+      },
+    );
 
     const data = await response.json();
     return data.url;
   };
 
+  const getPaymentPageLink = async () => {
+    try {
+      const backend_url =
+        import.meta.env.VITE_BACKEND_URL || 'http://127.0.0.1:8000';
+      const response = await fetch(
+        `${backend_url}/stripe/payment-page-link/?pk=${integrationDetails.id}`,
+        {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' },
+        },
+      );
+
+      const data = await response.json();
+      return data.url.url;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div
       className={`relative max-w-sm m-5 rounded-xl overflow-hidden shadow-lg h-fit ${
-        isConnected ? "ring-2 ring-green-500 p-2" : "p-0"
+        isConnected ? 'ring-2 ring-green-500 p-2' : 'p-0'
       }`}
     >
       {/* The overlay to show the card is not available */}
@@ -54,8 +76,14 @@ export default function IntegrationCard(props) {
             <button
               type="button"
               onClick={async () => {
-                if (!icon.isLinked) {
-                  if (icon.platform === "Stripe") {
+                const hasPackageWithSameId =
+                  user.package_plans &&
+                  user.package_plans.some((plan) => plan.id === icon.id);
+                if (!hasPackageWithSameId) {
+                  const stripePaymentLink = await getPaymentPageLink();
+                  window.location.href = stripePaymentLink;
+                } else if (!icon.isLinked) {
+                  if (icon.platform === 'Stripe') {
                     const stripeLink = await getStripeLink();
                     window.location.href = stripeLink;
                   } else {
@@ -65,10 +93,10 @@ export default function IntegrationCard(props) {
               }}
               className={`inline-flex items-center justify-middle gap-x-1 rounded-md ${
                 icon.isSyncing
-                  ? "bg-gray-200"
+                  ? 'bg-gray-200'
                   : icon.isLinked
-                  ? "bg-green-600"
-                  : "bg-blue-400"
+                  ? 'bg-green-600'
+                  : 'bg-blue-400'
               } px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
             >
               {icon.isSyncing && (
@@ -89,7 +117,16 @@ export default function IntegrationCard(props) {
                   />
                 </svg>
               )}
-              {icon.isSyncing ? "" : icon.isLinked ? "Linked" : "Start Link"}
+              {user.package_plans &&
+                user.package_plans.length <= 0 &&
+                'Purchase'}
+              {user.package_plans &&
+                user.package_plans.length > 0 &&
+                (icon.isSyncing
+                  ? 'Loading'
+                  : icon.isLinked
+                  ? 'Linked'
+                  : 'Start Link')}
               {icon.isLinked && !icon.isSyncing && (
                 <CheckCircleIcon
                   className="-mr-0.5 h-5 w-5"

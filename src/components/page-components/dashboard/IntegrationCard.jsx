@@ -10,7 +10,7 @@ export default function IntegrationCard(props) {
     const backend_url =
       import.meta.env.VITE_BACKEND_URL || 'http://127.0.0.1:8000';
     const response = await fetch(
-      `${backend_url}/stripe/connect-link/?pk=${user.id}`,
+      `${backend_url}/stripe/connect-link/?pk=${user.id}&redirect_uri=${window.location.href}`,
       {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
@@ -26,7 +26,7 @@ export default function IntegrationCard(props) {
       const backend_url =
         import.meta.env.VITE_BACKEND_URL || 'http://127.0.0.1:8000';
       const response = await fetch(
-        `${backend_url}/stripe/subscription-checkout/?customer_pk=${user.id}&pk=${integrationDetails.id}`,
+        `${backend_url}/stripe/subscription-checkout/?customer_pk=${user.id}&pk=${integrationDetails.id}&redirect_uri=${window.location.href}}`,
         {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' },
@@ -76,12 +76,15 @@ export default function IntegrationCard(props) {
             <button
               type="button"
               onClick={async () => {
+                console.log(user.package_plans);
                 const hasPackageWithSameId =
                   user.package_plans &&
-                  user.package_plans.some((plan) => plan.id === icon.id);
+                  user.package_plans.some(
+                    (plan) => plan.template_title === icon.template_title,
+                  );
                 if (!hasPackageWithSameId) {
                   const stripePaymentLink = await getPaymentPageLink();
-                  window.location.href = stripePaymentLink;
+                  // window.location.href = stripePaymentLink;
                 } else if (!icon.isLinked) {
                   if (icon.platform === 'Stripe') {
                     const stripeLink = await getStripeLink();

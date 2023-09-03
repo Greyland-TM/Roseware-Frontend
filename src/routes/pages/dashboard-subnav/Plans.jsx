@@ -25,7 +25,6 @@ const Plans = () => {
         );
 
         const data = await response.json();
-        console.log(data);
         if (data.ok) {
           setPackagePlans(data.package_plans);
         }
@@ -35,6 +34,10 @@ const Plans = () => {
     };
     fetchPlans();
   }, []);
+
+  useEffect(() => {
+    console.log('plans are in state: ', packagePlans);
+  }, [packagePlans]);
 
   return (
     <DashboardLayout>
@@ -50,9 +53,17 @@ const Plans = () => {
         </div>
         {packagePlans &&
           packagePlans.length > 0 &&
-          packagePlans.map((plan, idx) => (
-            <PlanCard plan={plan} key={idx} setPackagePlans={setPackagePlans} />
-          ))}
+          packagePlans.map((plan, idx) => {
+            console.log('In the map: ', plan);
+            return (
+              <PlanCard
+                plan={plan}
+                key={idx}
+                setPackagePlans={setPackagePlans}
+                packagePlans={packagePlans}
+              />
+            );
+          })}
       </div>
     </DashboardLayout>
   );

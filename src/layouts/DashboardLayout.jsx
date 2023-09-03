@@ -7,6 +7,9 @@ import {
   updateSyncedPipedrive,
   updateSyncedStripe,
   updateIsPipedriveSyncing,
+  updateHasSyncedStripe,
+  updateHasSyncedPipedrive,
+  updateIsStripeSyncing,
 } from '../redux/slices/sessionSlice';
 
 export function DashboardLayout({ children }) {
@@ -14,11 +17,11 @@ export function DashboardLayout({ children }) {
   const { isLoggedIn, validationCheckComplete } = useSelector(
     (state) => state.session,
   );
-  const [hasCreatedPackagePlan, setHasCreatedPackagePlan] = useState(false);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const pipedriveOuthCode = queryParams.get('code');
   const stripePaymentSuccesss = queryParams.get('success');
+  const stripeConnectionSuccess = queryParams.get('connected');
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -31,6 +34,7 @@ export function DashboardLayout({ children }) {
     }
   }, [isLoggedIn, validationCheckComplete]);
 
+  // After a user connects their pipedrive account to roseware, setup the oauth flow
   useEffect(() => {
     const pipedriveOauthSetup = async () => {
       if (isLoggedIn && pipedriveOuthCode && userToken) {
@@ -57,10 +61,39 @@ export function DashboardLayout({ children }) {
     ('');
   }, [pipedriveOuthCode, isLoggedIn]);
 
-  useEffect(() => {
-    dispatch(updateSyncedStripe(true));
-  }, [stripePaymentSuccesss, isLoggedIn]);
+  // After a user completes a stripe payment, update the user state to reflect that
+  // useEffect(() => {
+  //   dispatch(updateSyncedStripe(stripePaymentSuccesss));
+  // }, [stripePaymentSuccesss, isLoggedIn]);
 
+  // After a user connects their stripe account to roseware, update the user state to reflect that
+  useEffect(() => {
+    const checkConnectionStatus = async () => {
+      dispatch(updateIsStripeSyncing(true));
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/stripe/connect-link/?pk=${
+          user.id
+        }`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Token ${userToken}`,
+          },
+        },
+      );
+      const data = await response.json();
+      if (data.ok) {
+        dispatch(updateSyncedStripe(true));
+      }
+      dispatch(updateIsStripeSyncing(false));
+    };
+    if (isLoggedIn && stripeConnectionSuccess && userToken) {
+      checkConnectionStatus();
+    }
+  }, [stripeConnectionSuccess, isLoggedIn, user, dispatch, userToken]);
+
+  // Default loading state
   if (!isLoggedIn) {
     return <></>;
   }

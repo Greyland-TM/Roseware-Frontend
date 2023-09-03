@@ -1,11 +1,10 @@
-import { CheckCircleIcon } from '@heroicons/react/20/solid';
 import { useSelector } from 'react-redux';
 
-export default function PlanCard({ plan }) {
+export default function PlanCard({ plan, setPackagePlans, packagePlans }) {
+  console.log('Rendering PlanCard: ', plan);
   const { userToken } = useSelector((state) => state.session);
 
   const deleteServicePackage = async (pkgId) => {
-    // Make the request to delete the service package
     const backend_url =
       import.meta.env.VITE_BACKEND_URL || 'http://127.0.0.1:8000';
     const response = await fetch(
@@ -19,29 +18,23 @@ export default function PlanCard({ plan }) {
       },
     );
 
-    // If the response is ok, remove the package from the list of packages
     const data = await response.json();
     if (data.ok) {
-      const newPackagePlans = props.packagePlans.filter(
-        (pkg) => pkg.id !== pkgId,
-      );
-      props.setPackagePlans(newPackagePlans);
+      const newPackagePlans = packagePlans.filter((pkg) => pkg.id !== pkgId);
+      setPackagePlans(newPackagePlans);
     }
   };
 
-  const { service_packages, name, type, status } = plan;
-  const packages = service_packages?.service_packages;
-
   return (
     <div className="relative max-w-sm m-5 rounded-xl overflow-hidden shadow-lg h-fit">
-      {packages && packages.length > 0 ? (
+      {plan.service_packages && plan.service_packages.length > 0 ? (
         <div className="px-6 py-4 h-full">
-          <div className="font-bold text-xl mb-2">{name}</div>
-          {packages.map((pkg, idx) => (
+          <div className="font-bold text-xl mb-2">{plan.name}</div>
+          {plan.service_packages.map((pkg, idx) => (
             <div key={idx}>
               <p>{pkg.template_title}</p>
               <p>
-                {type} - {status}
+                {plan.type} - {plan.status}
               </p>
               <p>${pkg.cost}/mo</p>
               <div className="w-full flex">

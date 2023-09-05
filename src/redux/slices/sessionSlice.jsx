@@ -28,12 +28,6 @@ export const sessionSlice = createSlice({
     validationComplete: (state) => {
       state.validationCheckComplete = true;
     },
-    updateSyncedPipedrive: (state, action) => {
-      state.hasSyncedPipedrive = action.payload;
-    },
-    updateSyncedStripe: (state, action) => {
-      state.hasSyncedStripe = action.payload;
-    },
     updateIsPipedriveSyncing: (state, action) => {
       state.isPipedriveSyncing = action.payload;
     },
@@ -41,11 +35,9 @@ export const sessionSlice = createSlice({
       state.isStripeSyncing = action.payload;
     },
     updateHasSyncedPipedrive: (state, action) => {
-      console.log("Test");
       state.user.has_synced_pipedrive = action.payload;
     },
     updateHasSyncedStripe: (state, action) => {
-      console.log("Test");
       state.user.has_synced_stripe = action.payload;
     },
     updatePackagePlans: (state, action) => {
@@ -118,8 +110,6 @@ export const sessionSlice = createSlice({
 export const {
   logout,
   validationComplete,
-  updateSyncedPipedrive,
-  updateSyncedStripe,
   updateIsPipedriveSyncing,
   updateIsStripeSyncing,
   updateHasSyncedPipedrive,

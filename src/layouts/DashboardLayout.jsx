@@ -4,11 +4,11 @@ import DashboardNav from '../components/page-components/dashboard/DashboardNav';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {
-  updateSyncedPipedrive,
-  updateSyncedStripe,
-  updateIsPipedriveSyncing,
-  updateHasSyncedStripe,
   updateHasSyncedPipedrive,
+  updateHasSyncedStripe,
+  updateIsPipedriveSyncing,
+  // updateHasSyncedStripe,
+  // updateHasSyncedPipedrive,
   updateIsStripeSyncing,
 } from '../redux/slices/sessionSlice';
 
@@ -20,7 +20,7 @@ export function DashboardLayout({ children }) {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const pipedriveOuthCode = queryParams.get('code');
-  const stripePaymentSuccesss = queryParams.get('success');
+  // const stripePaymentSuccesss = queryParams.get('success');
   const stripeConnectionSuccess = queryParams.get('connected');
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -53,7 +53,7 @@ export function DashboardLayout({ children }) {
         const data = await response.json();
         console.log('pipedrive data: ', data)
         if (data.ok) {
-          dispatch(updateSyncedPipedrive(data.customer.has_synced_pipedrive));
+          dispatch(updateHasSyncedPipedrive(data.customer.has_synced_pipedrive));
         }
         dispatch(updateIsPipedriveSyncing(false));
       }
@@ -70,7 +70,8 @@ export function DashboardLayout({ children }) {
   // After a user connects their stripe account to roseware, update the user state to reflect that
   useEffect(() => {
     const checkConnectionStatus = async () => {
-      // dispatch(updateIsStripeSyncing(true));
+      dispatch(updateIsStripeSyncing(true));
+      console.log('user: ', user);
       const response = await fetch(
         `${import.meta.env.VITE_BACKEND_URL}/stripe/connect-link/?pk=${
           user.id
@@ -86,12 +87,13 @@ export function DashboardLayout({ children }) {
       const data = await response.json();
       console.log('data: ', data);
       if (data.ok) {
-        dispatch(updateSyncedStripe(true));
+        dispatch(updateHasSyncedStripe(true));
       }
     };
     if (isLoggedIn && stripeConnectionSuccess && userToken) {
       checkConnectionStatus();
     }
+    dispatch(updateIsStripeSyncing(false));
   }, [stripeConnectionSuccess, isLoggedIn, user, dispatch, userToken]);
 
   // Default loading state

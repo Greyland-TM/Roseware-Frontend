@@ -51,7 +51,7 @@ const Integrations = () => {
       icons: [{ src: mondayLogo, isLinked: false, isSyncing: false }],
     },
   ]);
-
+ 
   useEffect(() => {
     setIntegrations((prevIntegrations) => {
       const newIntegrations = [...prevIntegrations];
@@ -60,6 +60,15 @@ const Integrations = () => {
       return newIntegrations;
     });
   }, [user]);
+
+  useEffect(() => {
+    setIntegrations((prevIntegrations) => {
+      const newIntegrations = [...prevIntegrations];
+      newIntegrations[0].icons[0].isSyncing = isPipedriveSyncing;
+      newIntegrations[0].icons[1].isSyncing = isStripeSyncing;
+      return newIntegrations;
+    });
+  }, [isPipedriveSyncing, isStripeSyncing]);
 
   return (
     <DashboardLayout>

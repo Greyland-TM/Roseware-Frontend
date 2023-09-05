@@ -47,6 +47,9 @@ export const sessionSlice = createSlice({
     updateHasSyncedStripe: (state, action) => {
       console.log("Test");
       state.user.has_synced_stripe = action.payload;
+    },
+    updatePackagePlans: (state, action) => {
+      state.user.package_plans = action.payload;
     }
   },
   extraReducers: (builder) => {
@@ -121,6 +124,7 @@ export const {
   updateIsStripeSyncing,
   updateHasSyncedPipedrive,
   updateHasSyncedStripe,
+  updatePackagePlans
 } = sessionSlice.actions;
 
 export default sessionSlice.reducer;

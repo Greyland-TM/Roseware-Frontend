@@ -51,6 +51,7 @@ export function DashboardLayout({ children }) {
           },
         );
         const data = await response.json();
+        console.log('pipedrive data: ', data)
         if (data.ok) {
           dispatch(updateSyncedPipedrive(data.customer.has_synced_pipedrive));
         }
@@ -69,7 +70,7 @@ export function DashboardLayout({ children }) {
   // After a user connects their stripe account to roseware, update the user state to reflect that
   useEffect(() => {
     const checkConnectionStatus = async () => {
-      dispatch(updateIsStripeSyncing(true));
+      // dispatch(updateIsStripeSyncing(true));
       const response = await fetch(
         `${import.meta.env.VITE_BACKEND_URL}/stripe/connect-link/?pk=${
           user.id
@@ -83,10 +84,10 @@ export function DashboardLayout({ children }) {
         },
       );
       const data = await response.json();
+      console.log('data: ', data);
       if (data.ok) {
         dispatch(updateSyncedStripe(true));
       }
-      dispatch(updateIsStripeSyncing(false));
     };
     if (isLoggedIn && stripeConnectionSuccess && userToken) {
       checkConnectionStatus();

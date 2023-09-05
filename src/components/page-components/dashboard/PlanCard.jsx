@@ -1,14 +1,21 @@
 import { useSelector } from 'react-redux';
+import {
+  updateHasSyncedStripe,
+  updateHasSyncedPipedrive,
+  updatePackagePlans
+} from '../../../redux/slices/sessionSlice';
+import { useDispatch } from 'react-redux';
 
 export default function PlanCard({ plan, setPackagePlans, packagePlans }) {
   console.log('Rendering PlanCard: ', plan);
   const { userToken } = useSelector((state) => state.session);
+  const dispatch = useDispatch();
 
   const deleteServicePackage = async (pkgId) => {
     const backend_url =
       import.meta.env.VITE_BACKEND_URL || 'http://127.0.0.1:8000';
     const response = await fetch(
-      `${backend_url}/package-manager/service-package?pk=${pkgId}`,
+      `${backend_url}/package-manager/package-plan?pk=${pkgId}`,
       {
         method: 'DELETE',
         headers: {
@@ -19,9 +26,13 @@ export default function PlanCard({ plan, setPackagePlans, packagePlans }) {
     );
 
     const data = await response.json();
+    console.log(data);
     if (data.ok) {
       const newPackagePlans = packagePlans.filter((pkg) => pkg.id !== pkgId);
       setPackagePlans(newPackagePlans);
+      dispatch(updatePackagePlans(newPackagePlans));
+      dispatch(updateHasSyncedStripe(false));
+      dispatch(updateHasSyncedPipedrive(false));
     }
   };
 
@@ -40,7 +51,7 @@ export default function PlanCard({ plan, setPackagePlans, packagePlans }) {
               <div className="w-full flex">
                 <button
                   className="w-1/2 bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full ml-auto"
-                  onClick={() => deleteServicePackage(pkg.id)}
+                  onClick={() => deleteServicePackage(plan.id)}
                 >
                   Remove
                 </button>

@@ -20,7 +20,7 @@ const Integrations = () => {
   } = useSelector((state) => state.session);
   const [integrations, setIntegrations] = useState([
     {
-      id: 13,
+      id: 1,
       title: "Pipedrive-Stripe sync",
       description:
         "This is a 100% integration between your Pipedrive and Stripe accounts, and includes tools for creating stripe payments and subscriptions from in your Pipedrive account.",

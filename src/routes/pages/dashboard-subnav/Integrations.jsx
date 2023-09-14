@@ -1,14 +1,14 @@
-import { DashboardLayout } from "../../../layouts/DashboardLayout";
-import IntegrationCard from "../../../components/page-components/dashboard/IntegrationCard";
-import stripeLogo from "../../../images/logos/stripe-logo.jpeg";
-import pipedriveLogo from "../../../images/logos/pipedrive-logo.jpeg";
-import mondayLogo from "../../../images/logos/monday-logo.jpeg";
-import { useSelector } from "react-redux";
+import { DashboardLayout } from '../../../layouts/DashboardLayout';
+import IntegrationCard from '../../../components/page-components/dashboard/IntegrationCard';
+import stripeLogo from '../../../images/logos/stripe-logo.jpeg';
+import pipedriveLogo from '../../../images/logos/pipedrive-logo.jpeg';
+import mondayLogo from '../../../images/logos/monday-logo.jpeg';
+import { useSelector } from 'react-redux';
 import {
   updateHasSyncedPipedrive,
   updateHasSyncedStripe,
-} from "../../../redux/slices/sessionSlice";
-import { useState, useEffect } from "react";
+} from '../../../redux/slices/sessionSlice';
+import { useState, useEffect } from 'react';
 
 const Integrations = () => {
   const {
@@ -21,12 +21,12 @@ const Integrations = () => {
   const [integrations, setIntegrations] = useState([
     {
       id: 4,
-      title: "Pipedrive-Stripe sync",
+      title: 'Pipedrive-Stripe sync',
       description:
-        "This is a 100% integration between your Pipedrive and Stripe accounts, and includes tools for creating stripe payments and subscriptions from in your Pipedrive account.",
+        'This is a 100% integration between your Pipedrive and Stripe accounts, and includes tools for creating stripe payments and subscriptions from in your Pipedrive account.',
       icons: [
         {
-          platform: "Pipedrive",
+          platform: 'Pipedrive',
           src: pipedriveLogo,
           isLinked: hasSyncedPipedrive,
           isSyncing: isPipedriveSyncing,
@@ -34,24 +34,28 @@ const Integrations = () => {
           action: updateHasSyncedPipedrive,
         },
         {
-          platform: "Stripe",
+          platform: 'Stripe',
           src: stripeLogo,
           isLinked: hasSyncedStripe,
           isSyncing: isStripeSyncing,
-          url: "",
+          url: '',
           action: updateHasSyncedStripe,
         },
       ],
     },
     {
-      platform: "Monday",
-      title: "Monday Lead Capture",
+      platform: 'Monday',
+      title: 'Monday Lead Capture',
       description:
-        "This generic lead capturing tool is free with websites developed by Roseware Integrations.",
+        'This generic lead capturing tool is free with websites developed by Roseware Integrations.',
       icons: [{ src: mondayLogo, isLinked: false, isSyncing: false }],
     },
   ]);
- 
+
+  useEffect(() => {
+    console.log(integrations);
+  }, [integrations]);
+
   useEffect(() => {
     setIntegrations((prevIntegrations) => {
       const newIntegrations = [...prevIntegrations];
@@ -81,7 +85,7 @@ const Integrations = () => {
             These features are at the core of the platform. Our tools aim to
             alieviate the stress of managing a business. If there is a tool your
             business needs that you do not see here, let us know, and we&apos;ll
-            see what we can do to add it {" { link_here }"}.
+            see what we can do to add it {' { link_here }'}.
           </p>
         </div>
       </div>

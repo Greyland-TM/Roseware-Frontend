@@ -4,40 +4,50 @@ export default function Article(props) {
 
   return (
     <body className="bg-white font-sans leading-normal tracking-normal">
-
       <div className="text-center pt-16 md:pt-32">
         {/* <p className="text-sm md:text-base text-green-500 font-bold">{new Date(article.created_at).toDateString()}<span className="text-gray-900">/</span>{article.title}</p> */}
-        <h1 className="font-bold break-normal text-3xl md:text-5xl">{article.description}</h1>
+        <h1 className="font-bold break-normal text-3xl md:text-5xl">
+          {article.description}
+        </h1>
       </div>
 
-      <div className="container w-full max-w-6xl mx-auto bg-white bg-cover mt-8 rounded" style={{backgroundImage: `url(${article.image})`, height: "75vh"}}></div>
+      <div
+        className="container w-full max-w-6xl mx-auto bg-white bg-cover mt-8 rounded"
+        style={{ backgroundImage: `url(${article.image})`, height: "75vh" }}
+      ></div>
 
       <div className="container max-w-5xl mx-auto -mt-32">
         <div className="mx-0 sm:mx-6">
-          <div className="bg-white w-full p-8 md:p-24 text-xl md:text-2xl text-gray-800 leading-normal" style={{fontFamily: "Georgia,serif"}}>
-
+          <div
+            className="bg-white w-full p-8 md:p-24 text-xl md:text-2xl text-gray-800 leading-normal"
+            style={{ fontFamily: "Georgia,serif" }}
+          >
             {/* <p className="text-2xl md:text-3xl mb-5">
               👋 Welcome fellow <a className="text-gray-800 hover:text-green-500 no-underline border-b-2 border-green-500" href="https://www.tailwindcss.com">Tailwind CSS</a> and <a className="text-gray-800 hover:text-green-500 no-underline border-b-2 border-green-500" href="https://www.ghost.org">Ghost</a> fan.  This starter template is an attempt to replicate the default Ghost theme <a className="text-gray-800 hover:text-green-500 no-underline border-b-2 border-green-500" href="https://demo.ghost.io/welcome">"Casper"</a> using Tailwind CSS and vanilla Javascript.
             </p> */}
             {article.author_details && (
-              <div class="inline-flex items-center mr-3 text-sm text-gray-900 mb-5">
-              <img
-                class="mr-4 w-16 h-16 rounded-full"
-                src={article.author_details.profile_picture}
-                alt="Jese Leos"
-              />
-              <div>
-                <a
-                  href="#"
-                  rel="author_details"
-                  class="text-xl font-bold text-gray-900 ">
-                  {article.author_details.first_name} {article.author_details.last_name}
-                </a>
-                <p class="text-base font-light text-gray-500 ">
-                  {article.author_details.role}
-                </p>
-                <p class="text-base font-light text-gray-500 ">{new Date(article.created_at).toDateString()}</p>
-              </div>
+              <div className="inline-flex items-center mr-3 text-sm text-gray-900 mb-5">
+                <img
+                  className="mr-4 w-16 h-16 rounded-full"
+                  src={article.author_details.profile_picture}
+                  alt="Jese Leos"
+                />
+                <div>
+                  <a
+                    href="#"
+                    rel="author_details"
+                    className="text-xl font-bold text-gray-900 "
+                  >
+                    {article.author_details.first_name}{" "}
+                    {article.author_details.last_name}
+                  </a>
+                  <p className="text-base font-light text-gray-500 ">
+                    {article.author_details.role}
+                  </p>
+                  <p className="text-base font-light text-gray-500 ">
+                    {new Date(article.created_at).toDateString()}
+                  </p>
+                </div>
               </div>
             )}
 
@@ -67,7 +77,6 @@ export default function Article(props) {
               </div>
           </div> */}
 
-          
             {/* <p className="py-6">Sed dignissim lectus ut tincidunt vulputate. Fusce tincidunt lacus purus, in mattis tortor sollicitudin pretium. Phasellus at diam posuere, scelerisque nisl sit amet, tincidunt urna. Cras nisi diam, pulvinar ut molestie eget, eleifend ac magna. Sed at lorem condimentum, dignissim lorem eu, blandit massa. Phasellus eleifend turpis vel erat bibendum scelerisque. Maecenas id risus dictum, rhoncus odio vitae, maximus purus. Etiam efficitur dolor in dolor molestie ornare. Aenean pulvinar diam nec neque tincidunt, vitae molestie quam fermentum. Donec ac pretium diam. Suspendisse sed odio risus. Nunc nec luctus nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis nec nulla eget sem dictum elementum.</p> */}
 
             {/* <ol>

@@ -154,10 +154,11 @@ export const createNewUser = createAsyncThunk(
 export const handleLogin = createAsyncThunk(
   "session/handleLogin",
   async (body, { rejectWithValue }) => {
+    console.log(body)
     try {
       const backend_url =
         import.meta.env.VITE_BACKEND_URL || "http://127.0.0.1:8000";
-      const response = await fetch(`${backend_url}/accounts/login`, {
+      const response = await fetch(`${backend_url}/accounts/login/`, {
         method: "POST",
         body: JSON.stringify(body),
         headers: { "Content-Type": "application/json" },
@@ -219,7 +220,7 @@ export const handleLogout = createAsyncThunk(
     const backend_url =
       import.meta.env.VITE_BACKEND_URL || "http://127.0.0.1:8000";
     try {
-      const response = await fetch(`${backend_url}/accounts/logout`, {
+      const response = await fetch(`${backend_url}/accounts/logout/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -12,7 +12,7 @@ const AboutRoute = () => {
         header="Want to lean more?" 
         subheader="Check out our available services."
         primaryLink={{link: "/services", text: "Services"}}
-        secondaryLink={{link: "/register", text: "Get Started"}}
+        secondaryLink={{link: "/contact", text: "Get Started"}}
       />
     </div>
   );

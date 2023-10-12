@@ -10,7 +10,7 @@ export default function ServicesRoute() {
       <GeneralCTA 
         header="Interested in any of our services?" 
         subheader="Follow the link to create a Roseware account."
-        primaryLink={{link: "/register", text: "Get Started"}}
+        primaryLink={{link: "/contact", text: "Get Started"}}
         secondaryLink={{link: "/support", text: "Contact Us"}}
       />
     </>

@@ -37,7 +37,7 @@ export default function Nav() {
                         href="/services"
                         className={`${
                           pathName === "/services"
-                            ? "bg-rose-100 text-zinc-950"
+                            ? "bg-white text-zinc-950"
                             : ""
                         } transition ease-in-out duration-200 rounded-md text-lg px-3 py-1 font-medium text-gray-300 hover:bg-gray-700 hover:text-white`}
                       >
@@ -47,7 +47,7 @@ export default function Nav() {
                         href="/contact"
                         className={`${
                           pathName === "/contact"
-                            ? "bg-rose-100 text-zinc-950"
+                            ? "bg-white text-zinc-950"
                             : ""
                         } transition ease-in-out duration-200 rounded-md text-lg px-3 py-1 font-medium text-gray-300 hover:bg-gray-700 hover:text-white`}
                       >
@@ -57,7 +57,7 @@ export default function Nav() {
                         href="/about"
                         className={`${
                           pathName === "/about"
-                            ? "bg-rose-100 text-zinc-950"
+                            ? "bg-white text-zinc-950"
                             : ""
                         } transition ease-in-out duration-200 rounded-md text-lg px-3 py-1 font-medium text-gray-300 hover:bg-gray-700 hover:text-white`}
                       >

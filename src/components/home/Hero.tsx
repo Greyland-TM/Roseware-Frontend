@@ -1,13 +1,10 @@
-import { ChevronRightIcon } from '@heroicons/react/20/solid'
-import screenshot from '../../../images/general/screenshot.png';
 import Link from 'next/link';
-import Image from 'next/image';
 
 export default function Hero() {
   return (
-    <div className="relative isolate overflow-hidden bg-gradient-to-tr from-white via-rose-200 via-30% to-zinc-900 to-95%">
+    <div className="relative isolate overflow-hidden bg-gradient-to-tr from-white via-rose-200 via-30% to-white to-95%">
       <svg
-        className="absolute inset-0 -z-10 h-full w-full stroke-gray-200 [mask-image:radial-gradient(75%_100%_at_top_right,white,transparent)]"
+        className="absolute inset-0 -z-10 h-full w-full stroke-gray-400 [mask-image:radial-gradient(75%_100%_at_top_right,white,transparent)]"
         aria-hidden="true"
       >
         <defs>

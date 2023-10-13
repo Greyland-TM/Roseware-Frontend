@@ -9,7 +9,7 @@ export default function Nav() {
 
   return (
     <>
-      <Disclosure as="nav" className="bg-zinc-900 h-16">
+      <Disclosure as="nav" className="bg-Crimson-950 h-16">
         {({ open }) => (
           <>
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

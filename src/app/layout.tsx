@@ -1,9 +1,10 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Geologica } from "next/font/google";
 import Navbar from "@/components/UI/Navbar";
 import Footer from "@/components/UI/Footer";
-const inter = Inter({ subsets: ["latin"] });
+
+const yrsa = Geologica({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Roseware Integrations",
@@ -17,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className}`}>
+      <body className={`${yrsa.className}`}>
           <Navbar />
           <main className="min-h-custom">{children}</main>
           <Footer />

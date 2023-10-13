@@ -21,18 +21,18 @@ export default function LoginForm({ overlayClicked, pipedriveOuthCode }) {
 
   const formik = useFormik({
     initialValues: {
-      username: "",
+      email: "",
       password: "",
     },
     validationSchema: Yup.object({
-      username: Yup.string().required("Please provide a valid username"),
+      email: Yup.string().required("Please provide a valid email"),
       password: Yup.string().required("Please provide a valid password")
     }),
     onSubmit: async (values, { setSubmitting, setErrors }) => {
       setSubmitting(true);
 
       const body = {
-        username: values.username,
+        email: values.email,
         password: values.password,
       };
       
@@ -72,26 +72,26 @@ export default function LoginForm({ overlayClicked, pipedriveOuthCode }) {
               <form className="space-y-6" onSubmit={formik.handleSubmit}>
                 <div>
                   <label
-                    htmlFor="username"
+                    htmlFor="email"
                     className="block text-sm font-semibold leading-6 text-gray-900">
                     Email
                   </label>
                   <div className="mt-2.5">
                     <input
                       onChange={formik.handleChange}
-                      value={formik.values.username}
+                      value={formik.values.email}
                       placeholder=""
                       type="text"
-                      name="username"
-                      id="username"
+                      name="email"
+                      id="email"
                       className={`${
-                        formik.touched.username && formik.errors.username
+                        formik.touched.email && formik.errors.email
                           ? "border-red-400"
                           : "border-gray-300"
                       } block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
                     />
-                    {formik.touched.username && formik.errors.username && (
-                      <span className="text-red-400">{formik.errors.username}</span>
+                    {formik.touched.email && formik.errors.email && (
+                      <span className="text-red-400">{formik.errors.email}</span>
                     )}
                   </div>
                 </div>

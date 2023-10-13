@@ -4,7 +4,7 @@ import GeneralCTA from '../../components/UI/GeneralCTA';
 
 export default function ServicesRoute() {
   return (
-    <>
+    <div className="tracking-tighter">
       <ServicesHeader />
       <ServicesIndex />
       <GeneralCTA 
@@ -13,7 +13,7 @@ export default function ServicesRoute() {
         primaryLink={{link: "/contact", text: "Get Started"}}
         secondaryLink={{link: "/support", text: "Contact Us"}}
       />
-    </>
+    </div>
   );
 };
 

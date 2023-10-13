@@ -5,7 +5,6 @@ import Navbar from "@/components/UI/Navbar";
 import Footer from "@/components/UI/Footer";
 
 const yrsa = Geologica({ subsets: ["latin"] });
-
 export const metadata: Metadata = {
   title: "Roseware Integrations",
   description: "Where Portland craftmanship meets everyday business solutions",
@@ -18,7 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${yrsa.className}`}>
+      <body className={`${yrsa.className} tracking-tighter`}>
           <Navbar />
           <main className="min-h-custom">{children}</main>
           <Footer />

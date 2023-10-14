@@ -1,7 +1,6 @@
 import {
   BuildingOffice2Icon,
   EnvelopeIcon,
-  PhoneIcon,
 } from "@heroicons/react/24/outline";
 import ContactForm from "../../components/contact/ContactForm";
 
@@ -9,7 +8,7 @@ export default function Contact() {
   return (
     <>
       <svg
-        className="absolute inset-0 -z-10 h-full w-full stroke-gray-300"
+        className="absolute inset-0 -z-10 h-full w-full stroke-gray-200"
         aria-hidden="true"
       >
         <defs>
@@ -32,7 +31,7 @@ export default function Contact() {
         />
       </svg>
       <div className="flex flex-col lg:flex-row justify-center mx-auto max-w-7xl min-h-custom bg-gradient-to-tl from-white via-zinc-50 via-50% to-white rounded-2xl shadow-lg">
-        <div className="relative flex px-6 pb-20 pt-24 sm:pt-32 lg:static lg:px-8 lg:py-48">
+        <div className="relative px-6 pb-20 pt-24 sm:pt-32 lg:static lg:px-8 lg:py-52">
           <div className="mx-auto max-w-xl lg:mx-0 lg:max-w-lg my-auto ">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900">
               Get in touch

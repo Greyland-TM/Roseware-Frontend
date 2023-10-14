@@ -6,7 +6,7 @@ import React, {
   useEffect,
   useReducer,
 } from "react";
-import {registerNewUser, validateUser } from "./Utils";
+import { logoutUser, registerNewUser, validateUser } from "./Utils";
 
 interface AuthState {
   user: Object | null;
@@ -39,36 +39,43 @@ const initialState: AuthState = {
 };
 
 const reducer = (state: AuthState, action: Action) => {
+  let data;
+  let token;
+  let user;
+
   switch (action.type) {
+
     case "SETUSER":
-      const payload = action.payload;
-      console.log(payload)
-      const valToken = payload.token;
-      const valUser =  payload.user;
-
+      data = action.payload;
+      token = data.token;
+      user = data.user;
       return {
         ...state,
-        user: valUser,
-        token: valToken,
-        isLoggedIn: payload.ok,
+        user: user,
+        token: token,
+        isLoggedIn: data.ok,
       };
-      
-    case "LOGIN":
-      const data = action.payload;
-      const loginToken = data.token;
-      const loginUser = data.user;
-      localStorage.setItem("token", loginToken);
 
+    case "LOGIN":
+      data = action.payload;
+      token = data.token;
+      user = data.user;
+      localStorage.setItem("user", user);
+      localStorage.setItem("token", token);
       return {
         ...state,
-        user: loginUser,
-        token: loginToken,
+        user: user,
+        token: token,
         isLoggedIn: true,
       };
 
     case "LOGOUT":
+      token = localStorage.getItem("token");
       localStorage.removeItem("user");
       localStorage.removeItem("token");
+      logoutUser(token).then((res) => {
+        console.log(res);
+      });
       return {
         ...state,
         user: null,
@@ -89,9 +96,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const token = localStorage.getItem("token");
     validateUser(token).then((res) => {
-      dispatch({type: "SETUSER", payload: res})
+      dispatch({ type: "SETUSER", payload: res });
     });
-    
   }, []);
 
   const authContextValue = {

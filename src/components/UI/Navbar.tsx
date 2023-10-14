@@ -1,5 +1,5 @@
 "use client";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useRef, useContext } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -7,12 +7,14 @@ import { Disclosure } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import LoginForm from "../auth/LoginForm";
 import { AuthContext } from "../auth/AuthContext";
+import { Oval } from "react-loader-spinner";
 
 export default function Nav() {
   const pathName = usePathname();
   const modalRef = useRef<HTMLDialogElement>(null);
   const ctx = useContext(AuthContext);
   const dispatch = ctx.dispatch;
+  const router = useRouter();
 
   const handleLoginClicked = () => {
     const modal: HTMLDialogElement | null = modalRef.current;
@@ -24,11 +26,14 @@ export default function Nav() {
     modal?.close();
   };
 
-  
   return (
     <>
-     <dialog className="min-h-custom backdrop:backdrop-blur" ref={modalRef}>
-        <LoginForm closeModal={closeModal} dispatch={dispatch}/>
+      <dialog className="min-h-custom backdrop:backdrop-blur" ref={modalRef}>
+        <LoginForm
+          closeModal={closeModal}
+          dispatch={dispatch}
+          router={router}
+        />
       </dialog>
       <Disclosure
         as="nav"
@@ -84,28 +89,47 @@ export default function Nav() {
                     </div>
                   </div>
                 </div>
-                <Disclosure.Button className="md:hidden relative inline-flex items-center justify-center rounded-md p-2 text-black hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-                  <span className="absolute -inset-0.5" />
-                  <span className="sr-only">Open main menu</span>
-                  {open ? (
-                    <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
-                  ) : (
-                    <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
-                  )}
-                </Disclosure.Button>
-                {!ctx.isLoggedIn ? <div className="md:flex hidden">
-                  <button onClick={handleLoginClicked} className="w-24 mr-2 rounded-md bg-rose-950 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-rose-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600">
-                    Sign In
-                  </button>
-                  <Link href="/auth/register" className=" text-center w-24 rounded-md bg-rose-950 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-rose-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600">
-                    Sign Up
-                  </Link>
-                </div> : <button onClick={() => {dispatch({type: "LOGOUT"})}} className="w-24 mr-2 rounded-md bg-rose-950 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-rose-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600">Logout</button>}
+                <div className="flex items-center">
+                    {!ctx.isLoggedIn ? (
+                      <div className="md:flex hidden">
+                        <button
+                          onClick={handleLoginClicked}
+                          className="w-24 mr-2 rounded-md bg-rose-950 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-rose-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600"
+                        >
+                          Sign In
+                        </button>
+                        <Link
+                          href="/auth/register"
+                          className=" text-center w-24 rounded-md bg-rose-950 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-rose-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600"
+                        >
+                          Sign Up
+                        </Link>
+                      </div>
+                    ) : (
+                      <button
+                        onClick={() => {
+                          dispatch({ type: "LOGOUT" });
+                        }}
+                        className="hidden md:block w-24 mr-2 text-center rounded-md bg-rose-950 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-rose-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600"
+                      >
+                        Logout
+                      </button>
+                    )}
+                  <Disclosure.Button className="md:hidden relative inline-flex items-center justify-center rounded-md p-2 text-black hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                    <span className="absolute -inset-0.5" />
+                    <span className="sr-only">Open main menu</span>
+                    {open ? (
+                      <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
+                    ) : (
+                      <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
+                    )}
+                  </Disclosure.Button>
+                </div>
               </div>
             </div>
 
             {/* Mobile Nav */}
-            <Disclosure.Panel className="md:hidden absolute right-0 rounded-lg w-1/4 bg-gray-800">
+            <Disclosure.Panel className="md:hidden absolute right-0 rounded-lg w-1/4 bg-gray-900 text-black opacity-100">
               <div className="space-y-1 px-2 pb-3 pt-2 text-right">
                 <Disclosure.Button
                   as={Link}
@@ -128,22 +152,35 @@ export default function Nav() {
                 >
                   About
                 </Disclosure.Button>
-                <div className="flex flex-col justify-center">
-                  <Disclosure.Button
-                    as={Link}
-                    onClick={handleLoginClicked}
-                    href="#"
-                    className="mx-2 mb-2 text-center mr-2 rounded-md bg-rose-950 px-2.5 py-1 text-sm font-semibold text-white shadow-sm hover:bg-rose-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600"
-                  >
-                    Sign In
-                  </Disclosure.Button>
-                  <Disclosure.Button
-                    as={Link}                    
-                    href="#"
-                    className="mx-2 text-center mr-2 rounded-md bg-rose-950 px-2.5 py-1 text-sm font-semibold text-white shadow-sm hover:bg-rose-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600"
-                  >
-                    Sign Up
-                  </Disclosure.Button>
+                <div className="flex flex-col justify-center border-t border-gray-500 pt-3 mx-4">
+                  {ctx.isLoggedIn === false ? (
+                    <>
+                      <Disclosure.Button
+                        as={Link}
+                        onClick={handleLoginClicked}
+                        href="#"
+                        className=" w-full mx-auto mb-2 text-center mr-2 rounded-md bg-rose-950 px-2.5 py-1 text-sm font-semibold text-white shadow-sm hover:bg-rose-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600"
+                      >
+                        Sign In
+                      </Disclosure.Button>
+                      <Disclosure.Button
+                        as={Link}
+                        href="#"
+                        className="w-full mx-auto text-center mr-2 rounded-md bg-rose-950 px-2.5 py-1 text-sm font-semibold text-white shadow-sm hover:bg-rose-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600"
+                      >
+                        Sign Up
+                      </Disclosure.Button>
+                    </>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        dispatch({ type: "LOGOUT" });
+                      }}
+                      className="w-full mx-auto text-center rounded-md bg-rose-950 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-rose-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600"
+                    >
+                      Logout
+                    </button>
+                  )}
                 </div>
               </div>
             </Disclosure.Panel>

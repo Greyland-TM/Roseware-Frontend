@@ -40,6 +40,24 @@ export const loginUser = async (body: Object) => {
   }
 };
 
+export const logoutUser = async (token: string | null) => {
+ const backend_url = "http://127.0.0.1:8000";
+  try {
+    const response = await fetch(`${backend_url}/accounts/logout/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    });
+
+    const data = await response.json();
+
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 export const validateUser = async (token: string | null) => {
 
   try {
@@ -56,6 +74,6 @@ export const validateUser = async (token: string | null) => {
     return data
 
   } catch (error) {
-    console.log("Returning error: ", error);
+    console.log(error);
   }
 };

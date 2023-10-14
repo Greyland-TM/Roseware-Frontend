@@ -8,13 +8,37 @@ import { ThreeDots } from "react-loader-spinner";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { loginUser } from "./Utils";
+import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 
 interface loginFormProps { 
   closeModal: () => void;
   dispatch: React.Dispatch<any>;
-}
+  router: AppRouterInstance;
+};
 
-export default function LoginForm({ closeModal, dispatch }: loginFormProps) { 
+export default function LoginForm({ closeModal, dispatch, router }: loginFormProps) {
+  interface Values {
+    email: string;
+    password: string;
+  };
+
+  const handleSubmit = async (values: Values) => {
+    const body = {
+      email: values.email,
+      password: values.password,
+    }
+    const res = await loginUser(body);
+    console.log("res: ", res)
+    if (res.token) {
+      dispatch({type: "LOGIN", payload: res});
+      closeModal();
+      router.push("/");
+    } else {
+      console.log("error: ", res);
+    }
+  }
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -24,21 +48,16 @@ export default function LoginForm({ closeModal, dispatch }: loginFormProps) {
       email: Yup.string().required("Please provide a valid email"),
       password: Yup.string().required("Please provide a valid password"),
     }),
-    onSubmit: async (values) => {
-      const body = {
-        email: values.email,
-        password: values.password,
-      }
-      const data = await loginUser(body);
-      dispatch({type: "LOGIN", payload: data})
-    },
+    onSubmit: handleSubmit,
   });
 
-  return (
+  return (<>
+
     <div className="flex justify-center">
       <div className="fixed z-20 ">
         <div className="mt-10 sm:mt-20 lg:mt-52 sm:mx-auto sm:w-full sm:max-w-[480px]">
-          <div className="bg-white px-6 py-6 shadow sm:rounded-lg sm:px-12">
+        <button onClick={closeModal} className="absolute mt-6 mr-2 right-5 w-6 rounded-full ring-1 ring-gray-200 hover:ring-gray-400 text-gray-400"><XMarkIcon /></button>
+          <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
             <div className="flex justify-center">
               <h1 className="font-extrabold text-4xl text-Black">Roseware</h1>
             </div>
@@ -69,7 +88,7 @@ export default function LoginForm({ closeModal, dispatch }: loginFormProps) {
                         formik.touched.email && formik.errors.email
                           ? "border-red-400"
                           : "border-gray-300"
-                      } block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-rose-600 sm:text-sm sm:leading-6`}
+                      } block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-300 sm:text-sm sm:leading-6`}
                     />
                     {formik.touched.email && formik.errors.email && (
                       <span className="text-red-400">
@@ -98,7 +117,7 @@ export default function LoginForm({ closeModal, dispatch }: loginFormProps) {
                         formik.touched.password && formik.errors.password
                           ? "border-red-400"
                           : "border-gray-300"
-                      } block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-rose-600 sm:text-sm sm:leading-6`}
+                      } block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-300 sm:text-sm sm:leading-6`}
                     />
                     {formik.touched.password && formik.errors.password && (
                       <span className="text-red-400">
@@ -111,7 +130,7 @@ export default function LoginForm({ closeModal, dispatch }: loginFormProps) {
                 <div>
                   <button
                     type="submit"
-                    className="flex w-full justify-center rounded-md bg-Vine px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-rose-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600"
+                    className="flex w-full justify-center rounded-md bg-Vine px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-300"
                   >
                     {!formik.isSubmitting ? (
                       "Sign in"
@@ -144,5 +163,5 @@ export default function LoginForm({ closeModal, dispatch }: loginFormProps) {
         </div>
       </div>
     </div>
-  );
+    </>);
 }

@@ -37,7 +37,7 @@ export default function Nav() {
                         href="/services"
                         className={`${
                           pathName === "/services"
-                            ? "bg-zinc-600 text-white"
+                            ? "bg-zinc-800 text-white"
                             : ""
                         } transition ease-in-out duration-200 rounded-md text-lg px-3 py-1 font-medium text-black hover:bg-gray-700 hover:text-white`}
                       >
@@ -47,7 +47,7 @@ export default function Nav() {
                         href="/contact"
                         className={`${
                           pathName === "/contact"
-                            ? "bg-zinc-600 text-white"
+                            ? "bg-zinc-800 text-white"
                             : ""
                         } transition ease-in-out duration-200 rounded-md text-lg px-3 py-1 font-medium text-black hover:bg-gray-700 hover:text-white`}
                       >
@@ -56,7 +56,7 @@ export default function Nav() {
                       <Link
                         href="/about"
                         className={`${
-                          pathName === "/about" ? "bg-zinc-600 text-white" : ""
+                          pathName === "/about" ? "bg-zinc-800 text-white" : ""
                         } transition ease-in-out duration-200 rounded-md text-lg px-3 py-1 font-medium text-black hover:bg-gray-700 hover:text-white`}
                       >
                         About
@@ -65,19 +65,19 @@ export default function Nav() {
                   </div>
                 </div>
                 <Disclosure.Button className="md:hidden relative inline-flex items-center justify-center rounded-md p-2 text-black hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
-              <span className="absolute -inset-0.5" />
-              <span className="sr-only">Open main menu</span>
-              {open ? (
-                <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
-              ) : (
-                <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
-              )}
-            </Disclosure.Button>
+                  <span className="absolute -inset-0.5" />
+                  <span className="sr-only">Open main menu</span>
+                  {open ? (
+                    <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
+                  ) : (
+                    <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
+                  )}
+                </Disclosure.Button>
                 <div className="md:flex hidden">
-                  <button className="w-24 mr-2 rounded-md bg-rose-800 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600">
+                  <button className="w-24 mr-2 rounded-md bg-rose-950 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-rose-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600">
                     Sign In
                   </button>
-                  <button className="w-24 rounded-md bg-rose-800 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600">
+                  <button className="w-24 rounded-md bg-rose-950 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-rose-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600">
                     Sign Up
                   </button>
                 </div>
@@ -85,29 +85,45 @@ export default function Nav() {
             </div>
 
             {/* Mobile Nav */}
-            <Disclosure.Panel className="md:hidden absolute right-0 rounded-lg bg-gray-100 w-1/2 ">
+            <Disclosure.Panel className="md:hidden absolute right-0 rounded-lg w-1/4 bg-gray-800">
               <div className="space-y-1 px-2 pb-3 pt-2 text-right">
                 <Disclosure.Button
                   as={Link}
                   href="/services"
-                  className="block rounded-md px-3 py-2 text-base font-medium text-black hover:bg-gray-700 hover:text-black"
+                  className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-gray-300 hover:text-black"
                 >
                   Services
                 </Disclosure.Button>
                 <Disclosure.Button
                   as={Link}
                   href="/contact"
-                  className="block rounded-md px-3 py-2 text-base font-medium text-black hover:bg-gray-700 hover:text-black"
+                  className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-gray-300 hover:text-black"
                 >
                   Contact
                 </Disclosure.Button>
                 <Disclosure.Button
                   as={Link}
                   href="/about"
-                  className="block rounded-md px-3 py-2 text-base font-medium text-black hover:bg-gray-700 hover:text-black"
+                  className="block rounded-md px-3 py-2 text-base font-medium text-white hover:bg-gray-300 hover:text-black"
                 >
                   About
                 </Disclosure.Button>
+                <div className="flex flex-col justify-center">
+                  <Disclosure.Button
+                    as={Link}
+                    href="#"
+                    className="mx-2 mb-2 text-center mr-2 rounded-md bg-rose-950 px-2.5 py-1 text-sm font-semibold text-white shadow-sm hover:bg-rose-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600"
+                  >
+                    Sign In
+                  </Disclosure.Button>
+                  <Disclosure.Button
+                    as={Link}
+                    href="#"
+                    className="mx-2 text-center mr-2 rounded-md bg-rose-950 px-2.5 py-1 text-sm font-semibold text-white shadow-sm hover:bg-rose-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600"
+                  >
+                    Sign Up
+                  </Disclosure.Button>
+                </div>
               </div>
             </Disclosure.Panel>
           </>

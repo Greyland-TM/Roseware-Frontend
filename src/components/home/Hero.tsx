@@ -18,7 +18,7 @@ export default function Hero() {
           <div className="mt-10 flex items-center gap-x-6">
             <Link 
               href='/contact' 
-              className="rounded-md bg-Vine px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600"
+              className="rounded-md bg-Vine px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-green-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600"
             >
               Get In Touch
             </Link>

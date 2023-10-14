@@ -29,7 +29,6 @@ export default function LoginForm({ closeModal, dispatch, router }: loginFormPro
       password: values.password,
     }
     const res = await loginUser(body);
-    console.log("res: ", res)
     if (res.token) {
       dispatch({type: "LOGIN", payload: res});
       closeModal();

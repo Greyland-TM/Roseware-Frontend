@@ -1,10 +1,5 @@
 "use client";
-import React, {
-  ReactNode,
-  createContext,
-  useEffect,
-  useReducer,
-} from "react";
+import React, { ReactNode, createContext, useEffect, useReducer } from "react";
 import { logoutUser, validateUser } from "./utils";
 
 interface AuthState {
@@ -45,12 +40,20 @@ const reducer = (state: AuthState, action: Action) => {
       data = action.payload;
       token = data.token;
       user = data.user;
-      return {
-        ...state,
-        user: user,
-        token: token,
-        isLoggedIn: data.ok,
-      };
+      if (data.ok) {
+        return {
+          ...state,
+          user: user,
+          token: token,
+          isLoggedIn: true,
+        };
+      } else
+        return {
+          ...state,
+          user: null,
+          token: null,
+          isLoggedIn: false,
+        };
 
     case "LOGIN":
       data = action.payload;

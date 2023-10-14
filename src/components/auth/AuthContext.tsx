@@ -1,12 +1,11 @@
 "use client";
 import React, {
-  Dispatch,
   ReactNode,
   createContext,
   useEffect,
   useReducer,
 } from "react";
-import { logoutUser, registerNewUser, validateUser } from "./utils";
+import { logoutUser, validateUser } from "./utils";
 
 interface AuthState {
   user: Object | null;

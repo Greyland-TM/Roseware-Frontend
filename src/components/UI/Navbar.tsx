@@ -7,7 +7,6 @@ import { Disclosure } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import LoginForm from "../auth/LoginForm";
 import { AuthContext } from "../auth/AuthContext";
-import { Oval } from "react-loader-spinner";
 
 export default function Nav() {
   const pathName = usePathname();
@@ -35,6 +34,7 @@ export default function Nav() {
           router={router}
         />
       </dialog>
+      
       <Disclosure
         as="nav"
         className="h-16 sticky top-0 z-50 opacity-95 backdrop-blur text-black shadow-md"

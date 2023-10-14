@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Geologica } from "next/font/google";
 import Navbar from "@/components/UI/Navbar";
 import Footer from "@/components/UI/Footer";
+import { AuthProvider } from "@/components/auth/AuthContext";
 
 const yrsa = Geologica({ subsets: ["latin"] });
 export const metadata: Metadata = {
@@ -18,9 +19,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${yrsa.className} tracking-tighter`}>
+        <AuthProvider>
           <Navbar />
           <main className="min-h-custom">{children}</main>
           <Footer />
+        </AuthProvider>
       </body>
     </html>
   );

@@ -7,8 +7,14 @@ import Link from "next/link";
 import { ThreeDots } from "react-loader-spinner";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { loginUser } from "./Utils";
 
-export default function LoginForm() {
+interface loginFormProps { 
+  closeModal: () => void;
+  dispatch: React.Dispatch<any>;
+}
+
+export default function LoginForm({ closeModal, dispatch }: loginFormProps) { 
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -19,9 +25,12 @@ export default function LoginForm() {
       password: Yup.string().required("Please provide a valid password"),
     }),
     onSubmit: async (values) => {
-      const email = values.email;
-      const password = values.password;
-      console.log(email, password);
+      const body = {
+        email: values.email,
+        password: values.password,
+      }
+      const data = await loginUser(body);
+      dispatch({type: "LOGIN", payload: data})
     },
   });
 
@@ -31,9 +40,7 @@ export default function LoginForm() {
         <div className="mt-10 sm:mt-20 lg:mt-52 sm:mx-auto sm:w-full sm:max-w-[480px]">
           <div className="bg-white px-6 py-6 shadow sm:rounded-lg sm:px-12">
             <div className="flex justify-center">
-              <h1 className="font-extrabold text-4xl text-blue-700">
-                Roseware
-              </h1>
+              <h1 className="font-extrabold text-4xl text-Black">Roseware</h1>
             </div>
             <div className="flex min-h-full flex-1 flex-col justify-center py-6 sm:px-6 lg:px-8">
               <div className="sm:mx-auto sm:w-full sm:max-w-md">
@@ -104,7 +111,7 @@ export default function LoginForm() {
                 <div>
                   <button
                     type="submit"
-                    className="flex w-full justify-center rounded-md bg-rose-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-rose-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600"
+                    className="flex w-full justify-center rounded-md bg-Vine px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-rose-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600"
                   >
                     {!formik.isSubmitting ? (
                       "Sign in"
@@ -126,10 +133,11 @@ export default function LoginForm() {
             <p className="mt-2 text-center w-full text-sm text-gray-500">
               Not a member?
               <Link
-                href={`/register`}
-                className="font-semibold leading-6 text-rose-600 hover:text-rose-500"
+                href={`/auth/register`}
+                onClick={closeModal}
+                className="mx-1 font-semibold leading-6 text-rose-800 hover:text-rose-700"
               >
-               {" "}Sign Up Here
+                Sign Up Here
               </Link>
             </p>
           </div>

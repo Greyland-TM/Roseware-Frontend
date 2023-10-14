@@ -31,8 +31,8 @@ export default function Contact() {
           fill="url(#0787a7c5-978c-4f66-83c7-11c213f99cb7)"
         />
       </svg>
-      <div className="flex flex-col lg:flex-row justify-center mx-auto max-w-7xl min-h-custom bg-gradient-to-tl from-gray-50 via-gray-300 via-50% to-gray-50 rounded-2xl">
-        <div className="relative flex px-6 pb-20 pt-24 sm:pt-32 lg:static lg:px-8 lg:py-48 ">
+      <div className="flex flex-col lg:flex-row justify-center mx-auto max-w-7xl min-h-custom bg-gradient-to-tl from-white via-zinc-50 via-50% to-white rounded-2xl shadow-lg">
+        <div className="relative flex px-6 pb-20 pt-24 sm:pt-32 lg:static lg:px-8 lg:py-48">
           <div className="mx-auto max-w-xl lg:mx-0 lg:max-w-lg my-auto ">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900">
               Get in touch

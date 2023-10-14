@@ -1,18 +1,38 @@
 "use client";
 import { usePathname } from "next/navigation";
+import { useRef, useContext } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Disclosure } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import LoginForm from "../auth/LoginForm";
+import { AuthContext } from "../auth/AuthContext";
 
 export default function Nav() {
   const pathName = usePathname();
+  const modalRef = useRef<HTMLDialogElement>(null);
+  const ctx = useContext(AuthContext);
+  const dispatch = ctx.dispatch;
 
+  const handleLoginClicked = () => {
+    const modal: HTMLDialogElement | null = modalRef.current;
+    modal?.showModal();
+  };
+
+  const closeModal = () => {
+    const modal: HTMLDialogElement | null = modalRef.current;
+    modal?.close();
+  };
+
+  
   return (
     <>
+     <dialog className="min-h-custom backdrop:backdrop-blur" ref={modalRef}>
+        <LoginForm closeModal={closeModal} dispatch={dispatch}/>
+      </dialog>
       <Disclosure
         as="nav"
-        className="h-16 sticky top-0 z-50 opacity-95 backdrop-blur text-black shadow"
+        className="h-16 sticky top-0 z-50 opacity-95 backdrop-blur text-black shadow-md"
       >
         {({ open }) => (
           <>
@@ -73,14 +93,14 @@ export default function Nav() {
                     <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
                   )}
                 </Disclosure.Button>
-                <div className="md:flex hidden">
-                  <button className="w-24 mr-2 rounded-md bg-rose-950 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-rose-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600">
+                {!ctx.isLoggedIn ? <div className="md:flex hidden">
+                  <button onClick={handleLoginClicked} className="w-24 mr-2 rounded-md bg-rose-950 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-rose-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600">
                     Sign In
                   </button>
-                  <button className="w-24 rounded-md bg-rose-950 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-rose-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600">
+                  <Link href="/auth/register" className=" text-center w-24 rounded-md bg-rose-950 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-rose-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600">
                     Sign Up
-                  </button>
-                </div>
+                  </Link>
+                </div> : <button onClick={() => {dispatch({type: "LOGOUT"})}} className="w-24 mr-2 rounded-md bg-rose-950 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-rose-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600">Logout</button>}
               </div>
             </div>
 
@@ -111,13 +131,14 @@ export default function Nav() {
                 <div className="flex flex-col justify-center">
                   <Disclosure.Button
                     as={Link}
+                    onClick={handleLoginClicked}
                     href="#"
                     className="mx-2 mb-2 text-center mr-2 rounded-md bg-rose-950 px-2.5 py-1 text-sm font-semibold text-white shadow-sm hover:bg-rose-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600"
                   >
                     Sign In
                   </Disclosure.Button>
                   <Disclosure.Button
-                    as={Link}
+                    as={Link}                    
                     href="#"
                     className="mx-2 text-center mr-2 rounded-md bg-rose-950 px-2.5 py-1 text-sm font-semibold text-white shadow-sm hover:bg-rose-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600"
                   >

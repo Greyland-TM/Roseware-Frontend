@@ -253,7 +253,7 @@ export default function RegisterForm() {
             <button
               type="submit"
               disabled={formik.isSubmitting}
-              className="rounded-md bg-rose-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-rose-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600"
+              className="rounded-md bg-Vine px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-rose-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600"
             >
               {!formik.isSubmitting ? (
                 "Save"

@@ -6,7 +6,7 @@ import React, {
   useEffect,
   useReducer,
 } from "react";
-import { logoutUser, registerNewUser, validateUser } from "./Utils";
+import { logoutUser, registerNewUser, validateUser } from "./utils";
 
 interface AuthState {
   user: Object | null;
@@ -39,12 +39,9 @@ const initialState: AuthState = {
 };
 
 const reducer = (state: AuthState, action: Action) => {
-  let data;
-  let token;
-  let user;
+  let data, token, user;
 
   switch (action.type) {
-
     case "SETUSER":
       data = action.payload;
       token = data.token;
@@ -70,12 +67,10 @@ const reducer = (state: AuthState, action: Action) => {
       };
 
     case "LOGOUT":
-      token = localStorage.getItem("token");
+      token = state.token;
+      logoutUser(token);
       localStorage.removeItem("user");
       localStorage.removeItem("token");
-      logoutUser(token).then((res) => {
-        console.log(res);
-      });
       return {
         ...state,
         user: null,

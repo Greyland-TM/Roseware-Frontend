@@ -1,3 +1,4 @@
+
 export const registerNewUser = async (body: Object) => {
   try {
     const backend_url = "http://127.0.0.1:8000";
@@ -16,7 +17,24 @@ export const registerNewUser = async (body: Object) => {
     } else {
       console.log("No Token Received");
     }
+  } catch (error) {
+    console.log(error);
+  }
+};
 
+export const validateUser = async (token: string | null) => {
+  try {
+    const backend_url = "http://127.0.0.1:8000";
+    const response = await fetch(`${backend_url}/accounts/customer/`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token}`,
+      },
+    });
+
+    const data = await response.json();
+    return data;
   } catch (error) {
     console.log(error);
   }
@@ -33,15 +51,13 @@ export const loginUser = async (body: Object) => {
 
     const data = await response.json();
     return data;
-
-  
   } catch (error) {
     console.log(error);
   }
 };
 
 export const logoutUser = async (token: string | null) => {
- const backend_url = "http://127.0.0.1:8000";
+  const backend_url = "http://127.0.0.1:8000";
   try {
     const response = await fetch(`${backend_url}/accounts/logout/`, {
       method: "POST",
@@ -52,27 +68,6 @@ export const logoutUser = async (token: string | null) => {
     });
 
     const data = await response.json();
-
-  } catch (error) {
-    console.log(error)
-  }
-}
-
-export const validateUser = async (token: string | null) => {
-
-  try {
-    const backend_url = "http://127.0.0.1:8000";
-    const response = await fetch(`${backend_url}/accounts/customer/`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Token ${token}`,
-      },
-    });
-
-    const data = await response.json();
-    return data
-
   } catch (error) {
     console.log(error);
   }

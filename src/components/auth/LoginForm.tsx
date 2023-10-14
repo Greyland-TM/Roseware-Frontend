@@ -7,7 +7,7 @@ import Link from "next/link";
 import { ThreeDots } from "react-loader-spinner";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { loginUser } from "./Utils";
+import { loginUser } from "./utils";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 

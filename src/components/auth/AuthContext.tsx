@@ -2,8 +2,21 @@
 import React, { ReactNode, createContext, useEffect, useReducer } from "react";
 import { logoutUser, validateUser } from "./utils";
 
+type User = {
+  id: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+  profile_picture: string;
+  phoneNumber: string;
+  package_plans: Array<any>;
+  organization: Object;
+  has_synced_pipedrive: false;
+  has_synced_stripe: false;
+};
+
 interface AuthState {
-  user: Object | null;
+  user: User | null;
   token: string | null;
   isLoggedIn: boolean;
   dispatch: React.Dispatch<Action>;

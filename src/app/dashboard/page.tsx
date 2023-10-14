@@ -1,59 +1,62 @@
 // PageLayout.jsx
 "use client";
-import { usePathname, useRouter } from "next/navigation";
-import React, { ReactNode, useEffect, useState } from 'react';
-import DashboardNav from '../components/page-components/dashboard/DashboardNav';
-import { useSelector, useDispatch } from 'react-redux';
+import { useRouter } from "next/navigation";
+import React, { ReactNode, useEffect, useState, useContext } from "react";
+import { AuthContext } from "@/components/auth/AuthContext";
+import { useSearchParams } from 'next/navigation'
 
-
-export function DashboardLayout({ children }: {children: ReactNode}) {
-  const { userToken, user } = useSelector((state) => state.session);
-  const { isLoggedIn, validationCheckComplete } = useSelector(
-    (state) => state.session,
-  );
-  const location = usePathname();
-  const queryParams = new URLSearchParams(location.search);
-  const pipedriveOuthCode = queryParams.get('code');
-  // const stripePaymentSuccesss = queryParams.get('success');
-  const stripeConnectionSuccess = queryParams.get('connected');
+export function DashboardLayout({ children }: { children: ReactNode }) {
+  const ctx = useContext(AuthContext);
+  // TODO - These need to either be passed through a prop chain or stored in app wide state eventually
+  const [isPipedriveSyncing, setIsStripeSyncing] = useState(false);
+  const [isStripeSyncing, setIsPipedriveSyncing] = useState(false);
+ const queryParams = useSearchParams();
+  const pipedriveOuthCode = queryParams.get("code");
+  const stripeConnectionSuccess = queryParams.get("connected");
   const navigate = useRouter();
-  const dispatch = useDispatch();
+  const user = ctx.user;
+  const userToken = ctx.token;
+  const isLoggedIn = ctx.isLoggedIn;
+
+  // NOTE
+  // There was at one point a validationCheckComplete variable used in here some how.
+  // We got rid of it while switching to next.js and updating the application.
 
   // If the user is not logged in the redirect to the register page. Keep the oauth code in the url if it exists
   useEffect(() => {
-    if (validationCheckComplete && !isLoggedIn) {
+    if (!isLoggedIn) {
       navigate.push(
-        `/login${pipedriveOuthCode ? `?code=${pipedriveOuthCode}` : ''}`,
+        `/login${pipedriveOuthCode ? `?code=${pipedriveOuthCode}` : ""}`
       );
     }
-  }, [isLoggedIn, validationCheckComplete]);
+  }, [isLoggedIn]);
 
   // After a user connects their pipedrive account to roseware, setup the oauth flow
   useEffect(() => {
     const pipedriveOauthSetup = async () => {
       if (isLoggedIn && pipedriveOuthCode && userToken) {
-        dispatch(updateIsPipedriveSyncing(true));
+        setIsPipedriveSyncing(true);
         const response = await fetch(
-          `${import.meta.env.VITE_BACKEND_URL}/pipedrive/oauth/`,
+          `${process.env.BACKEND_URL}/pipedrive/oauth/`,
           {
-            method: 'POST',
+            method: "POST",
             headers: {
-              'Content-Type': 'application/json',
+              "Content-Type": "application/json",
               Authorization: `Token ${userToken}`,
             },
             body: JSON.stringify({ code: pipedriveOuthCode }),
-          },
+          }
         );
         const data = await response.json();
-        console.log('pipedrive data: ', data)
+        console.log("pipedrive data: ", data);
         if (data.ok) {
-          dispatch(updateHasSyncedPipedrive(data.customer.has_synced_pipedrive));
+          setIsPipedriveSyncing(false);
         }
-        dispatch(updateIsPipedriveSyncing(false));
+        setIsPipedriveSyncing(false);
       }
     };
     pipedriveOauthSetup();
-    ('');
+    ("");
   }, [pipedriveOuthCode, isLoggedIn]);
 
   // After a user completes a stripe payment, update the user state to reflect that
@@ -64,31 +67,28 @@ export function DashboardLayout({ children }: {children: ReactNode}) {
   // After a user connects their stripe account to roseware, update the user state to reflect that
   useEffect(() => {
     const checkConnectionStatus = async () => {
-      dispatch(updateIsStripeSyncing(true));
-      console.log('user: ', user);
+      setIsStripeSyncing(true);
       const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}/stripe/connect-link/?pk=${
-          user.id
-        }`,
+        `${process.env.BACKEND_URL}/stripe/connect-link/?pk=${user?.id}`,
         {
-          method: 'POST',
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
             Authorization: `Token ${userToken}`,
           },
-        },
+        }
       );
       const data = await response.json();
-      console.log('data: ', data);
+      console.log("data: ", data);
       if (data.ok) {
-        dispatch(updateHasSyncedStripe(true));
+        setIsStripeSyncing(false);
       }
     };
     if (isLoggedIn && stripeConnectionSuccess && userToken) {
       checkConnectionStatus();
     }
-    dispatch(updateIsStripeSyncing(false));
-  }, [stripeConnectionSuccess, isLoggedIn, user, dispatch, userToken]);
+    setIsStripeSyncing(false);
+  }, [stripeConnectionSuccess, isLoggedIn, user, userToken]);
 
   // Default loading state
   if (!isLoggedIn) {
@@ -98,7 +98,7 @@ export function DashboardLayout({ children }: {children: ReactNode}) {
   return (
     <div className="flex h-custom">
       <div className="hidden md:block flex-shrink-0">
-        <DashboardNav />
+        {/* <DashboardNav /> */}
       </div>
       <div className="flex flex-col flex-grow items-center overflow-y-auto w-full">
         {children}

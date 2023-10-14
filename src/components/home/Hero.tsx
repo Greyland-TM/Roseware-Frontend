@@ -2,25 +2,9 @@ import Link from 'next/link';
 
 export default function Hero() {
   return (
-    <div className="relative isolate overflow-hidden bg-stone-50">
-      <svg
-        className="absolute inset-0 -z-10 h-full w-full stroke-gray-300"
-        aria-hidden="true"
-      >
-        <defs>
-          <pattern
-            id="0787a7c5-978c-4f66-83c7-11c213f99cb7"
-            width={200}
-            height={200}
-            x="50%"
-            y={-1}
-            patternUnits="userSpaceOnUse"
-          >
-            <path d="M.5 200V.5H200" fill="none" />
-          </pattern>
-        </defs>
-        <rect width="100%" height="100%" strokeWidth={0} fill="url(#0787a7c5-978c-4f66-83c7-11c213f99cb7)" />
-      </svg>
+    <div className="relative isolate overflow-hidden">
+
+     
       <div className="min-h-custom mx-auto max-w-7xl px-6 pb-24 pt-10 sm:pb-32 flex justify-center lg:px-8 md:py-40">
         <div className="flex justify-center flex-col items-left lg:flex-shrink-0 pb-4">
           <h1 className="font-display text-5xl font-medium text-slate-900 md:text-6xl lg:text-7xl tracking-tighter">
@@ -34,7 +18,7 @@ export default function Hero() {
           <div className="mt-10 flex items-center gap-x-6">
             <Link 
               href='/contact' 
-              className="rounded-md bg-rose-800 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600"
+              className="rounded-md bg-Vine px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-gray-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600"
             >
               Get In Touch
             </Link>
@@ -44,6 +28,7 @@ export default function Hero() {
           </div>
         </div>
       </div>
+
     </div>
   )
 }

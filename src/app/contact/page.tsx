@@ -31,34 +31,9 @@ export default function Contact() {
           fill="url(#0787a7c5-978c-4f66-83c7-11c213f99cb7)"
         />
       </svg>
-      <div className="flex flex-col lg:flex-row justify-center mx-auto max-w-7xl min-h-custom   bg-gradient-to-tl from-white via-gray-200 to-white">
+      <div className="flex flex-col lg:flex-row justify-center mx-auto max-w-7xl min-h-custom bg-gradient-to-tr from-white via-gray-200 via-50% to-white">
         <div className="relative flex px-6 pb-20 pt-24 sm:pt-32 lg:static lg:px-8 lg:py-48 ">
           <div className="mx-auto max-w-xl lg:mx-0 lg:max-w-lg my-auto ">
-            <div className="absolute inset-y-0 left-0 -z-10 w-full overflow-hidden bg-gray-100 ring-1 ring-gray-900/10 lg:w-1/2 ">
-              <svg
-                className="absolute inset-0 -z-10 h-full w-full stroke-gray-300"
-                aria-hidden="true"
-              >
-                <defs>
-                  <pattern
-                    id="0787a7c5-978c-4f66-83c7-11c213f99cb7"
-                    width={200}
-                    height={200}
-                    x="50%"
-                    y={-1}
-                    patternUnits="userSpaceOnUse"
-                  >
-                    <path d="M.5 200V.5H200" fill="none" />
-                  </pattern>
-                </defs>
-                <rect
-                  width="100%"
-                  height="100%"
-                  strokeWidth={0}
-                  fill="url(#0787a7c5-978c-4f66-83c7-11c213f99cb7)"
-                />
-              </svg>
-            </div>
             <h2 className="text-3xl font-bold tracking-tight text-gray-900">
               Get in touch
             </h2>

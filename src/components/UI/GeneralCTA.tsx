@@ -5,7 +5,7 @@ export default function GeneralCTA(props: any) {
   const { header, subheader, primaryLink, secondaryLink } = props;
   return (
     <div className="bg-zinc-100">
-      <div className="2xl:container 2xl:mx-auto px-6 py-24 sm:py-32 lg:flex lg:items-center lg:justify-between lg:px-8">
+      <div className="2xl:container 2xl:mx-auto px-6 py-24 sm:py-32 lg:flex lg:items-center lg:justify-between lg:px-8 max-w-7xl">
         <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
           {header}
           <br />

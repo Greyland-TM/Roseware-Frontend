@@ -1,9 +1,9 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Geologica } from "next/font/google";
-import Navbar from "@/components/UI/Navbar";
+import Navbar from "@/components/nav/Navbar";
 import Footer from "@/components/UI/Footer";
-import { AuthProvider } from "@/components/auth/AuthContext";
+import { AuthProvider } from "@/app/auth/AuthContext";
 
 const geologica = Geologica({ 
   subsets: ["latin"],

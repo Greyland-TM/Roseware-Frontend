@@ -1,5 +1,3 @@
-import { validateUser } from "@/components/auth/utils";
-import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 

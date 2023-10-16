@@ -1,5 +1,5 @@
-import ServicesIndex from '@/components/services/Services';
-import ServicesHeader from '@/components/services/ServicesHeader';
+import ServicesIndex from './Services';
+import ServicesHeader from './ServicesHeader';
 import GeneralCTA from '../../components/UI/GeneralCTA';
 
 export default function ServicesRoute() {

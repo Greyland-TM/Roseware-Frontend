@@ -5,8 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { Disclosure } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import LoginForm from "../auth/LoginForm";
-import { AuthContext } from "../auth/AuthContext";
+import LoginForm from "../../app/auth/LoginForm";
+import { AuthContext } from "../../app/auth/AuthContext";
 
 export default function Nav() {
   const pathName = usePathname();

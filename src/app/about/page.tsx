@@ -1,6 +1,6 @@
-import Team from "@/components/about/Team";
+import Team from "./Team";
 import GeneralCTA from "../../components/UI/GeneralCTA";
-import About from "../../components/about/About";
+import About from "./About";
 
 const AboutRoute = () => {
   return (

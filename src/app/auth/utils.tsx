@@ -1,5 +1,10 @@
+import Cookies from "js-cookie";
+
 // ──────────────────────────────────────────────
 // Register New User
+
+import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
+
 // ──────────────────────────────────────────────
 export const registerNewUser = async (body: Object) => {
   try {
@@ -30,7 +35,7 @@ export const registerNewUser = async (body: Object) => {
 // ──────────────────────────────────────────────
 // Validate User
 // ──────────────────────────────────────────────
-export const validateUser = async (token: string | null) => {
+export const validateUser = async (token: string | undefined) => {
   try {
     const backend_url = "http://127.0.0.1:8000";
 
@@ -65,6 +70,9 @@ export const loginUser = async (body: Object) => {
     });
 
     const data = await response.json();
+    if (data.token) {
+      Cookies.set("token", data.token);
+    }
     return data;
   } catch (error) {
     return error;
@@ -74,7 +82,7 @@ export const loginUser = async (body: Object) => {
 // ──────────────────────────────────────────────
 // Logout User
 // ──────────────────────────────────────────────
-export const logoutUser = async (token: string | null) => {
+export const logoutUser = async (token: string | undefined) => {
   try {
     const backend_url = "http://127.0.0.1:8000";
 

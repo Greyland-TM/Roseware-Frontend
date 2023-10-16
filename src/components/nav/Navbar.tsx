@@ -43,7 +43,7 @@ export default function Nav() {
           <>
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <div className="flex h-16 items-center justify-between">
-                <Link href="/">
+                <Link href="/home">
                   <div className={`p-1 rounded-full bg-gray-300 h-12 w-12`}>
                     <Image
                       className="inline-block rounded-full h-full w-full"

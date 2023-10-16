@@ -1,6 +1,8 @@
 "use client";
 import React, { ReactNode, createContext, useEffect, useReducer } from "react";
-import { validateUser } from "./utils";
+import { validateUser, logoutUser } from "./utils";
+import Cookies from 'js-cookie';
+import jsCookie from 'js-cookie';
 
 type User = {
   id: number;
@@ -51,9 +53,10 @@ const reducer = (state: AuthState, action: Action) => {
   switch (action.type) {
     case "SETUSER":
       data = action.payload;
+      console.log("setting user...", data.customer)
       return {
         ...state,
-        user: data.user,
+        user: data.customer,
         token: data.token,
         isLoggedIn: data.ok,
       };
@@ -86,7 +89,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    const token = "";
+    const token = Cookies.get('token');
     if (token) {
       validateUser(token).then((res) => {
         dispatch({ type: "SETUSER", payload: res });

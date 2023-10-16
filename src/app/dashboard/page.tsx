@@ -1,11 +1,11 @@
 // PageLayout.jsx
 "use client";
 import { useRouter } from "next/navigation";
-import React, { ReactNode, useEffect, useState, useContext } from "react";
-import { AuthContext } from "@/components/auth/AuthContext";
+import React, { useEffect, useState, useContext } from "react";
+import { AuthContext } from "../auth/AuthContext";
 import { useSearchParams } from 'next/navigation'
 
-export default function DashboardLayout({ children }: { children: ReactNode }) {
+export default function Dashboard() {
   const ctx = useContext(AuthContext);
   // TODO - These need to either be passed through a prop chain or stored in app wide state eventually
   const [isPipedriveSyncing, setIsStripeSyncing] = useState(false);
@@ -33,32 +33,32 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
   // }, [isLoggedIn]);
 
   // After a user connects their pipedrive account to roseware, setup the oauth flow
-  useEffect(() => {
-    const pipedriveOauthSetup = async () => {
-      if (isLoggedIn && pipedriveOuthCode && userToken) {
-        setIsPipedriveSyncing(true);
-        const response = await fetch(
-          `${process.env.BACKEND_URL}/pipedrive/oauth/`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Token ${userToken}`,
-            },
-            body: JSON.stringify({ code: pipedriveOuthCode }),
-          }
-        );
-        const data = await response.json();
-        console.log("pipedrive data: ", data);
-        if (data.ok) {
-          setIsPipedriveSyncing(false);
-        }
-        setIsPipedriveSyncing(false);
-      }
-    };
-    pipedriveOauthSetup();
-    ("");
-  }, [pipedriveOuthCode, isLoggedIn]);
+  // useEffect(() => {
+  //   const pipedriveOauthSetup = async () => {
+  //     if (isLoggedIn && pipedriveOuthCode && userToken) {
+  //       setIsPipedriveSyncing(true);
+  //       const response = await fetch(
+  //         `${process.env.BACKEND_URL}/pipedrive/oauth/`,
+  //         {
+  //           method: "POST",
+  //           headers: {
+  //             "Content-Type": "application/json",
+  //             Authorization: `Token ${userToken}`,
+  //           },
+  //           body: JSON.stringify({ code: pipedriveOuthCode }),
+  //         }
+  //       );
+  //       const data = await response.json();
+  //       console.log("pipedrive data: ", data);
+  //       if (data.ok) {
+  //         setIsPipedriveSyncing(false);
+  //       }
+  //       setIsPipedriveSyncing(false);
+  //     }
+  //   };
+  //   pipedriveOauthSetup();
+  //   ("");
+  // }, [pipedriveOuthCode, isLoggedIn]);
 
   // After a user completes a stripe payment, update the user state to reflect that
   // useEffect(() => {
@@ -66,35 +66,35 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
   // }, [stripePaymentSuccesss, isLoggedIn]);
 
   // After a user connects their stripe account to roseware, update the user state to reflect that
-  useEffect(() => {
-    const checkConnectionStatus = async () => {
-      setIsStripeSyncing(true);
-      const response = await fetch(
-        `${process.env.BACKEND_URL}/stripe/connect-link/?pk=${user?.id}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Token ${userToken}`,
-          },
-        }
-      );
-      const data = await response.json();
-      console.log("data: ", data);
-      if (data.ok) {
-        setIsStripeSyncing(false);
-      }
-    };
-    if (isLoggedIn && stripeConnectionSuccess && userToken) {
-      checkConnectionStatus();
-    }
-    setIsStripeSyncing(false);
-  }, [stripeConnectionSuccess, isLoggedIn, user, userToken]);
+  // useEffect(() => {
+  //   const checkConnectionStatus = async () => {
+  //     setIsStripeSyncing(true);
+  //     const response = await fetch(
+  //       `${process.env.BACKEND_URL}/stripe/connect-link/?pk=${user?.id}`,
+  //       {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: `Token ${userToken}`,
+  //         },
+  //       }
+  //     );
+  //     const data = await response.json();
+  //     console.log("data: ", data);
+  //     if (data.ok) {
+  //       setIsStripeSyncing(false);
+  //     }
+  //   };
+  //   if (isLoggedIn && stripeConnectionSuccess && userToken) {
+  //     checkConnectionStatus();
+  //   }
+  //   setIsStripeSyncing(false);
+  // }, [stripeConnectionSuccess, isLoggedIn, user, userToken]);
 
-  // Default loading state
-  if (!isLoggedIn) {
-    return <></>;
-  }
+  // // Default loading state
+  // if (!isLoggedIn) {
+  //   return <></>;
+  // }
 
   return (
     <div className="flex h-custom">
@@ -102,7 +102,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
         {/* <DashboardNav /> */}
       </div>
       <div className="flex flex-col flex-grow items-center overflow-y-auto w-full">
-        {children}
+        <h1>Dashboard</h1>
       </div>
     </div>
   );

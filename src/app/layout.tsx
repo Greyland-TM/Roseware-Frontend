@@ -5,7 +5,11 @@ import Navbar from "@/components/UI/Navbar";
 import Footer from "@/components/UI/Footer";
 import { AuthProvider } from "@/components/auth/AuthContext";
 
-const yrsa = Geologica({ subsets: ["latin"] });
+const geologica = Geologica({ 
+  subsets: ["latin"],
+  variable: '--custom-font-geologica'
+});
+
 export const metadata: Metadata = {
   title: "Roseware Integrations",
   description: "Where Portland craftmanship meets everyday business solutions",
@@ -18,7 +22,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${yrsa.className} tracking-tighter`}>
+      <body className={`${geologica.variable} tracking-tighter`}>
         <AuthProvider>
           <Navbar />
           <main className="min-h-custom">{children}</main>

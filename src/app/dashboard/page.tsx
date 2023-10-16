@@ -5,7 +5,7 @@ import React, { ReactNode, useEffect, useState, useContext } from "react";
 import { AuthContext } from "@/components/auth/AuthContext";
 import { useSearchParams } from 'next/navigation'
 
-export function DashboardLayout({ children }: { children: ReactNode }) {
+export default function DashboardLayout({ children }: { children: ReactNode }) {
   const ctx = useContext(AuthContext);
   // TODO - These need to either be passed through a prop chain or stored in app wide state eventually
   const [isPipedriveSyncing, setIsStripeSyncing] = useState(false);
@@ -23,13 +23,14 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
   // We got rid of it while switching to next.js and updating the application.
 
   // If the user is not logged in the redirect to the register page. Keep the oauth code in the url if it exists
-  useEffect(() => {
-    if (!isLoggedIn) {
-      navigate.push(
-        `/login${pipedriveOuthCode ? `?code=${pipedriveOuthCode}` : ""}`
-      );
-    }
-  }, [isLoggedIn]);
+  // useEffect(() => {
+  //   console.log()
+  //   if (!isLoggedIn) {
+  //     navigate.push(
+  //       `/login${pipedriveOuthCode ? `?code=${pipedriveOuthCode}` : ""}`
+  //     );
+  //   }
+  // }, [isLoggedIn]);
 
   // After a user connects their pipedrive account to roseware, setup the oauth flow
   useEffect(() => {

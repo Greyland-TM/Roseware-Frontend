@@ -1,6 +1,6 @@
 "use client";
 import React, { ReactNode, createContext, useEffect, useReducer } from "react";
-import { logoutUser, validateUser } from "./utils";
+import { validateUser } from "./utils";
 
 type User = {
   id: number;
@@ -11,8 +11,8 @@ type User = {
   phoneNumber: string;
   package_plans: Array<any>;
   organization: Object;
-  has_synced_pipedrive: false;
-  has_synced_stripe: false;
+  has_synced_pipedrive: boolean;
+  has_synced_stripe: boolean;
 };
 
 interface AuthState {
@@ -46,46 +46,28 @@ const initialState: AuthState = {
 };
 
 const reducer = (state: AuthState, action: Action) => {
-  let data, token, user;
+  let data;
 
   switch (action.type) {
     case "SETUSER":
       data = action.payload;
-      token = data.token;
-      user = data.user;
-      if (data.ok) {
-        return {
-          ...state,
-          user: user,
-          token: token,
-          isLoggedIn: true,
-        };
-      } else
-        return {
-          ...state,
-          user: null,
-          token: null,
-          isLoggedIn: false,
-        };
+      return {
+        ...state,
+        user: data.user,
+        token: data.token,
+        isLoggedIn: data.ok,
+      };
 
     case "LOGIN":
       data = action.payload;
-      token = data.token;
-      user = data.user;
-      localStorage.setItem("user", user);
-      localStorage.setItem("token", token);
       return {
         ...state,
-        user: user,
-        token: token,
+        user: data.user,
+        token: data.token,
         isLoggedIn: true,
       };
 
     case "LOGOUT":
-      token = state.token;
-      logoutUser(token);
-      localStorage.removeItem("user");
-      localStorage.removeItem("token");
       return {
         ...state,
         user: null,
@@ -104,10 +86,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    validateUser(token).then((res) => {
-      dispatch({ type: "SETUSER", payload: res });
-    });
+    const token = "";
+    if (token) {
+      validateUser(token).then((res) => {
+        dispatch({ type: "SETUSER", payload: res });
+      });
+    }
   }, []);
 
   const authContextValue = {

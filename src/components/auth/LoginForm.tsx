@@ -76,6 +76,7 @@ export default function LoginForm({ closeModal, dispatch, router }: loginFormPro
                   </label>
                   <div className="mt-2.5">
                     <input
+                      autoComplete="email"
                       autoFocus
                       onChange={formik.handleChange}
                       value={formik.values.email}
@@ -106,6 +107,7 @@ export default function LoginForm({ closeModal, dispatch, router }: loginFormPro
                   </label>
                   <div className="mt-2.5">
                     <input
+                    autoComplete="password"
                       onChange={formik.handleChange}
                       value={formik.values.password}
                       placeholder=""

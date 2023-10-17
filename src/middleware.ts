@@ -15,13 +15,19 @@ export const config = {
      * - greyland.jpg
      * - roseware-logo-3.png
      * - register route
-     * FYI because root cannot be excluded, middleware will always run when something hits "/" with a request
      */
     "/((?!api|_next/static|_next/image|favicon.ico|robots.txt|roseware-logo-3.png|will.jpg|greyland.jpg|about|home|services|contact|auth/register).*)",
   ],
 };
 
 export async function middleware(request: NextRequest) {
+  const base_dir = 'http://localhost:3000/';
+  console.log(request);
+  if (request.url === base_dir) {
+    const homeURL = `${base_dir}home`
+    console.log(homeURL);
+    return NextResponse.redirect(homeURL);
+  }
   const token: RequestCookie | undefined = request.cookies.get("token");
   if (token) {
     console.log("token: ", token);

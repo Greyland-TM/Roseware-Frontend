@@ -61,11 +61,7 @@ interface LoginBody {
 export const loginUser = async (body: LoginBody) => {
   try {
     const backend_url = process.env.NEXT_PUBLIC_BACKEND_URL;
-    console.log(body, backend_url)
-
     // Send a POST request to login the user and get token
-    // console.log(body);
-    // console.log(backend_url);
     const response = await fetch(`${backend_url}/accounts/login/`, {
       method: "POST",
       body: JSON.stringify(body),

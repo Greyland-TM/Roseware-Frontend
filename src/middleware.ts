@@ -22,8 +22,8 @@ export const config = {
 
 export async function middleware(request: NextRequest) {
   const base_dir = "http://localhost:3000/";
+  const homeURL = `${base_dir}home`;
   if (request.url === base_dir) {
-    const homeURL = `${base_dir}home`;
     return NextResponse.redirect(homeURL);
   }
   const token: RequestCookie | undefined = request.cookies.get("token");
@@ -33,9 +33,6 @@ export async function middleware(request: NextRequest) {
       return NextResponse.next();
     }
   } else {
-    return Response.json(
-      { success: false, message: "authentication failed - No token found" },
-      { status: 401 }
-    );
+    return NextResponse.redirect(homeURL);
   }
 }

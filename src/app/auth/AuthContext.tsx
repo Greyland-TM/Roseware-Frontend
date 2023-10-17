@@ -52,7 +52,6 @@ const reducer = (state: AuthState, action: Action) => {
   switch (action.type) {
     case "SETUSER":
       data = action.payload;
-      console.log("setting user to: ", data.customer);
       return {
         ...state,
         user: data.customer,

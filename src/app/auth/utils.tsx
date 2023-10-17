@@ -84,7 +84,7 @@ export const loginUser = async (body: LoginBody) => {
 // ──────────────────────────────────────────────
 // Logout User
 // ──────────────────────────────────────────────
-export const logoutUser = async (token: RequestCookie | string | undefined) => {
+export const logoutUser = async (token: RequestCookie | string | undefined | null) => {
   try {
     const backend_url = process.env.NEXT_PUBLIC_BACKEND_URL;
 
@@ -98,7 +98,7 @@ export const logoutUser = async (token: RequestCookie | string | undefined) => {
     });
 
     const data = await response.json();
-    Cookies.remove("token", { path: "" }); // From my reading the path has to match what was used to set. But thats not working so idk. I'm going to bed.
+    Cookies.remove("token");
     return data;
   } catch (error) {
     return error;

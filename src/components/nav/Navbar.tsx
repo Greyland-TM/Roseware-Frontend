@@ -1,14 +1,18 @@
 "use client";
 import { usePathname, useRouter } from "next/navigation";
-import { useRef, useContext } from "react";
+import { useRef, useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Disclosure } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import LoginForm from "../../app/auth/LoginForm";
 import { AuthContext } from "../../app/auth/AuthContext";
+import { logoutUser } from "../../app/auth/utils";
+import NavButtons from "./NavButtons";
+import { Puff } from "react-loader-spinner";
 
 export default function Nav() {
+  const [loading, setLoading] = useState(true);
   const pathName = usePathname();
   const modalRef = useRef<HTMLDialogElement>(null);
   const ctx = useContext(AuthContext);
@@ -20,10 +24,21 @@ export default function Nav() {
     modal?.showModal();
   };
 
+  const handleLogoutClicked = () => {
+    logoutUser(ctx.token);
+    dispatch({ type: "LOGOUT" });
+    router.push("/home");
+  };
+
   const closeModal = () => {
     const modal: HTMLDialogElement | null = modalRef.current;
     modal?.close();
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false)}, 500);
+  }, []);
 
   return (
     <>
@@ -34,7 +49,7 @@ export default function Nav() {
           router={router}
         />
       </dialog>
-      
+
       <Disclosure
         as="nav"
         className="h-16 sticky top-0 z-50 opacity-95 backdrop-blur text-black shadow-md"
@@ -90,31 +105,24 @@ export default function Nav() {
                   </div>
                 </div>
                 <div className="flex items-center">
-                    {!ctx.isLoggedIn ? (
-                      <div className="md:flex hidden">
-                        <button
-                          onClick={handleLoginClicked}
-                          className="w-24 mr-2 rounded-md bg-rose-950 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-rose-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600"
-                        >
-                          Sign In
-                        </button>
-                        <Link
-                          href="/auth/register"
-                          className=" text-center w-24 rounded-md bg-rose-950 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-rose-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600"
-                        >
-                          Sign Up
-                        </Link>
-                      </div>
-                    ) : (
-                      <button
-                        onClick={() => {
-                          dispatch({ type: "LOGOUT" });
-                        }}
-                        className="hidden md:block w-24 mr-2 text-center rounded-md bg-rose-950 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-rose-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600"
-                      >
-                        Logout
-                      </button>
-                    )}
+                  {loading ? (
+                    <Puff
+                    height="40"
+                    width="40"
+                    radius={1}
+                    color="#420718"
+                    ariaLabel="puff-loading"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                    visible={true}
+                  />
+                  ) : (
+                    <NavButtons
+                      isLoggedIn={ctx.isLoggedIn}
+                      handleLoginClicked={handleLoginClicked}
+                      handleLogoutClicked={handleLogoutClicked}
+                    />
+                  )}
                   <Disclosure.Button className="md:hidden relative inline-flex items-center justify-center rounded-md p-2 text-black hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
                     <span className="absolute -inset-0.5" />
                     <span className="sr-only">Open main menu</span>
@@ -173,9 +181,7 @@ export default function Nav() {
                     </>
                   ) : (
                     <button
-                      onClick={() => {
-                        dispatch({ type: "LOGOUT" });
-                      }}
+                      onClick={handleLogoutClicked}
                       className="w-full mx-auto text-center rounded-md bg-rose-950 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-rose-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600"
                     >
                       Logout

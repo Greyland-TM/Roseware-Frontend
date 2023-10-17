@@ -13,25 +13,37 @@ export default function NavButtons({
 }: NavButtonsProps) {
   if (!isLoggedIn) {
     return (
-        <div className="w-48 flex items-center gap-2">
+      <div className="w-48 flex items-center gap-2">
         <button
           onClick={handleLoginClicked}
-          className=" w-full mx-auto text-center rounded-md bg-rose-950 px-2.5 py-1 text-sm font-semibold text-white shadow-sm hover:bg-rose-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600"
+          className=" w-full mx-auto text-center rounded-md bg-rose-950 px-2.5 py-1 text-sm font-semibold text-white shadow-sm hover:bg-rose-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600 tracking-tighter"
         >
           Sign In
         </button>
-        <Link href="/auth/register" className="w-full mx-auto text-center mr-2 rounded-md bg-rose-950 px-2.5 py-1 text-sm font-semibold text-white shadow-sm hover:bg-rose-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600">
+        <Link
+          href="/auth/register"
+          className="w-full mx-auto text-center rounded-md bg-rose-950 px-2.5 py-1 text-sm font-semibold text-white shadow-sm hover:bg-rose-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600"
+        >
           Sign Up
         </Link>
       </div>
     );
   } else
     return (
-      <button
-        onClick={handleLogoutClicked}
-        className="w-full mx-auto text-center rounded-md bg-rose-950 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-rose-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600"
-      >
-        Logout
-      </button>
+      <div className="w-48 flex items-center gap-2">
+        <Link
+          href="/dashboard"
+          className="w-full mx-auto text-center rounded-md bg-rose-950 px-2.5 py-1 text-sm font-semibold text-white shadow-sm hover:bg-rose-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600"
+        >
+          Dashboard
+        </Link>
+
+        <button
+          onClick={handleLogoutClicked}
+          className="w-full mx-auto text-center rounded-md bg-rose-950 px-2.5 py-1 text-sm font-semibold text-white shadow-sm hover:bg-rose-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600 tracking-tighter"
+        >
+          Logout
+        </button>
+      </div>
     );
 }

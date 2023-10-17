@@ -103,6 +103,8 @@ export default function Dashboard() {
       </div>
       <div className="flex flex-col flex-grow items-center overflow-y-auto w-full">
         <h1>Dashboard</h1>
+        <h2>Welcome, {user?.first_name + " " + user?.last_name}</h2>
+        <p></p>
       </div>
     </div>
   );

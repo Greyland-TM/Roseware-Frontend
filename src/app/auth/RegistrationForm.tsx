@@ -4,10 +4,13 @@ import * as Yup from "yup";
 import { ThreeDots } from "react-loader-spinner";
 import { useContext } from "react";
 import { AuthContext } from "./AuthContext";
+import { registerNewUser } from "./utils";
+import { useRouter } from "next/navigation";
 
 export default function RegisterForm() {
   const ctx = useContext(AuthContext);
   const dispatch = ctx.dispatch;
+  const router = useRouter();
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -43,7 +46,11 @@ export default function RegisterForm() {
         phone: values.phone,
         status: "customer",
       };
-      dispatch({ type: "REGISTER", payload: data });
+      const newUserResponse = await registerNewUser(data);
+      if (newUserResponse.token) {
+        dispatch({ type: "LOGIN", payload: data });
+        router.push("/dashboard");
+      }
     },
   });
 

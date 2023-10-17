@@ -14,9 +14,10 @@ export const config = {
      * - will.jpg
      * - greyland.jpg
      * - roseware-logo-3.png
+     * - register route
      * FYI because root cannot be excluded, middleware will always run when something hits "/" with a request
      */
-    "/((?!api|_next/static|_next/image|favicon.ico|robots.txt|roseware-logo-3.png|will.jpg|greyland.jpg|about|home|services|contact).*)",
+    "/((?!api|_next/static|_next/image|favicon.ico|robots.txt|roseware-logo-3.png|will.jpg|greyland.jpg|about|home|services|contact|auth/register).*)",
   ],
 };
 

@@ -3,12 +3,10 @@ import Cookies from "js-cookie";
 // ──────────────────────────────────────────────
 // Register New User
 
-import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
-
 // ──────────────────────────────────────────────
 export const registerNewUser = async (body: Object) => {
   try {
-    const backend_url = "http://127.0.0.1:8000";
+    const backend_url = process.env.NEXT_PUBLIC_BACKEND_URL;
 
     // Send a POST request to create a new customer
     const response = await fetch(`${backend_url}/accounts/create-customer/`, {
@@ -18,11 +16,8 @@ export const registerNewUser = async (body: Object) => {
     });
 
     const data = await response.json();
-    console.log(data);
-
     // If token is received, save it to local storage and return data
     if (data.token) {
-      localStorage.setItem("rosewareAuthToken", data.token);
       return data;
     } else {
       console.log("No Token Received");
@@ -37,7 +32,7 @@ export const registerNewUser = async (body: Object) => {
 // ──────────────────────────────────────────────
 export const validateUser = async (token: string | undefined) => {
   try {
-    const backend_url = "http://127.0.0.1:8000";
+    const backend_url = process.env.NEXT_PUBLIC_BACKEND_URL;
 
     // Send a GET request to validate the user based on provided token
     const response = await fetch(`${backend_url}/accounts/customer/`, {
@@ -60,18 +55,20 @@ export const validateUser = async (token: string | undefined) => {
 // ──────────────────────────────────────────────
 export const loginUser = async (body: Object) => {
   try {
-    const backend_url = "http://127.0.0.1:8000";
+    const backend_url = process.env.NEXT_PUBLIC_BACKEND_URL;
 
     // Send a POST request to login the user and get token
+    // console.log(body);
+    // console.log(backend_url);
     const response = await fetch(`${backend_url}/accounts/login/`, {
       method: "POST",
       body: JSON.stringify(body),
       headers: { "Content-Type": "application/json" },
     });
-
     const data = await response.json();
+    // console.log(data);
     if (data.token) {
-      Cookies.set("token", data.token);
+      Cookies.set("token", data.token, { path: "" });
     }
     return data;
   } catch (error) {
@@ -84,7 +81,7 @@ export const loginUser = async (body: Object) => {
 // ──────────────────────────────────────────────
 export const logoutUser = async (token: string | undefined) => {
   try {
-    const backend_url = "http://127.0.0.1:8000";
+    const backend_url = process.env.NEXT_PUBLIC_BACKEND_URL;
 
     // Send a POST request to logout the user
     const response = await fetch(`${backend_url}/accounts/logout/`, {
@@ -96,6 +93,7 @@ export const logoutUser = async (token: string | undefined) => {
     });
 
     const data = await response.json();
+    Cookies.remove("token", { path: "" }); // From my reading the path has to match what was used to set. But thats not working so idk. I'm going to bed.
     return data;
   } catch (error) {
     return error;

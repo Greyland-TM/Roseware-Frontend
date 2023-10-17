@@ -28,11 +28,13 @@ export default function LoginForm({
   }
 
   const handleSubmit = async (values: Values) => {
+    console.log("handling login...")
     const body = {
       email: values.email,
       password: values.password,
     };
     const res = await loginUser(body);
+    console.log("login res: ", res)
     if (res.token) {
       dispatch({ type: "LOGIN", payload: res });
       closeModal();

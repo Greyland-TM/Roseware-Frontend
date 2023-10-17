@@ -1,4 +1,5 @@
 import Cookies from "js-cookie";
+import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies';
 
 // ──────────────────────────────────────────────
 // Register New User
@@ -30,7 +31,7 @@ export const registerNewUser = async (body: Object) => {
 // ──────────────────────────────────────────────
 // Validate User
 // ──────────────────────────────────────────────
-export const validateUser = async (token: string | undefined) => {
+export const validateUser = async (token: RequestCookie | string | undefined) => {
   try {
     const backend_url = process.env.NEXT_PUBLIC_BACKEND_URL;
 
@@ -53,9 +54,14 @@ export const validateUser = async (token: string | undefined) => {
 // ──────────────────────────────────────────────
 // Login User
 // ──────────────────────────────────────────────
-export const loginUser = async (body: Object) => {
+interface LoginBody {
+  email: string,
+  password: string,
+}
+export const loginUser = async (body: LoginBody) => {
   try {
     const backend_url = process.env.NEXT_PUBLIC_BACKEND_URL;
+    console.log(body, backend_url)
 
     // Send a POST request to login the user and get token
     // console.log(body);
@@ -66,7 +72,6 @@ export const loginUser = async (body: Object) => {
       headers: { "Content-Type": "application/json" },
     });
     const data = await response.json();
-    // console.log(data);
     if (data.token) {
       Cookies.set("token", data.token, { path: "" });
     }
@@ -79,7 +84,7 @@ export const loginUser = async (body: Object) => {
 // ──────────────────────────────────────────────
 // Logout User
 // ──────────────────────────────────────────────
-export const logoutUser = async (token: string | undefined) => {
+export const logoutUser = async (token: RequestCookie | string | undefined) => {
   try {
     const backend_url = process.env.NEXT_PUBLIC_BACKEND_URL;
 

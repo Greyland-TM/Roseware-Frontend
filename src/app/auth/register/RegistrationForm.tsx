@@ -3,8 +3,8 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { ThreeDots } from "react-loader-spinner";
 import { useContext } from "react";
-import { AuthContext } from "./AuthContext";
-import { registerNewUser } from "./utils";
+import { AuthContext } from "../AuthContext";
+import { registerNewUser } from "../utils";
 import { useRouter } from "next/navigation";
 
 export default function RegisterForm() {

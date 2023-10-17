@@ -22,18 +22,17 @@ export const config = {
 
 export async function middleware(request: NextRequest) {
   const base_dir = 'http://localhost:3000/';
-  console.log(request);
   if (request.url === base_dir) {
     const homeURL = `${base_dir}home`
     console.log(homeURL);
     return NextResponse.redirect(homeURL);
   }
   const token: RequestCookie | undefined = request.cookies.get("token");
+  console.log(token)
   if (token) {
-    console.log("token: ", token);
-    const data = await validateUser(token.value);
-    console.log(data);
-    if (data.ok) {
+    const res = await validateUser(token.value);
+    console.log(res);
+    if (res.ok) {
       console.log("user validated");
       return NextResponse.next();
     }

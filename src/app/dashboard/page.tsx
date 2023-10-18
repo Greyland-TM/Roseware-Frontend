@@ -3,14 +3,15 @@
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../auth/AuthContext";
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams } from "next/navigation";
+import AccountForm from "./AccountForm";
 
 export default function Dashboard() {
   const ctx = useContext(AuthContext);
   // TODO - These need to either be passed through a prop chain or stored in app wide state eventually
   const [isPipedriveSyncing, setIsStripeSyncing] = useState(false);
   const [isStripeSyncing, setIsPipedriveSyncing] = useState(false);
- const queryParams = useSearchParams();
+  const queryParams = useSearchParams();
   const pipedriveOuthCode = queryParams.get("code");
   const stripeConnectionSuccess = queryParams.get("connected");
   const navigate = useRouter();
@@ -104,7 +105,9 @@ export default function Dashboard() {
       <div className="flex flex-col flex-grow items-center overflow-y-auto w-full">
         <h1>Dashboard</h1>
         <h2>Welcome, {user?.first_name + " " + user?.last_name}</h2>
-        <p></p>
+        <div className="">
+          <AccountForm />
+        </div>
       </div>
     </div>
   );

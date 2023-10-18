@@ -39,8 +39,8 @@ export default function RegisterForm() {
     }),
     onSubmit: async (values) => {
       const data = {
-        first_name: values.firstName,
-        last_name: values.lastName,
+        firstName: values.firstName,
+        lastName: values.lastName,
         email: values.email,
         password: values.password,
         phone: values.phone,

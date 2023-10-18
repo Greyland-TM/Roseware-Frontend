@@ -14,7 +14,10 @@ export const config = {
      * - will.jpg
      * - greyland.jpg
      * - roseware-logo-3.png
-     * - register route
+     * - home route
+     * - services route
+     * - contact route
+     * - auth/register route
      */
     "/((?!api|_next/static|_next/image|favicon.ico|robots.txt|roseware-logo-3.png|will.jpg|greyland.jpg|about|home|services|contact|auth/register).*)",
   ],

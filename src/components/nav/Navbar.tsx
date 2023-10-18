@@ -91,7 +91,7 @@ export default function Nav() {
                           key={item.key}
                           href={item.href}
                           className={`${
-                            pathName === "/services"
+                            pathName === item.href
                               ? "bg-zinc-800 text-white"
                               : ""
                           } transition ease-in-out duration-200 rounded-md text-lg px-3 py-1 font-medium text-black hover:bg-gray-700 hover:text-white`}

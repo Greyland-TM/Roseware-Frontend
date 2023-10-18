@@ -56,7 +56,7 @@ const reducer = (state: AuthState, action: Action) => {
         ...state,
         user: data.customer,
         token: data.token,
-        isLoggedIn: data.ok,
+        isLoggedIn: true,
       };
 
     case "LOGIN":
@@ -76,7 +76,6 @@ const reducer = (state: AuthState, action: Action) => {
         isLoggedIn: false,
       };
 
-
     default:
       return state;
   }
@@ -95,7 +94,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       const token = Cookies.get("token");
       if (token) {
         validateUser(token).then((res) => {
-          dispatch({ type: "SETUSER", payload: res });
+          dispatch({
+            type: "SETUSER",
+            payload: { token: token, customer: res.customer },
+          });
         });
       }
     }

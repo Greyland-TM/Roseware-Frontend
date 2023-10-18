@@ -1,5 +1,5 @@
 import Cookies from "js-cookie";
-import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies';
+import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 
 // ──────────────────────────────────────────────
 // Register New User
@@ -31,7 +31,9 @@ export const registerNewUser = async (body: Object) => {
 // ──────────────────────────────────────────────
 // Validate User
 // ──────────────────────────────────────────────
-export const validateUser = async (token: RequestCookie | string | undefined) => {
+export const validateUser = async (
+  token: RequestCookie | string | undefined
+) => {
   try {
     const backend_url = process.env.NEXT_PUBLIC_BACKEND_URL;
 
@@ -55,8 +57,8 @@ export const validateUser = async (token: RequestCookie | string | undefined) =>
 // Login User
 // ──────────────────────────────────────────────
 interface LoginBody {
-  email: string,
-  password: string,
+  email: string;
+  password: string;
 }
 export const loginUser = async (body: LoginBody) => {
   try {
@@ -80,7 +82,9 @@ export const loginUser = async (body: LoginBody) => {
 // ──────────────────────────────────────────────
 // Logout User
 // ──────────────────────────────────────────────
-export const logoutUser = async (token: RequestCookie | string | undefined | null) => {
+export const logoutUser = async (
+  token: RequestCookie | string | undefined | null
+) => {
   try {
     const backend_url = process.env.NEXT_PUBLIC_BACKEND_URL;
 

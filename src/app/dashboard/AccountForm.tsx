@@ -1,12 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useContext } from "react";
 import { AuthContext } from "../auth/AuthContext";
-import defaultProfilePicture from "../../../images/general/default_profile_picture.jpg";
-
-// I just grabbed this form from the og app and started converting. Idk how far I got with it.
 
 export default function AccountForm() {
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
@@ -14,6 +11,7 @@ export default function AccountForm() {
   const ctx = useContext(AuthContext);
   const dispatch = ctx.dispatch;
   const user = ctx.user;
+  const token = ctx.token;
 
   const formik = useFormik({
     initialValues: {
@@ -47,10 +45,12 @@ export default function AccountForm() {
       }
 
       const backend_url = process.env.NEXT_PUBLIC_BACKEND_URL;
-      const response = await fetch(`${backend_url}/accounts/login/`, {
-        method: "POST",
+      const response = await fetch(`${backend_url}/accounts/customer/`, {
+        method: "PUT",
         body: formData,
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          Authorization: `Token ${token}`,
+        },
       });
       const data = await response.json();
 
@@ -85,7 +85,7 @@ export default function AccountForm() {
                   ? selectedFileUrl
                   : user?.profile_picture
                   ? user?.profile_picture
-                  : defaultProfilePicture
+                  : "/default_profile_picture"
               }
               alt={user?.first_name ? user?.first_name : "Profile Picture"}
               width="1400"

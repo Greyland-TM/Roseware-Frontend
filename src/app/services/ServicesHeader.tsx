@@ -55,7 +55,7 @@ export default function ServicesHeader() {
           {supportLinks.map((link) => (
             <div key={link.name} className="flex flex-col rounded-2xl bg-white shadow-xl">
               <div className="relative flex-1 px-6 pb-8 pt-16 md:px-8">
-                <div className="absolute top-0 inline-block -translate-y-1/2 transform rounded-xl bg-Vine p-5 shadow-lg">
+                <div className="absolute top-0 inline-block -translate-y-1/2 transform rounded-xl bg-Vine-900 p-5 shadow-lg">
                   <link.icon className="h-6 w-6 text-white" aria-hidden="true" />
                 </div>
                 <h3 className="text-xl font-medium text-gray-900">{link.name}</h3>

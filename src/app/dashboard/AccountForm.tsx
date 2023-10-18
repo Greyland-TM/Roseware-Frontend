@@ -13,6 +13,15 @@ export default function AccountForm() {
   const user = ctx.user;
   const token = ctx.token;
 
+  useEffect(() => {
+    formik.setValues({
+      firstName: user?.first_name,
+      lastName: user?.last_name,
+      email: user?.email,
+      phone: user?.phone_number,
+    });
+  }, [user]);
+
   const formik = useFormik({
     initialValues: {
       firstName: user?.first_name,
@@ -43,7 +52,7 @@ export default function AccountForm() {
       if (selectedFile) {
         formData.append("profile_picture", selectedFile);
       }
-
+      
       const backend_url = process.env.NEXT_PUBLIC_BACKEND_URL;
       const response = await fetch(`${backend_url}/accounts/customer/`, {
         method: "PUT",
@@ -54,8 +63,11 @@ export default function AccountForm() {
       });
       const data = await response.json();
 
-      if (!data.ok) {
-        console.log("Error: ", data);
+      if (data.ok) {
+        dispatch({
+          type: "SETUSER",
+          payload: data,
+        });
       }
     },
   });
@@ -85,7 +97,7 @@ export default function AccountForm() {
                   ? selectedFileUrl
                   : user?.profile_picture
                   ? user?.profile_picture
-                  : "/default_profile_picture"
+                  : "/default_profile_picture.jpg"
               }
               alt={user?.first_name ? user?.first_name : "Profile Picture"}
               width="1400"
@@ -208,7 +220,7 @@ export default function AccountForm() {
         <div className="mt-8 flex">
           <button
             type="submit"
-            className="rounded-md bg-indigo-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+            className="rounded-md bg-Vine-900 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-Vine-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
           >
             Save
           </button>

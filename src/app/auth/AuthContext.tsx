@@ -54,8 +54,8 @@ const reducer = (state: AuthState, action: Action) => {
       data = action.payload;
       return {
         ...state,
-        user: data.customer,
-        token: data.token,
+        user: data.customer ?? state.user,
+        token: data.token ?? state.token,
         isLoggedIn: true,
       };
 

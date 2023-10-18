@@ -12,7 +12,7 @@ export default function pageError() {
                 Sorry about that! Please visit our hompage to get where you need
                 to go.
               </p>
-              <button className="sm:w-full lg:w-auto my-2  rounded md py-4 px-8 text-center bg-Vine text-white hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-rose-700 focus:ring-opacity-50">
+              <button className="sm:w-full lg:w-auto my-2  rounded md py-4 px-8 text-center bg-Vine-900 text-white hover:bg-Vine-500 focus:outline-none focus:ring-2 focus:ring-rose-700 focus:ring-opacity-50">
                 <Link href="/">Go Home</Link>
               </button>
           <div>

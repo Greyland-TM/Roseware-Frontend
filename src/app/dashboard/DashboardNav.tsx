@@ -96,7 +96,7 @@ export default function dashboardNav() {
                       "group flex gap-x-3 rounded-md p-2 text-sm leading-6 "
                     )}
                   >
-                    <span className="flex font-semibold h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-gray-800 text-[0.8rem] font-medium text-white group-hover:text-black group-hover:bg-white">
+                    <span className="flex font-semibold h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-gray-800 text-[0.8rem] text-white group-hover:text-black group-hover:bg-white">
                       {team.initial}
                     </span>
                     <span className="truncate">{team.name}</span>

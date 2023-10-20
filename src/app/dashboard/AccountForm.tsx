@@ -82,7 +82,7 @@ export default function AccountForm() {
   };
 
   return (
-    <div className="max-w-md w-lg rounded-xl overflow-hidden shadow-lg h-fit p-6 m-18">
+    <div className="max-w-lg rounded-xl overflow-hidden shadow-md h-fit p-6 m-18 mt-36 bg-white">
       <form onSubmit={formik.handleSubmit} className="md:col-span-2">
         <div className="mb-6 flex align-middle">
           <p className="font-bold text-xl leading-tight">Contact Details</p>
@@ -99,7 +99,7 @@ export default function AccountForm() {
                   ? user?.profile_picture
                   : "/default_profile_picture.jpg"
               }
-              alt={user?.first_name ? user?.first_name : "Profile Picture"}
+              alt={user?.first_name ? user?.first_name : "profile Picture"}
               width="1400"
               height="1800"
             />

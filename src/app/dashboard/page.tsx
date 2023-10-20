@@ -5,8 +5,9 @@ import React, { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../auth/AuthContext";
 import { useSearchParams } from "next/navigation";
 import AccountForm from "./AccountForm";
+import DashboardNav from "./DashboardNav";
 
-export default function Dashboard() {
+export default function dashboard() {
   const ctx = useContext(AuthContext);
   // TODO - These need to either be passed through a prop chain or stored in app wide state eventually
   const [isPipedriveSyncing, setIsStripeSyncing] = useState(false);
@@ -98,9 +99,9 @@ export default function Dashboard() {
   // }
 
   return (
-    <div className="flex h-custom">
-      <div className="hidden md:block flex-shrink-0">
-        {/* <DashboardNav /> */}
+    <div className="flex h-custom bg-gray-100">
+      <div className="hidden md:block flex-shrink-0 w-64 bg-white">
+      <DashboardNav />
       </div>
       <div className="flex flex-col flex-grow items-center overflow-y-auto w-full">
         <div className='flex flex-wrap justify-around w-xl gap-18 mb-20 lg:mb-5'>

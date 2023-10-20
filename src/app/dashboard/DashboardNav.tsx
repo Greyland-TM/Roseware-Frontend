@@ -21,9 +21,9 @@ export default function dashboardNav() {
     },
     {
       name: "Apps",
-      href: "../dashboard/websites",
+      href: "../dashboard/apps",
       icon: UsersIcon,
-      current: currentPage.toLowerCase() === "websites",
+      current: currentPage.toLowerCase() === "apps",
     },
     {
       name: "Integrations",

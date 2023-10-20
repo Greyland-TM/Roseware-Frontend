@@ -13,6 +13,7 @@ import { Puff } from "react-loader-spinner";
 
 export default function Nav() {
   const [loading, setLoading] = useState(true);
+  const [ modalShown, setModalShown ] = useState(false);
   const pathName = usePathname();
   const modalRef = useRef<HTMLDialogElement>(null);
   const ctx = useContext(AuthContext);
@@ -20,6 +21,7 @@ export default function Nav() {
   const router = useRouter();
 
   const handleLoginClicked = () => {
+    setModalShown(true);
     const modal: HTMLDialogElement | null = modalRef.current;
     modal?.showModal();
   };
@@ -31,8 +33,13 @@ export default function Nav() {
   };
 
   const closeModal = () => {
-    const modal: HTMLDialogElement | null = modalRef.current;
+    setModalShown(false);
+    setTimeout(() => {
+      const modal: HTMLDialogElement | null = modalRef.current;
     modal?.close();
+    }, 150);
+
+
   };
 
   useEffect(() => {
@@ -52,10 +59,10 @@ export default function Nav() {
     { href: "/contact", display: "Contact", key: 2 },
     { href: "/about", display: "About", key: 3 },
   ];
-
+//  ${!modalShown ? "translate-y-0" : "translate-y-0"}
   return (
     <>
-      <dialog className="min-h-custom backdrop:backdrop-blur" ref={modalRef}>
+      <dialog className={`transition-all ease-in-out duration-150 ${!modalShown ? "opacity-0 backdrop:backdrop-none" : "opacity-100 backdrop:backdrop-blur"} min-h-custom backdrop:backdrop-blur`} ref={modalRef}>
         <LoginForm
           closeModal={closeModal}
           dispatch={dispatch}

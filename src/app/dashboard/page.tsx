@@ -103,8 +103,6 @@ export default function Dashboard() {
         {/* <DashboardNav /> */}
       </div>
       <div className="flex flex-col flex-grow items-center overflow-y-auto w-full">
-        <h1>Dashboard</h1>
-        <h2>Welcome, {user?.first_name + " " + user?.last_name}</h2>
         <div className='flex flex-wrap justify-around w-xl gap-18 mb-20 lg:mb-5'>
           <AccountForm />
         </div>

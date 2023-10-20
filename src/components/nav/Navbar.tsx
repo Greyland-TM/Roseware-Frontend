@@ -136,7 +136,7 @@ export default function Nav() {
             </div>
 
             {/* Mobile Nav */}
-            <Disclosure.Panel className="md:hidden absolute right-0 rounded-lg w-1/4 bg-gray-900 text-black opacity-100">
+            <Disclosure.Panel className="md:hidden absolute right-0 rounded-lg w-1/4 bg-black text-black opacity-100">
               <div className="space-y-1 px-2 pb-3 pt-2 text-right">
                 {navLinks.map((item) => (
                   <Disclosure.Button

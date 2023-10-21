@@ -21,13 +21,15 @@ export default function dashboardNav() {
     },
     {
       name: "Apps",
-      href: "../dashboard/apps",
+      // href: "../dashboard/apps",
+      href: "#",
       icon: UsersIcon,
       current: currentPage.toLowerCase() === "apps",
     },
     {
       name: "Integrations",
-      href: "../dashboard/integrations",
+      // href: "../dashboard/integrations",
+      href: "#",
       icon: FolderIcon,
       current: currentPage.toLowerCase() === "integrations",
     },
@@ -37,14 +39,16 @@ export default function dashboardNav() {
     {
       id: 1,
       name: "Settings",
-      href: "../dashboard/settings",
+      // href: "../dashboard/settings",
+      href: "#",
       initial: "S",
       current: currentPage.toLowerCase() === "settings",
     },
     {
       id: 1,
       name: "Plans",
-      href: "../dashboard/plans",
+      // href: "../dashboard/plans",
+      href: "#",
       initial: "P",
       current: currentPage.toLowerCase() === "plans",
     },
@@ -66,7 +70,7 @@ export default function dashboardNav() {
                       item.current
                         ? "bg-gray-800 text-white"
                         : "text-black hover:text-white hover:bg-gray-800",
-                      "group flex gap-x-3 rounded-md p-2 text-sm leading-6 "
+                      "transition-all ease-in-out duration-200 group flex gap-x-3 rounded-md p-2 text-sm leading-6 "
                     )}
                     aria-current={item.current ? "page" : undefined}
                   >
@@ -81,7 +85,7 @@ export default function dashboardNav() {
             </ul>
           </li>
           <li>
-            <div className="text-xs  leading-6 text-black">
+            <div className="text-sm font-semibold leading-6 text-black">
               Your Account
             </div>
             <ul role="list" className="-mx-2 mt-2 space-y-1">
@@ -93,7 +97,7 @@ export default function dashboardNav() {
                       team.current
                         ? "bg-gray-800 text-white"
                         : "text-black hover:text-white hover:bg-gray-800",
-                      "group flex gap-x-3 rounded-md p-2 text-sm leading-6 "
+                      "transition-all ease-in-out duration-200 group flex gap-x-3 rounded-md p-2 text-sm leading-6 "
                     )}
                   >
                     <span className="flex font-semibold h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-gray-800 text-[0.8rem] text-white group-hover:text-black group-hover:bg-white">

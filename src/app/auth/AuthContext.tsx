@@ -9,7 +9,7 @@ type User = {
   last_name: string;
   email: string;
   profile_picture: string;
-  phone_number: string;
+  phone: string;
   package_plans: Array<any>;
   organization: Object;
   has_synced_pipedrive: boolean;
@@ -35,7 +35,7 @@ const initialState: AuthState = {
     last_name: "",
     email: "",
     profile_picture: "",
-    phone_number: "",
+    phone: "",
     package_plans: [],
     organization: {},
     has_synced_pipedrive: false,

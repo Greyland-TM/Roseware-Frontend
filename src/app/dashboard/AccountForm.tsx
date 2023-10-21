@@ -15,10 +15,10 @@ export default function AccountForm() {
 
   useEffect(() => {
     formik.setValues({
-      firstName: user?.first_name,
-      lastName: user?.last_name,
-      email: user?.email,
-      phone: user?.phone_number,
+      firstName: user?.first_name ? user?.first_name : "",
+      lastName: user?.last_name ? user?.last_name : "",
+      email: user?.email ? user?.email : "",
+      phone: user?.phone ? user?.phone : "",
     });
   }, [user]);
 
@@ -27,7 +27,7 @@ export default function AccountForm() {
       firstName: user?.first_name,
       lastName: user?.last_name,
       email: user?.email,
-      phone: user?.phone_number,
+      phone: user?.phone,
     },
     validationSchema: Yup.object({
       firstName: Yup.string()
@@ -52,7 +52,7 @@ export default function AccountForm() {
       if (selectedFile) {
         formData.append("profile_picture", selectedFile);
       }
-      
+
       const backend_url = process.env.NEXT_PUBLIC_BACKEND_URL;
       const response = await fetch(`${backend_url}/accounts/customer/`, {
         method: "PUT",
@@ -61,7 +61,9 @@ export default function AccountForm() {
           Authorization: `Token ${token}`,
         },
       });
+      console.log("formData:  ", formData);
       const data = await response.json();
+      console.log("res: ", data);
 
       if (data.ok) {
         dispatch({

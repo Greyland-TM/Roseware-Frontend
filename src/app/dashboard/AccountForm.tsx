@@ -93,6 +93,7 @@ export default function AccountForm() {
         <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:max-w-xl sm:grid-cols-6">
           <div className="col-span-full flex items-center gap-x-8">
             <Image
+            priority
               className="inline-block h-28 w-28 rounded-full object-cover"
               src={
                 selectedFileUrl

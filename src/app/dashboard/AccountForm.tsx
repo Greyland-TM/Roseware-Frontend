@@ -127,6 +127,7 @@ export default function AccountForm() {
                 JPG, GIF or PNG. 1MB max.
               </p>
             </div>
+            
           </div>
 
           <div className="sm:col-span-3">

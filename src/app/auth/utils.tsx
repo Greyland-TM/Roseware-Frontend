@@ -3,7 +3,6 @@ import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 
 // ──────────────────────────────────────────────
 // Register New User
-
 // ──────────────────────────────────────────────
 export const registerNewUser = async (body: Object) => {
   try {
@@ -11,6 +10,7 @@ export const registerNewUser = async (body: Object) => {
 
     // Send a POST request to create a new customer
     const response = await fetch(`${backend_url}/accounts/create-customer/`, {
+      cache: "no-store",
       method: "POST",
       body: JSON.stringify(body),
       headers: { "Content-Type": "application/json" },
@@ -39,6 +39,7 @@ export const validateUser = async (
 
     // Send a GET request to validate the user based on provided token
     const response = await fetch(`${backend_url}/accounts/customer/`, {
+      cache: "no-store",
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -66,6 +67,7 @@ export const loginUser = async (body: LoginBody) => {
     // Send a POST request to login the user and get token
     const response = await fetch(`${backend_url}/accounts/login/`, {
       method: "POST",
+      cache: "no-store",
       body: JSON.stringify(body),
       headers: { "Content-Type": "application/json" },
     });
@@ -91,6 +93,7 @@ export const logoutUser = async (
     // Send a POST request to logout the user
     const response = await fetch(`${backend_url}/accounts/logout/`, {
       method: "POST",
+      cache: "no-store",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Token ${token}`,

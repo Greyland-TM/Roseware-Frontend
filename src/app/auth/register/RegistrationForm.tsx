@@ -2,12 +2,13 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { ThreeDots } from "react-loader-spinner";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../AuthContext";
 import { registerNewUser } from "../utils";
 import { useRouter } from "next/navigation";
 
 export default function RegisterForm() {
+  const [error, setError] = useState("");
   const ctx = useContext(AuthContext);
   const dispatch = ctx.dispatch;
   const router = useRouter();
@@ -47,7 +48,11 @@ export default function RegisterForm() {
         status: "customer",
       };
       const newUserResponse = await registerNewUser(data);
-      if (newUserResponse.token) {
+      console.log(newUserResponse)
+      if (newUserResponse.error) {
+        setError(newUserResponse.error)
+      }
+      else if (newUserResponse.token) {
         dispatch({ type: "LOGIN", payload: data });
         router.push("/dashboard");
       }
@@ -250,17 +255,12 @@ export default function RegisterForm() {
             </div>
           </div>
 
-          <div className="flex items-center justify-end gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:px-8">
-            <button
-              type="button"
-              className="text-sm font-semibold leading-6 text-gray-900"
-            >
-              Cancel
-            </button>
+          <div className="flex items-center justify-between gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:px-8">
+            <div className="text-red-600">{error}</div>
             <button
               type="submit"
               disabled={formik.isSubmitting}
-              className="rounded-md bg-Vine-900 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-Vine-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600"
+              className="rounded-md bg-Vine-900 px-3 py-2 mx-3 text-sm font-semibold text-white shadow-sm hover:bg-Vine-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-600"
             >
               {!formik.isSubmitting ? (
                 "Save"

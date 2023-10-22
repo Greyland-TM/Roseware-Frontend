@@ -17,12 +17,7 @@ export const registerNewUser = async (body: Object) => {
     });
 
     const data = await response.json();
-    // If token is received, save it to local storage and return data
-    if (data.token) {
-      return data;
-    } else {
-      console.log("No Token Received");
-    }
+    return data;
   } catch (error) {
     return error;
   }

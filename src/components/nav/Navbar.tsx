@@ -37,7 +37,7 @@ export default function Nav() {
     setTimeout(() => {
       const modal: HTMLDialogElement | null = modalRef.current;
     modal?.close();
-    }, 150);
+    }, 200);
 
 
   };
@@ -62,7 +62,7 @@ export default function Nav() {
 //  ${!modalShown ? "translate-y-0" : "translate-y-0"}
   return (
     <>
-      <dialog className={`transition-all ease-in-out duration-150 ${!modalShown ? "opacity-0 backdrop:backdrop-none" : "opacity-100 backdrop:backdrop-blur"} min-h-custom backdrop:backdrop-blur`} ref={modalRef}>
+      <dialog className={`transition-all ease-in-out duration-200 ${!modalShown ? "opacity-0 backdrop:backdrop-none" : "opacity-100 backdrop:backdrop-blur"} min-h-custom backdrop:backdrop-blur`} ref={modalRef}>
         <LoginForm
           closeModal={closeModal}
           dispatch={dispatch}

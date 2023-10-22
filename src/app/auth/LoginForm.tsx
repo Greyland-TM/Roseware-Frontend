@@ -2,7 +2,7 @@
 // Once a user is logged in a JWT is returned from the server and stored
 // in the local app context and in the browser local storage.
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { ThreeDots } from "react-loader-spinner";
 import { useFormik } from "formik";
@@ -22,6 +22,7 @@ export default function LoginForm({
   dispatch,
   router,
 }: loginFormProps) {
+  const [error, setError] = useState("");
   interface Values {
     email: string;
     password: string;
@@ -33,10 +34,14 @@ export default function LoginForm({
       password: values.password,
     };
     const res = await loginUser(body);
+    console.log(res);
+    if (res.error) {
+      setError(res.error + ". Please try again");
+    }
     if (res.token) {
       dispatch({ type: "LOGIN", payload: res });
-      closeModal();
       router.push("/dashboard");
+      closeModal();
     } else {
       console.log("error: ", res);
     }
@@ -54,64 +59,69 @@ export default function LoginForm({
     onSubmit: handleSubmit,
   });
 
-  return (<>
-
-    <div className="flex justify-center">
-      <div className="fixed z-20 ">
-        <div className="mt-10 sm:mt-20 lg:mt-52 sm:mx-auto sm:w-full sm:max-w-[480px]">
-        <button onClick={closeModal} className="absolute mt-6 mr-2 right-5 w-6 rounded-full ring-1 ring-gray-200 hover:ring-gray-400 text-gray-400"><XMarkIcon /></button>
-          <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
-            <div className="flex justify-center">
-              <h1 className="font-extrabold text-4xl text-Black">Roseware</h1>
-            </div>
-            <div className="flex min-h-full flex-1 flex-col justify-center py-6 sm:px-6 lg:px-8">
-              <div className="sm:mx-auto sm:w-full sm:max-w-md">
-                <h2 className=" mb-5 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                  Sign in to your account
-                </h2>
+  return (
+    <>
+      <div className="flex justify-center">
+        <div className="fixed z-20 ">
+          <div className="mt-10 sm:mt-20 lg:mt-52 sm:mx-auto sm:w-full sm:max-w-[480px]">
+            <button
+              onClick={closeModal}
+              className="absolute mt-6 mr-2 right-5 w-6 rounded-full ring-1 ring-gray-200 hover:ring-gray-400 text-gray-400"
+            >
+              <XMarkIcon />
+            </button>
+            <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
+              <div className="flex justify-center">
+                <h1 className="font-extrabold text-4xl text-Black">Roseware</h1>
               </div>
-              <form className="space-y-6" onSubmit={formik.handleSubmit}>
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-semibold leading-6 text-gray-900"
-                  >
-                    Email
-                  </label>
-                  <div className="mt-2.5">
-                    <input
-                      autoComplete="loginUsermail"
-                      autoFocus
-                      onChange={formik.handleChange}
-                      value={formik.values.email}
-                      placeholder=""
-                      type="text"
-                      name="email"
-                      id="loginEmail"
-                      className={`${
-                        formik.touched.email && formik.errors.email
-                          ? "border-red-400"
-                          : "border-gray-300"
-                      } block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-300 sm:text-sm sm:leading-6`}
-                    />
-                    {formik.touched.email && formik.errors.email && (
-                      <span className="text-red-400">
-                        {formik.errors.email}
-                      </span>
-                    )}
-                  </div>
+              <div className="flex min-h-full flex-1 flex-col justify-center py-6 sm:px-6 lg:px-8">
+                <div className="sm:mx-auto sm:w-full sm:max-w-md">
+                  <h2 className=" mb-5 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+                    Sign in to your account
+                  </h2>
                 </div>
+                <form className="space-y-6" onSubmit={formik.handleSubmit}>
+                  <div>
+                    <label
+                      htmlFor="loginEmail"
+                      className="block text-sm font-semibold leading-6 text-gray-900"
+                    >
+                      Email
+                    </label>
+                    <div className="mt-2.5">
+                      <input
+                        autoComplete="email"
+                        autoFocus
+                        onChange={formik.handleChange}
+                        value={formik.values.email}
+                        placeholder=""
+                        type="text"
+                        name="email"
+                        id="loginEmail"
+                        className={`${
+                          formik.touched.email && formik.errors.email
+                            ? "border-red-400"
+                            : "border-gray-300"
+                        } block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-300 sm:text-sm sm:leading-6`}
+                      />
+                      {formik.touched.email && formik.errors.email && (
+                        <span className="text-red-400">
+                          {formik.errors.email}
+                        </span>
+                      )}
+                    </div>
+                  </div>
 
                   <div>
                     <label
-                      htmlFor="password"
+                      htmlFor="loginPassword"
                       className="block text-sm font-semibold leading-6 text-gray-900"
                     >
                       Password
                     </label>
                     <div className="mt-2.5">
                       <input
-                        autoComplete="password"
+                        autoComplete="current-password"
                         onChange={formik.handleChange}
                         value={formik.values.password}
                         placeholder=""
@@ -131,7 +141,7 @@ export default function LoginForm({
                       )}
                     </div>
                   </div>
-
+                  <div className="text-red-600">{error}</div>
                   <div>
                     <button
                       type="submit"

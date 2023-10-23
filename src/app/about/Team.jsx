@@ -49,7 +49,7 @@ export default function Team() {
             Who we are
           </h1>
           <p className="font-normal text-base leading-6 text-gray-600">
-            We're the faces behind Roseware Integrations. From Portland, we come
+            We&apos;re the faces behind Roseware Integrations. From Portland, we come
             together as engineers, designers, and marketers. Our goal? Develop
             tools that make managing your business easier, and make sure
             everyone knows about it.

@@ -8,7 +8,7 @@ const ServicesIndex = () => (
         <p className="mb-5 font-light text-gray-500 sm:text-xl ">
           Every contract we handle is looked at individually, so project prices
           can differ. But remember, all our tools and integrations are there in
-          the dashboard for everyone, even if you don't have a Roseware app.
+          the dashboard for everyone, even if you don&apos;t have a Roseware app.
         </p>
       </div>
       <div className="space-y-8 lg:grid lg:grid-cols-3 sm:gap-6 xl:gap-10 lg:space-y-0">

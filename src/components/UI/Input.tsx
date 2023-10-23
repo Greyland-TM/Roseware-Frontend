@@ -1,20 +1,30 @@
-import { forwardRef } from 'react';
+import { forwardRef, ForwardedRef } from 'react';
 
-const Input = forwardRef(function Input(
-  {
-    className,
-    value,
-    onChange,
-    onBlur,
-    type,
-    name,
-    id,
-    placeholder,
-    autoComplete,
-    message,
-  },
-  ref
-) {
+type InputObject = {
+  className: string;
+  value: any;
+  onChange: any;
+  onBlur: any;
+  type: string;
+  name: string;
+  id: string;
+  placeholder: string;
+  autoComplete: string;
+  message: string;
+}
+
+const Input = forwardRef(({
+  className,
+  value,
+  onChange,
+  onBlur,
+  type,
+  name,
+  id,
+  placeholder,
+  autoComplete,
+  message,
+}: InputObject, ref: ForwardedRef<HTMLInputElement>) => {
   return (
     <div>
       <div className='mt-2'>

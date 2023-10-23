@@ -7,7 +7,7 @@ function classNames(...classes: Array<string>) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function dashboardNav() {
+export default function DashboardNav() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState("");
   const location = usePathname();

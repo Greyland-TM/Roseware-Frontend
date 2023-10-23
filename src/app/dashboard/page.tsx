@@ -7,7 +7,7 @@ import { useSearchParams } from "next/navigation";
 import AccountForm from "./AccountForm";
 import DashboardNav from "./DashboardNav";
 
-export default function dashboard() {
+export default function Dashboard() {
   const ctx = useContext(AuthContext);
   // TODO - These need to either be passed through a prop chain or stored in app wide state eventually
   const [isPipedriveSyncing, setIsStripeSyncing] = useState(false);

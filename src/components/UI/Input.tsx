@@ -51,4 +51,7 @@ const Input = forwardRef(({
   );
 });
 
+// Needed for the TypeScript compiler. Heroku build fails without it.
+Input.displayName = 'Input';
+
 export default Input;

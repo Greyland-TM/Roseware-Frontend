@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import { LifebuoyIcon, NewspaperIcon, PhoneIcon } from '@heroicons/react/24/outline'
+import Image from 'next/image'
 
 const supportLinks = [
   {
@@ -32,11 +33,12 @@ export default function ServicesHeader() {
       <div className="relative bg-black pb-32">
         <div className="absolute inset-0">
           <Image
+            height="559"
+            width="838"
             className="h-full w-full object-cover"
             src="https://images.unsplash.com/photo-1525130413817-d45c1d127c42?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1920&q=60&&sat=-100"
             alt=""
-            width={100}
-            height={100}
+
           />
           <div className="absolute inset-0 bg-gray-700 opacity-80 mix-blend-multiply" aria-hidden="true" />
         </div>

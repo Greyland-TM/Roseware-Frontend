@@ -3,8 +3,8 @@ import { forwardRef, ForwardedRef } from 'react';
 type InputObject = {
   className: string;
   value: any;
-  onChange: any;
-  onBlur: any;
+  onChange: () => void;
+  onBlur: () => void;
   type: string;
   name: string;
   id: string;

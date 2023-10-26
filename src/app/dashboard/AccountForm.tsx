@@ -13,15 +13,6 @@ export default function AccountForm() {
   const user = ctx.user;
   const token = ctx.token;
 
-  useEffect(() => {
-    formik.setValues({
-      firstName: user?.first_name ? user?.first_name : "",
-      lastName: user?.last_name ? user?.last_name : "",
-      email: user?.email ? user?.email : "",
-      phone: user?.phone ? user?.phone : "",
-    });
-  }, [user]);
-
   const formik = useFormik({
     initialValues: {
       firstName: user?.first_name,
@@ -74,6 +65,15 @@ export default function AccountForm() {
     },
   });
 
+  useEffect(() => {
+    formik.setValues({
+      firstName: user?.first_name ? user?.first_name : "",
+      lastName: user?.last_name ? user?.last_name : "",
+      email: user?.email ? user?.email : "",
+      phone: user?.phone ? user?.phone : "",
+    });
+  }, [user, formik]);
+
   const handleImageChange = (event: any) => {
     const file = event.target.files[0];
     if (file) {
@@ -93,7 +93,7 @@ export default function AccountForm() {
         <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:max-w-xl sm:grid-cols-6">
           <div className="col-span-full flex items-center gap-x-8">
             <Image
-            priority
+              priority
               className="inline-block h-28 w-28 rounded-full object-cover"
               src={
                 selectedFileUrl
@@ -127,7 +127,6 @@ export default function AccountForm() {
                 JPG, GIF or PNG. 1MB max.
               </p>
             </div>
-            
           </div>
 
           <div className="sm:col-span-3">

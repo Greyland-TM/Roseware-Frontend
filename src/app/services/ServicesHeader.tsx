@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import { LifebuoyIcon, NewspaperIcon, PhoneIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 

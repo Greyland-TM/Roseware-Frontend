@@ -32,12 +32,12 @@ export default function About() {
           </p>
         </div>
         <div className="w-full lg:w-8/12">
-          <img
+          <Image
             className="w-full h-full"
             src="https://i.ibb.co/FhgPJt8/Rectangle-116.png"
             alt="A group of People"
-            width={100}
-            height={100}
+            width="733"
+            height="415"
           />
         </div>
       </div>

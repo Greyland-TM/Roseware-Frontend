@@ -3,8 +3,8 @@ import { forwardRef, ForwardedRef } from 'react';
 type InputObject = {
   className: string;
   value: any;
-  onChange: any;
-  onBlur: any;
+  onChange: () => void;
+  onBlur: () => void;
   type: string;
   name: string;
   id: string;
@@ -50,5 +50,8 @@ const Input = forwardRef(({
     </div>
   );
 });
+
+// Needed for the TypeScript compiler. Heroku build fails without it.
+Input.displayName = 'Input';
 
 export default Input;

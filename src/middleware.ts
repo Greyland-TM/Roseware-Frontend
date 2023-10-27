@@ -27,6 +27,7 @@ export async function middleware(request: NextRequest) {
   const base_dir = process.env.NEXT_PUBLIC_FRONTEND_URL;
   const homeURL = `${base_dir}/home`;
   if (request.url === base_dir) {
+    console.log("Checking the request url: ", request);
     return NextResponse.redirect(homeURL);
   }
   const token: RequestCookie | undefined = request.cookies.get("token");

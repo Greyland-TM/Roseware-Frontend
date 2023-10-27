@@ -24,6 +24,7 @@ export const config = {
 };
 
 export async function middleware(request: any) {
+  console.log(request)
   const base_dir = process.env.NEXT_PUBLIC_FRONTEND_URL;
   const homeURL = `${base_dir}/home`;
   if (request.url.pathname === "/") {

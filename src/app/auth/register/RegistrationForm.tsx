@@ -52,8 +52,7 @@ export default function RegisterForm() {
       if (newUserResponse.error) {
         setError(newUserResponse.error);
       } else if (newUserResponse.token) {
-        dispatch({ type: "LOGIN", payload: data });
-        dispatch({ type: "SETUSER", payload: data });
+        dispatch({ type: "LOGIN", payload: newUserResponse });
         router.push("/dashboard");
       }
     },

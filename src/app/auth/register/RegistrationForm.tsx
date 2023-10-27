@@ -48,12 +48,12 @@ export default function RegisterForm() {
         status: "customer",
       };
       const newUserResponse = await registerNewUser(data);
-      console.log(newUserResponse)
+      console.log(newUserResponse);
       if (newUserResponse.error) {
-        setError(newUserResponse.error)
-      }
-      else if (newUserResponse.token) {
+        setError(newUserResponse.error);
+      } else if (newUserResponse.token) {
         dispatch({ type: "LOGIN", payload: data });
+        dispatch({ type: "SETUSER", payload: data });
         router.push("/dashboard");
       }
     },

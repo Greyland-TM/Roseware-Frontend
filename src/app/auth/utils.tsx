@@ -17,6 +17,9 @@ export const registerNewUser = async (body: Object) => {
     });
 
     const data = await response.json();
+    if (data.token) {
+      Cookies.set("token", data.token);
+    }
     return data;
   } catch (error) {
     return error;
@@ -68,7 +71,7 @@ export const loginUser = async (body: LoginBody) => {
     });
     const data = await response.json();
     if (data.token) {
-      Cookies.set("token", data.token, { path: "" });
+      Cookies.set("token", data.token);
     }
     return data;
   } catch (error) {

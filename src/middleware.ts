@@ -25,7 +25,7 @@ export const config = {
 
 export async function middleware(request: NextRequest) {
   const base_dir = process.env.NEXT_PUBLIC_FRONTEND_URL;
-  const homeURL = `${base_dir}home`;
+  const homeURL = `${base_dir}/home`;
   if (request.url === base_dir) {
     return NextResponse.redirect(homeURL);
   }

@@ -1,4 +1,4 @@
-import { NextResponse, type NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 import { validateUser } from "./app/auth/utils";
 import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 
@@ -23,11 +23,11 @@ export const config = {
   ],
 };
 
-export async function middleware(request: NextRequest) {
-  console.log("request: ", request);
+export async function middleware(request: any) {
+  console.log(typeof request);
   const base_dir = process.env.NEXT_PUBLIC_FRONTEND_URL;
   const homeURL = `${base_dir}/home`;
-  if (request.url === base_dir) {
+  if (request.url.pathname === "/") {
     return NextResponse.redirect(homeURL);
   }
   const token: RequestCookie | undefined = request.cookies.get("token");

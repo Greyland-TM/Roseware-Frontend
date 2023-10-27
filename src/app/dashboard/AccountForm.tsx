@@ -4,22 +4,82 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useContext } from "react";
 import { AuthContext } from "../auth/AuthContext";
+import { FormikValues } from "formik";
+
+
+interface FormResponse {
+  success: boolean | null;
+  message: string | null;
+}
 
 export default function AccountForm() {
-  const [selectedFile, setSelectedFile] = useState<string | null>(null);
-  const [selectedFileUrl, setSelectedFileUrl] = useState<string | null>(null);
   const ctx = useContext(AuthContext);
   const dispatch = ctx.dispatch;
   const user = ctx.user;
   const token = ctx.token;
+  const [selectedFile, setSelectedFile] = useState<string | null>(null);
+  const [selectedFileUrl, setSelectedFileUrl] = useState<string | null>(null);
+
+  const [formResponse, setFormResponse] = useState<FormResponse>({
+    success: null,
+    message: null,
+  });
+
+  const initialValues = {
+    firstName: user?.first_name,
+    lastName: user?.last_name,
+    email: user?.email,
+    phone: user?.phone,
+  };
+
+  const handleSubmit = async (values: FormikValues) => {
+    const formData = new FormData();
+    formData.append("first_name", values.firstName || "");
+    formData.append("last_name", values.lastName || "");
+    formData.append("email", values.email || "");
+    formData.append("phone", values.phone || "");
+    formData.append("pk", user?.id ? user.id.toString() : "");
+
+    if (selectedFile) {
+      formData.append("profile_picture", selectedFile);
+    }
+
+    const backend_url = process.env.NEXT_PUBLIC_BACKEND_URL;
+    try {
+      const response = await fetch(`${backend_url}/accounts/customer/`, {
+        method: "PUT",
+        body: formData,
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      });
+      const data = await response.json();
+
+      if (data.ok) {
+        dispatch({
+          type: "SETUSER",
+          payload: data,
+        });
+        setFormResponse({
+          success: true,
+          message: "Successly Updated Data!",
+        });
+      } else {
+        setFormResponse({
+          success: false,
+          message: "Failed to Save Update!",
+        });
+      }
+    } catch (error) {
+      setFormResponse({
+        success: false,
+        message: "Failed to Save Update!",
+      });
+    }
+  };
 
   const formik = useFormik({
-    initialValues: {
-      firstName: user?.first_name,
-      lastName: user?.last_name,
-      email: user?.email,
-      phone: user?.phone,
-    },
+    initialValues: initialValues,
     validationSchema: Yup.object({
       firstName: Yup.string()
         .label("First Name")
@@ -32,47 +92,19 @@ export default function AccountForm() {
         .email()
         .required("Please provide a valid email address"),
     }),
-    onSubmit: async (values) => {
-      const formData = new FormData();
-      formData.append("first_name", values.firstName || "");
-      formData.append("last_name", values.lastName || "");
-      formData.append("email", values.email || "");
-      formData.append("phone", values.phone || "");
-      formData.append("pk", user?.id ? user.id.toString() : "");
-
-      if (selectedFile) {
-        formData.append("profile_picture", selectedFile);
-      }
-
-      const backend_url = process.env.NEXT_PUBLIC_BACKEND_URL;
-      const response = await fetch(`${backend_url}/accounts/customer/`, {
-        method: "PUT",
-        body: formData,
-        headers: {
-          Authorization: `Token ${token}`,
-        },
-      });
-      console.log("formData:  ", formData);
-      const data = await response.json();
-      console.log("res: ", data);
-
-      if (data.ok) {
-        dispatch({
-          type: "SETUSER",
-          payload: data,
-        });
-      }
-    },
+    onSubmit: handleSubmit,
   });
 
   useEffect(() => {
-    formik.setValues({
-      firstName: user?.first_name ? user?.first_name : "",
-      lastName: user?.last_name ? user?.last_name : "",
-      email: user?.email ? user?.email : "",
-      phone: user?.phone ? user?.phone : "",
-    });
-  }, [user, formik]);
+    if (user?.first_name) {
+      formik.setValues({
+        firstName: user?.first_name ? user?.first_name : "",
+        lastName: user?.last_name ? user?.last_name : "",
+        email: user?.email ? user?.email : "",
+        phone: user?.phone ? user?.phone : "",
+      });
+    }         // Disable linter warning about missing formik dependency - adding it causes infinite loop...
+  }, [user]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleImageChange = (event: any) => {
     const file = event.target.files[0];
@@ -191,7 +223,7 @@ export default function AccountForm() {
                 } block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6`}
               />
               {formik.touched.email && formik.errors.email && (
-                <span className="text-red-400">{formik.errors.email}</span>
+                <span className="text-red-400">{`${formik.errors.email}`}</span>
               )}
             </div>
           </div>
@@ -220,7 +252,14 @@ export default function AccountForm() {
           </div>
         </div>
 
-        <div className="mt-8 flex justify-end">
+        <div className="mt-8 flex justify-between">
+          <p
+            className={`${
+              formResponse.success ? "text-green-600" : "text-red-500"
+            }`}
+          >
+            {formResponse.message}
+          </p>
           <button
             type="submit"
             className="rounded-md bg-Vine-900 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-Vine-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
